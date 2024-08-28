@@ -5,30 +5,8 @@
     margin: 15px;
 }   
 
-#playerName{
+.players input[type="text"]{
     font-family: "New Amsterdam", sans-serif;
-    border:none
-}
-
-#playerName:focus{
-    background-color: #697DFF;
-}
-
-.tenPlayers {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-
-}
-
-.players {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    width: 100%;
-}
-
-.players input[type="text"] {
     margin-right: 15px;
     padding: 10px;
     border: 2px solid #444;
@@ -40,7 +18,17 @@
     font-size: 18px;
 }
 
-.teer {
+.players input[type="text"]:focus {
+    background-color: #697DFF;
+}
+
+.tenPlayers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.tier {
     display: inline-block;
     padding: 1px 8px;
     margin: 5px;
@@ -50,7 +38,7 @@
     font-size: 30px;
 }
 
-.teer:hover {
+.tier:hover {
     background-color: #444;
 }
 
@@ -58,7 +46,7 @@ input[type="radio"]{
     display: none;
 }
 
-input[type="radio"]:checked + .teer {
+input[type="radio"]:checked + .tier {
     background-color: #666;
     border: 2px solid #888;
 }

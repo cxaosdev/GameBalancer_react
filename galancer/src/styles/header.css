@@ -1,5 +1,5 @@
 
-.header {
+.header_container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,7 +16,7 @@
 #Game {
     margin-top: 4rem;
     margin-left: 30px;
-    font-size: 0; /* Removes spacing between inline-block elements */
+    font-size: 0;
     display: flex;
 }
 
@@ -24,7 +24,7 @@
     background-color: transparent;
 }
 #Game input[type="radio"] {
-    display: none; /* Hide the radio buttons */
+    display: none;
 }
 
 #Game label {
@@ -48,8 +48,4 @@
     background-color: #697DFF;
     color: white;
     font-weight: bold;
-}
-
-input[type='text']{
-
 }

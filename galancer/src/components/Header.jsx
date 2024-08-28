@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Header() {
-  
+function Header() {
   const navigate = useNavigate();
   const [selectedGame, setSelectedGame] = useState("League of Legends");
 
-  const handleGameChange = (event) => {
+  const handleGame = (event) => {
     const game = event.target.value;
     setSelectedGame(game);
-
-    // 선택된 게임에 따라 페이지 이동
     if (game === "League of Legends") {
       navigate("/LeagueOfLegends");
     } else if (game === "Valorant") {
@@ -28,7 +25,7 @@ export default function Header() {
           value="League of Legends"
           type="radio"
           checked={selectedGame === "League of Legends"}
-          onChange={handleGameChange}
+          onChange={handleGame}
         />
         <label htmlFor="toggle-on" className="btn">
           League of Legends
@@ -40,7 +37,7 @@ export default function Header() {
           value="Valorant"
           type="radio"
           checked={selectedGame === "Valorant"}
-          onChange={handleGameChange}
+          onChange={handleGame}
         />
         <label htmlFor="toggle-off" className="btn">
           Valorant
@@ -49,3 +46,5 @@ export default function Header() {
     </div>
   );
 }
+
+export default Header;
