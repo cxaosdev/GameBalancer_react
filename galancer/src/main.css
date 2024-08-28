@@ -1,0 +1,64 @@
+.players{
+    display:flex;
+    font-size: 25px;
+    justify-content: center;
+    margin: 15px;
+}   
+
+#playerName{
+    font-family: "New Amsterdam", sans-serif;
+    border:none
+}
+
+#playerName:focus{
+    background-color: #697DFF;
+}
+
+.tenPlayers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.players {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.players input[type="text"] {
+    margin-right: 15px;
+    padding: 10px;
+    border: 2px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+    color: aliceblue;
+    width: 150px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.teer {
+    display: inline-block;
+    padding: 1px 8px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 30px;
+}
+
+.teer:hover {
+    background-color: #444;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+input[type="radio"]:checked + .teer {
+    background-color: #666;
+    border: 2px solid #888;
+}

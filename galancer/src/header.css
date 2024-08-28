@@ -1,0 +1,55 @@
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+}
+
+.logo{
+    margin-top: 25px;
+    margin-left: 20px;
+    width: 60px;
+}
+
+#Game {
+    margin-top: 4rem;
+    margin-left: 30px;
+    font-size: 0; /* Removes spacing between inline-block elements */
+    display: flex;
+}
+
+#Game{
+    background-color: transparent;
+}
+#Game input[type="radio"] {
+    display: none; /* Hide the radio buttons */
+}
+
+#Game label {
+    font-family: "New Amsterdam", sans-serif;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin-right: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: #444;
+    color: aliceblue;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block;
+}
+
+#Game label:hover {
+    background-color: #555;
+}
+
+#Game input[type="radio"]:checked + label {
+    background-color: #697DFF;
+    color: white;
+    font-weight: bold;
+}
+
+input[type='text']{
+
+}
