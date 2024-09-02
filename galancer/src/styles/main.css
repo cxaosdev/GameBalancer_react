@@ -47,6 +47,6 @@ input[type="radio"]{
 }
 
 input[type="radio"]:checked + .tier {
-    background-color: #666;
+    background-color: #6666667d;
     border: 2px solid #888;
 }

@@ -1,13 +1,13 @@
 import React from "react";
 
-export default function PlayerVlrt({ playerNum }) { // props를 디스트럭처링으로 받음
+export default function PlayerVlrt({ playerNum }) {
   return (
     <div>
       <section className="players">
         <input
           type="text"
-          id={`playerName${playerNum}`}  // id에 playerNum 반영
-          placeholder={`Player ${playerNum} Name`}  // placeholder에 playerNum 반영
+          id={`playerName${playerNum}`}
+          placeholder={`Player ${playerNum} Name`} 
           autoComplete="off"
         />
 
