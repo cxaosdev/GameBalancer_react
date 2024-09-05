@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import Lol from './pages/Lol';
-import Vlrt from './pages/Vlrt';
+import Lol from "./pages/Lol";
+import Vlrt from "./pages/Vlrt";
 
 function App() {
   return (
