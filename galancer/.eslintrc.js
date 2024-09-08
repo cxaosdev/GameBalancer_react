@@ -8,8 +8,6 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb/hooks',
-    'prettier',
-    'prettier/prettier',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:react-hooks/recommended',
@@ -29,7 +27,7 @@ module.exports = {
     'import/prefer-default-export': 0,
     'global-require': 0,
     'import/no-extraneous-dependencies': 0,
-    'jsx-quotes': ['error', 'prefer-single'],
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
     'react/jsx-props-no-spreading': 0,
     'react/forbid-prop-types': 0,
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx'] }],
@@ -41,6 +39,7 @@ module.exports = {
     'no-alert': 0,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/react-in-jsx-scope': 'off',
     'jsx-a11y/label-has-associated-control': [
       'error',
       {

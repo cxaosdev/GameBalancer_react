@@ -10,7 +10,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^3.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -38,14 +38,13 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.2.0",
+    "@eslint/js": "^9.9.1",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "prettier": "^3.3.3"
+    "eslint-plugin-react": "^7.35.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "globals": "^15.9.0"
   }
 }
