@@ -5,7 +5,7 @@
     margin: 15px;
 }   
 
-.players input[type="text"]{
+.players__input-name{
     font-family: "New Amsterdam", sans-serif;
     margin-right: 15px;
     padding: 10px;
@@ -18,7 +18,7 @@
     font-size: 18px;
 }
 
-.players input[type="text"]:focus {
+.players__input-name:focus {
     background-color: #697DFF;
 }
 
@@ -28,7 +28,7 @@
     justify-content: space-around;
 }
 
-.tier {
+.players__tiers {
     display: inline-block;
     padding: 1px 8px;
     margin: 5px;
@@ -38,15 +38,15 @@
     font-size: 30px;
 }
 
-.tier:hover {
+.players__tiers:hover {
     background-color: #444;
 }
 
-input[type="radio"]{
+.players__input-tier[type="radio"]{
     display: none;
 }
 
-input[type="radio"]:checked + .tier {
+.players__input-tier[type="radio"]:checked + .players__tiers{
     background-color: #6666667d;
     border: 2px solid #888;
 }

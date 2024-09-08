@@ -14,32 +14,31 @@ function Header() {
       navigate("/Valorant");
     }
   };
-
   return (
-    <div className="header_container">
-      <img className="logo" src="/assets/GB.webp" alt="Galancer Logo" />
-      <div id="Game">
+    <div className='header'>
+      <div className = 'header__title'>
+        <img className='header__title-logo' src='assets/logo.webp' alt='Logo' />
+        <span className='header__title-text'>Game Balancer</span>
+      </div>
+      <div className='header__game'>
         <input
-          id="toggle-on"
-          name="toggle"
-          value="League of Legends"
-          type="radio"
+          id='toggle-on'
+          value='League of Legends'
+          type='radio'
           checked={selectedGame === "League of Legends"}
           onChange={handleGame}
         />
-        <label htmlFor="toggle-on" className="btn">
+        <label htmlFor='toggle-on' className='btn'>
           League of Legends
         </label>
-
         <input
-          id="toggle-off"
-          name="toggle"
-          value="Valorant"
-          type="radio"
+          id='toggle-off'
+          value='Valorant'
+          type='radio'
           checked={selectedGame === "Valorant"}
           onChange={handleGame}
         />
-        <label htmlFor="toggle-off" className="btn">
+        <label htmlFor='toggle-off'>
           Valorant
         </label>
       </div>

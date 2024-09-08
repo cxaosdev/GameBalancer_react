@@ -1,5 +1,7 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect } from 'react';
-import PlayerVlrt from '../components/PlayerVlrt.jsx';
+import PlayerVlrt from 'components/PlayerVlrt.jsx';
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
@@ -17,9 +19,9 @@ export default function Vlrt() {
       Radiant: '#F3992E',
     };
 
-    const labels = document.querySelectorAll('.tier');
+    const labels = document.querySelectorAll('.players__tiers');
 
-    labels.forEach(label => {
+    labels.forEach((label) => {
       const tierText = label.textContent.trim();
       if (tierColors[tierText]) {
         label.style.color = tierColors[tierText];

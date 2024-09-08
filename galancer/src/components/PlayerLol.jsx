@@ -19,6 +19,7 @@ export default function PlayerLol({ playerNum }) {
       <section className='players'>
         <input
           type='text'
+          className = 'players__input-name'
           id={`playerName${playerNum}`}
           placeholder={`Player ${playerNum} Name`}
           autoComplete='off'
@@ -28,12 +29,13 @@ export default function PlayerLol({ playerNum }) {
           <div key={tier.id}>
             <input
               id={`player${playerNum}-${tier.id}`}
+              className='players__input-tier'
               name={`player${playerNum}`}
               value={tier.id}
               type='radio'
               defaultChecked={index === 0}
             />
-            <label htmlFor={`player${playerNum}-${tier.id}`} className='tier'>
+            <label htmlFor={`player${playerNum}-${tier.id}`} className='players__tiers'>
               {tier.label}
             </label>
           </div>
