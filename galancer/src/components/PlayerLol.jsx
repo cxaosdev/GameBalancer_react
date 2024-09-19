@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 
+import topLaneImage from "assets/lol_lane/top.svg";
+import jungleLaneImage from "assets/lol_lane/jungle.svg";
+import midLaneImage from "assets/lol_lane/mid.svg";
+import adcLaneImage from "assets/lol_lane/adc.svg";
+import supportLaneImage from "assets/lol_lane/support.svg";
+
 export default function PlayerLol({ playerNum, updatePlayerInfo }) {
   const tiers = [
     { id: "iron", label: "Iron" },
@@ -15,11 +21,11 @@ export default function PlayerLol({ playerNum, updatePlayerInfo }) {
   ];
 
   const lanes = [
-    { id: "top", lable: "Top" },
-    { id: "jungle", lable: "Jungle" },
-    { id: "mid", lable: "Mid" },
-    { id: "adc", lable: "ADC" },
-    { id: "support", lable: "Support" },
+    { id: "top", label: "Top", image: topLaneImage },
+    { id: "jungle", label: "Jungle", image: jungleLaneImage },
+    { id: "mid", label: "Mid", image: midLaneImage },
+    { id: "adc", label: "ADC", image: adcLaneImage },
+    { id: "support", label: "Support", image: supportLaneImage },
   ];
 
   const [playerName, setPlayerName] = useState("");
@@ -80,12 +86,13 @@ export default function PlayerLol({ playerNum, updatePlayerInfo }) {
                 checked={selectedLanes.includes(lane.id)}
                 onChange={handleLaneChange}
               />
-              <label
-                htmlFor={`player${playerNum}-${lane.id}`}
-                className='players__lanes-label'
-              >
-                {lane.label}
-              </label>
+              <img
+                src={lane.image}
+                alt={lane.label}
+                className={`players__lane-image ${
+                  selectedLanes.includes(lane.id) ? "selected" : ""
+                }`}
+              />
             </div>
           ))}
         </div>

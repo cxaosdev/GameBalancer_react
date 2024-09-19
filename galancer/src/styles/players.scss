@@ -78,5 +78,33 @@
 }
 
 .players__lanes {
+  margin-left: 10px;
+  margin-right: 10px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+
+  .lane {
+    background-color: transparent;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .players__lane-image {
+    margin: 3px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    transition:
+      transform 0.2s,
+      border 0.2s;
+
+    &.selected {
+      border: 2px solid #697dff;
+      border-radius: 5px;
+    }
+  }
 }

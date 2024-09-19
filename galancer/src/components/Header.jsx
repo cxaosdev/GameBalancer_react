@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "components/logo.jpg";
 
 function Header() {
   const navigate = useNavigate();
@@ -17,11 +18,7 @@ function Header() {
   return (
     <div className='header'>
       <div className='header__title'>
-        <img
-          className='header__title-logo'
-          src='/galancer/src/assets/logo.jpg'
-          alt='Logo'
-        />
+        <img className='header__title-logo' src={logo} alt='Logo' />
         <span className='header__title-text'>Game Balancer</span>
       </div>
       <div className='header__game'>

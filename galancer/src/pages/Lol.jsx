@@ -1,10 +1,16 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PlayerLol from "components/PlayerLol.jsx";
 
-const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 export default function Lol() {
+  const [players, setPlayers] = useState(Array(10).fill({}));
+  const updatePlayerInfo = (playerNum, info) => {
+    const updatedPlayers = [...players];
+    updatedPlayers[playerNum] = info;
+    setPlayers(updatedPlayers);
+  };
+
   useEffect(() => {
     const tierColors = {
       Iron: "#5E5E5E",
@@ -32,7 +38,12 @@ export default function Lol() {
   return (
     <div className='lol__container'>
       {players.map((player, index) => (
-        <PlayerLol className='players__list' key={index} playerNum={index + 1} />
+        <PlayerLol
+          className='players__list'
+          key={index}
+          playerNum={index + 1}
+          updatePlayerInfo={updatePlayerInfo}
+        />
       ))}
     </div>
   );
