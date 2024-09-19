@@ -1,0 +1,57 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+}
+
+.header__title-logo {
+  margin-top: 35px;
+  margin-left: 30px;
+  width: 90px;
+  background-color: transparent;
+}
+
+.header__title-text {
+  margin-left: 30px;
+  margin-bottom: 20px;
+  font-size: 60px;
+  display: inline-block;
+}
+
+.header__game {
+  margin-top: 4rem;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  font-size: 0;
+  display: flex;
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  label {
+    font-family: "New Amsterdam", sans-serif;
+    font-size: 30px;
+    padding: 10px 20px;
+    margin-right: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: #444;
+    color: aliceblue;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    display: inline-block;
+
+    &:hover {
+      background-color: #555;
+    }
+  }
+
+  input[type="radio"]:checked + label {
+    background-color: #697dff;
+    color: white;
+    font-weight: bold;
+  }
+}
