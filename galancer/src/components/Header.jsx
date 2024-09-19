@@ -16,8 +16,8 @@ function Header() {
   };
   return (
     <div className='header'>
-      <div className = 'header__title'>
-        <img className='header__title-logo' src='assets/logo.webp' alt='Logo' />
+      <div className='header__title'>
+        <img className='header__title-logo' src='assets/logo.jpg' alt='Logo' />
         <span className='header__title-text'>Game Balancer</span>
       </div>
       <div className='header__game'>
@@ -38,9 +38,7 @@ function Header() {
           checked={selectedGame === "Valorant"}
           onChange={handleGame}
         />
-        <label htmlFor='toggle-off'>
-          Valorant
-        </label>
+        <label htmlFor='toggle-off'>Valorant</label>
       </div>
     </div>
   );

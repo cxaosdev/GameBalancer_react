@@ -1,13 +1,28 @@
-.players{
-    display:flex;
-    font-size: 25px;
-    justify-content: center;
-    margin: 15px;
-}   
+.lol__container {
+    background-image: url('assets/lol_background.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+}
 
-.players__input-name{
+.vlrt__container {
+    background-image: url('assets/vlrt_background.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+}
+
+.players {
+    padding-left: 40px;
+    display: flex;
+    font-size: 25px;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    background-color: transparent;
+}
+
+.players__input-name {
     font-family: "New Amsterdam", sans-serif;
-    margin-right: 15px;
     padding: 10px;
     border: 2px solid #444;
     border-radius: 5px;
@@ -34,19 +49,30 @@
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
     font-size: 30px;
+
 }
+
 
 .players__tiers:hover {
     background-color: #444;
 }
 
-.players__input-tier[type="radio"]{
+.players__input-tier[type="radio"] {
     display: none;
 }
 
-.players__input-tier[type="radio"]:checked + .players__tiers{
-    background-color: #6666667d;
+.players__input-tier[type="radio"]:checked+.players__tiers {
+    background-color: black;
     border: 2px solid #888;
+}
+
+.player {
+    background-color: transparent;
+    margin: 0;
+    align-items: stretch;
+}
+
+.tier {
+    background-color: transparent;
 }

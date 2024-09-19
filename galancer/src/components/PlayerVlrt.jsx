@@ -1,30 +1,31 @@
-import React from 'react';
+import React from "react";
 
 export default function PlayerVlrt({ playerNum }) {
   const tiers = [
-    { id: 'bronze', label: 'Bronze' },
-    { id: 'silver', label: 'Silver' },
-    { id: 'gold', label: 'Gold' },
-    { id: 'platinum', label: 'Platinum' },
-    { id: 'diamond', label: 'Diamond' },
-    { id: 'ascendant', label: 'Ascendant' },
-    { id: 'immortal', label: 'Immortal' },
-    { id: 'radiant', label: 'Radiant' },
+    { id: "iron", label: "Iron" },
+    { id: "bronze", label: "Bronze" },
+    { id: "silver", label: "Silver" },
+    { id: "gold", label: "Gold" },
+    { id: "platinum", label: "Platinum" },
+    { id: "diamond", label: "Diamond" },
+    { id: "ascendant", label: "Ascendant" },
+    { id: "immortal", label: "Immortal" },
+    { id: "radiant", label: "Radiant" },
   ];
 
   return (
-    <div>
+    <div className='player'>
       <section className='players'>
         <input
           type='text'
-          className = 'players__input-name'
+          className='players__input-name'
           id={`playerName${playerNum}`}
           placeholder={`Player ${playerNum} Name`}
           autoComplete='off'
         />
 
         {tiers.map((tier, index) => (
-          <div key={tier.id}>
+          <div className='tier' key={tier.id}>
             <input
               id={`player${playerNum}-${tier.id}`}
               className='players__input-tier'
@@ -33,7 +34,10 @@ export default function PlayerVlrt({ playerNum }) {
               type='radio'
               defaultChecked={index === 0}
             />
-            <label htmlFor={`player${playerNum}-${tier.id}`} className='players__tiers'>
+            <label
+              htmlFor={`player${playerNum}-${tier.id}`}
+              className='players__tiers'
+            >
               {tier.label}
             </label>
           </div>
