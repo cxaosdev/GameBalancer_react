@@ -14,29 +14,29 @@ export default function PlayerVlrt({ playerNum }) {
   ];
 
   return (
-    <div className='player'>
-      <section className='players'>
+    <div className="player">
+      <section className="players">
         <input
-          type='text'
-          className='players__input-name'
+          type="text"
+          className="players__input-name"
           id={`playerName${playerNum}`}
           placeholder={`Player ${playerNum} Name`}
-          autoComplete='off'
+          autoComplete="off"
         />
 
         {tiers.map((tier, index) => (
-          <div className='tier' key={tier.id}>
+          <div className="tier" key={tier.id}>
             <input
               id={`player${playerNum}-${tier.id}`}
-              className='players__input-tier'
+              className="players__input-tier"
               name={`player${playerNum}`}
               value={tier.id}
-              type='radio'
+              type="radio"
               defaultChecked={index === 0}
             />
             <label
               htmlFor={`player${playerNum}-${tier.id}`}
-              className='players__tiers'
+              className="players__tiers"
             >
               {tier.label}
             </label>
