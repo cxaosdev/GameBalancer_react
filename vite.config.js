@@ -9,4 +9,10 @@ export default defineConfig({
       components: path.resolve(__dirname, "src/components"),
     },
   },
+  extends: [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+  ],
 });
