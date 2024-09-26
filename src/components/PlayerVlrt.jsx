@@ -2,15 +2,15 @@ import React from "react";
 
 export default function PlayerVlrt({ playerNum }) {
   const tiers = [
-    { id: "iron", label: "Iron" },
-    { id: "bronze", label: "Bronze" },
-    { id: "silver", label: "Silver" },
-    { id: "gold", label: "Gold" },
-    { id: "platinum", label: "Platinum" },
-    { id: "diamond", label: "Diamond" },
-    { id: "ascendant", label: "Ascendant" },
-    { id: "immortal", label: "Immortal" },
-    { id: "radiant", label: "Radiant" },
+    { id: "iron", label: "Iron", pts: 7 },
+    { id: "bronze", label: "Bronze", pts: 13 },
+    { id: "silver", label: "Silver", pts: 17 },
+    { id: "gold", label: "Gold", pts: 25 },
+    { id: "platinum", label: "Platinum", pts: 29 },
+    { id: "diamond", label: "Diamond", pts: 37 },
+    { id: "ascendant", label: "Ascendant", pts: 43 },
+    { id: "immortal", label: "Immortal", pts: 45 },
+    { id: "radiant", label: "Radiant", pts: 48 },
   ];
 
   return (

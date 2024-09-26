@@ -1,12 +1,12 @@
 .lol__container {
-  background-image: url("assets/lol_background.jpg");
+  background-image: url("../assets/lol_background.jpg");
   background-size: cover;
   background-position: center;
   padding: 20px;
 }
 
 .vlrt__container {
-  background-image: url("assets/vlrt_background.jpg");
+  background-image: url("../assets/vlrt_background.jpg");
   background-size: cover;
   background-position: center;
   padding: 20px;
@@ -98,9 +98,7 @@
     height: 25px;
     width: 25px;
     cursor: pointer;
-    transition:
-      transform 0.2s,
-      border 0.2s;
+    transition: transform 0.2s, border 0.2s;
 
     &.selected {
       border: 2px solid #697dff;

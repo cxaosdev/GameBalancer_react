@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "components/logo.jpg";
+import logo from "../components/logo.jpg";
 
 function Header() {
   const navigate = useNavigate();
@@ -16,30 +16,36 @@ function Header() {
     }
   };
   return (
-    <div className='header'>
-      <div className='header__title'>
-        <img className='header__title-logo' src={logo} alt='Logo' />
-        <span className='header__title-text'>Game Balancer</span>
+    <div className="flex items-center justify-between p-0 header">
+      <div className="header__title flex mt-[10px] mb-[20px] items-end">
+        <img
+          className="header__title-logo mt-[10px] ml-[30px] w-[50px] bg-transparent"
+          src={logo}
+          alt="Logo"
+        />
+        <span className="header__title-text ml-[20px] mt-[10px] text-[50px] leading-none">
+          Game Balancer
+        </span>
       </div>
-      <div className='header__game'>
+      <div className="header__game mt-[15px] ml-[30px] mb-[10px] ">
         <input
-          id='toggle-on'
-          value='League of Legends'
-          type='radio'
+          id="toggle-on"
+          value="League of Legends"
+          type="radio"
           checked={selectedGame === "League of Legends"}
           onChange={handleGame}
         />
-        <label htmlFor='toggle-on' className='btn'>
+        <label htmlFor="toggle-on" className="btn">
           League of Legends
         </label>
         <input
-          id='toggle-off'
-          value='Valorant'
-          type='radio'
+          id="toggle-off"
+          value="Valorant"
+          type="radio"
           checked={selectedGame === "Valorant"}
           onChange={handleGame}
         />
-        <label htmlFor='toggle-off'>Valorant</label>
+        <label htmlFor="toggle-off">Valorant</label>
       </div>
     </div>
   );

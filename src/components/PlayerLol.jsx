@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 
-import topLaneImage from "assets/lol_lane/top.svg";
-import jungleLaneImage from "assets/lol_lane/jungle.svg";
-import midLaneImage from "assets/lol_lane/mid.svg";
-import adcLaneImage from "assets/lol_lane/adc.svg";
-import supportLaneImage from "assets/lol_lane/support.svg";
+import topLaneImage from "../assets/lol_lane/top.svg";
+import jungleLaneImage from "../assets/lol_lane/jungle.svg";
+import midLaneImage from "../assets/lol_lane/mid.svg";
+import adcLaneImage from "../assets/lol_lane/adc.svg";
+import supportLaneImage from "../assets/lol_lane/support.svg";
 
 export default function PlayerLol({ playerNum, updatePlayerInfo }) {
   const tiers = [
-    { id: "iron", label: "Iron" },
-    { id: "bronze", label: "Bronze" },
-    { id: "silver", label: "Silver" },
-    { id: "gold", label: "Gold" },
-    { id: "platinum", label: "Platinum" },
-    { id: "emerald", label: "Emerald" },
-    { id: "diamond", label: "Diamond" },
-    { id: "master", label: "Master" },
-    { id: "grandmaster", label: "GrandMaster" },
-    { id: "challenger", label: "Challenger" },
+    { id: "iron", label: "Iron", pts: 7 },
+    { id: "bronze", label: "Bronze", pts: 13 },
+    { id: "silver", label: "Silver", pts: 17 },
+    { id: "gold", label: "Gold", pts: 25 },
+    { id: "platinum", label: "Platinum", pts: 29 },
+    { id: "emerald", label: "Emerald", pts: 36 },
+    { id: "diamond", label: "Diamond", pts: 42 },
+    { id: "master", label: "Master", pts: 45 },
+    { id: "grandmaster", label: "GrandMaster", pts: 49 },
+    { id: "challenger", label: "Challenger", pts: 52 },
   ];
 
   const lanes = [
@@ -61,28 +61,28 @@ export default function PlayerLol({ playerNum, updatePlayerInfo }) {
   };
 
   return (
-    <div className='player'>
-      <section className='players'>
+    <div className="player">
+      <section className="players">
         {/* input player's name */}
         <input
-          type='text'
-          className='players__input-name'
+          type="text"
+          className="players__input-name"
           id={`playerName${playerNum}`}
           placeholder={`Player ${playerNum} Name`}
           value={playerName}
           onChange={handleNameChange}
-          autoComplete='off'
+          autoComplete="off"
         />
         {/* input player's lane */}
-        <div className='players__lanes'>
+        <div className="players__lanes">
           {lanes.map((lane) => (
-            <div className='lane' key={lane.id}>
+            <div className="lane" key={lane.id}>
               <input
                 id={`player${playerNum}-${lane.id}`}
-                className='players__input-lane'
+                className="players__input-lane"
                 name={`player${playerNum}-lane`}
                 value={lane.id}
-                type='checkbox'
+                type="checkbox"
                 checked={selectedLanes.includes(lane.id)}
                 onChange={handleLaneChange}
               />
@@ -98,20 +98,20 @@ export default function PlayerLol({ playerNum, updatePlayerInfo }) {
         </div>
         {/* input player's tier */}
         {tiers.map((tier, index) => (
-          <div className='tier' key={tier.id}>
+          <div className="tier" key={tier.id}>
             <input
               id={`player${playerNum}-${tier.id}`}
-              className='players__input-tier'
+              className="players__input-tier"
               name={`player${playerNum}`}
               value={tier.id}
-              type='radio'
+              type="radio"
               checked={selectedTier === tier.id}
               defaultChecked={index === 0}
               onChange={handleTierChange}
             />
             <label
               htmlFor={`player${playerNum}-${tier.id}`}
-              className='players__tiers'
+              className="players__tiers"
             >
               {tier.label}
             </label>

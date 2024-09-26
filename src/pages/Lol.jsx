@@ -36,10 +36,10 @@ export default function Lol() {
   }, []);
 
   return (
-    <div className='lol__container'>
+    <div className="lol__container">
       {players.map((player, index) => (
         <PlayerLol
-          className='players__list'
+          className="players__list"
           key={index}
           playerNum={index + 1}
           updatePlayerInfo={updatePlayerInfo}
