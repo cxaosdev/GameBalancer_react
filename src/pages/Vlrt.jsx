@@ -8,8 +8,8 @@ export default function Vlrt() {
   const [playerData, setPlayerData] = useState(
     players.map((_, index) => ({
       playerName: `Player ${index + 1}`,
-      tier: "Iron", // default tier
-      pts: 7, // default points for Iron
+      tier: "Iron", 
+      pts: 7, 
     }))
   );
 
@@ -55,13 +55,12 @@ export default function Vlrt() {
     const updatedPlayers = [...playerData];
     updatedPlayers[index][field] = value;
     if (field === "tier") {
-      updatedPlayers[index].pts = tierToPoints[value]; // Update pts based on tier change
+      updatedPlayers[index].pts = tierToPoints[value]; 
     }
     setPlayerData(updatedPlayers);
   };
 
   const handleGenerateTeams = () => {
-    // Sort players by their pts in descending order
     const sortedPlayers = [...playerData].sort((a, b) => b.pts - a.pts);
 
     let team1 = [];
@@ -69,7 +68,7 @@ export default function Vlrt() {
     let team1Pts = 0;
     let team2Pts = 0;
 
-    // Iterate through sorted players and distribute them to balance team points
+  
     sortedPlayers.forEach((player) => {
       if (team1.length < 5 && (team1Pts <= team2Pts || team2.length >= 5)) {
         team1.push(player);
