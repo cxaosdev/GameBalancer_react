@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
@@ -8,33 +8,10 @@ export default function Vlrt() {
   const [playerData, setPlayerData] = useState(
     players.map((_, index) => ({
       playerName: `Player ${index + 1}`,
-      tier: "Iron", 
-      pts: 7, 
+      tier: "Iron",
+      pts: 7,
     }))
   );
-
-  useEffect(() => {
-    const tierColors = {
-      Iron: "#5E5E5E",
-      Bronze: "#8D6F46",
-      Silver: "#BAC8D1",
-      Gold: "#FFD700",
-      Platinum: "#54D3E0",
-      Diamond: "#A770F0",
-      Ascendant: "#1CB952",
-      Immortal: "#C23A73",
-      Radiant: "#F3992E",
-    };
-
-    const labels = document.querySelectorAll(".players__tiers");
-
-    labels.forEach((label) => {
-      const tierText = label.textContent.trim();
-      if (tierColors[tierText]) {
-        label.style.color = tierColors[tierText];
-      }
-    });
-  }, []);
 
   const tierToPoints = {
     Iron: 7,
@@ -55,7 +32,7 @@ export default function Vlrt() {
     const updatedPlayers = [...playerData];
     updatedPlayers[index][field] = value;
     if (field === "tier") {
-      updatedPlayers[index].pts = tierToPoints[value]; 
+      updatedPlayers[index].pts = tierToPoints[value];
     }
     setPlayerData(updatedPlayers);
   };
@@ -68,7 +45,6 @@ export default function Vlrt() {
     let team1Pts = 0;
     let team2Pts = 0;
 
-  
     sortedPlayers.forEach((player) => {
       if (team1.length < 5 && (team1Pts <= team2Pts || team2.length >= 5)) {
         team1.push(player);

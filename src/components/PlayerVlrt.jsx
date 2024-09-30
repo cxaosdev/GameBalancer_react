@@ -1,4 +1,5 @@
 import React from "react";
+import tierColors from "../styles/constants.json";
 
 export default function PlayerVlrt({
   playerNum,
@@ -50,6 +51,7 @@ export default function PlayerVlrt({
             <label
               htmlFor={`player${playerNum}-${tier.id}`}
               className="players__tiers"
+              style={{ color: tierColors[tier.id] }}
             >
               {tier.label}
             </label>
