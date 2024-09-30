@@ -4,7 +4,7 @@ import logo from "../components/logo.jpg";
 
 function Header() {
   const navigate = useNavigate();
-  const [selectedGame, setSelectedGame] = useState("League of Legends");
+  const [selectedGame, setSelectedGame] = useState("Valorant");
 
   const handleGame = (event) => {
     const game = event.target.value;
