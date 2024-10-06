@@ -1,3 +1,11 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
 .header__game {
   input[type="radio"] {
     display: none;
@@ -12,7 +20,9 @@
     cursor: pointer;
     background-color: #444;
     color: aliceblue;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
     display: inline-block;
 
     &:hover {
