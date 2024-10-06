@@ -51,7 +51,7 @@ export default function PlayerVlrt({
             <label
               htmlFor={`player${playerNum}-${tier.id}`}
               className="players__tiers"
-              style={{ color: tierColors[tier.id] }}
+              style={{ color: tierColors.vlrt_color[tier.id] }}
             >
               {tier.label}
             </label>

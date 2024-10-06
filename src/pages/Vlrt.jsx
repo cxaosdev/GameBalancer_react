@@ -1,7 +1,6 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable react/no-array-index-key */
 import React, { useState } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
+import ResultModal from "components/ResultModal.jsx";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 export default function Vlrt() {
@@ -25,10 +24,16 @@ export default function Vlrt() {
     Radiant: 48,
   };
 
+  const [teams, setTeams] = useState({
+    team1: [],
+    team1Pts: 0,
+    team2: [],
+    team2Pts: 0,
+  });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handlePlayerChange = (index, field, value) => {
-    console.log(
-      `Change detected for player ${index + 1}: ${field} -> ${value}`
-    ); // Log the change
     const updatedPlayers = [...playerData];
     updatedPlayers[index][field] = value;
     if (field === "tier") {
@@ -55,25 +60,35 @@ export default function Vlrt() {
       }
     });
 
-    console.log("Team 1:", team1);
-    console.log("Team 2:", team2);
     setTeams({
       team1,
       team1Pts,
       team2,
       team2Pts,
     });
+
+    const spinner = document.createElement("div");
+    spinner.className =
+      "fixed inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50";
+    spinner.innerHTML = `
+      <div class="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-800 mb-4 bg-transparent"></div>
+      <span class="text-white text-3xl text-yellow-300 bg-transparent">Generating...</span>
+    `;
+    const container = document.querySelector(".vlrt__container");
+    container.appendChild(spinner);
+
+    setTimeout(() => {
+      spinner.remove();
+      setIsModalOpen(true);
+    }, 500);
   };
 
-  const [teams, setTeams] = useState({
-    team1: [],
-    team1Pts: 0,
-    team2: [],
-    team2Pts: 0,
-  });
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
-    <div className="vlrt__container mt-[100px]">
+    <div className="vlrt__container mt-[100px] relative">
       {players.map((player, index) => (
         <PlayerVlrt
           className="players__list"
@@ -86,7 +101,7 @@ export default function Vlrt() {
 
       <div className="flex justify-center mt-4 bg-transparent">
         <button
-          className="w-[300px] text-[30px] flex items-center justify-center px-4 py-2 text-white border border-transparent rounded-md shadow-sm bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="mt-[20px] w-[300px] text-[30px] flex items-center justify-center px-4 py-2 text-white border border-transparent rounded-md shadow-sm bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           type="submit"
           onClick={handleGenerateTeams}
         >
@@ -94,56 +109,11 @@ export default function Vlrt() {
         </button>
       </div>
 
-      {teams.team1.length > 0 && (
-        <div className="grid grid-cols-1 gap-6 mt-8 bg-white sm:grid-cols-2 ">
-          {/* Team 1 */}
-          <div className="p-6 mt-4 ml-6 text-black rounded-lg shadow-lg">
-            <h2 className="mb-10 text-xl font-semibold text-center  text-[51px]">
-              Team 1 ( Total Points: {teams.team1Pts} ) :
-            </h2>
-            <ul className="space-y-2">
-              {teams.team1.map((player, index) => (
-                <li
-                  key={index}
-                  className="flex justify-between p-2 rounded-lg bg-gray"
-                >
-                  <span className="text-[25px]">{player.playerName}</span>
-                  <span className="text-[25px]">
-                    {player.tier} ({player.pts} pts)
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Team 2 */}
-          <div className="p-6 mt-4 mr-6 text-white rounded-lg shadow-lg bg-gray">
-            <h2 className="mb-10  text-xl font-semibold text-center  text-[51px]">
-              Team 2 ( Total Points: {teams.team2Pts} ) :
-            </h2>
-            <ul className="space-y-2">
-              {teams.team2.map((player, index) => (
-                <li
-                  key={index}
-                  className="flex justify-between p-2 rounded-lg bg-gray"
-                >
-                  <span className="text-[25px]">{player.playerName}</span>
-                  <span className="text-[25px]">
-                    {player.tier} ({player.pts} pts)
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Point Difference */}
-          <div className="col-span-2 text-center">
-            <h2 className="mt-3 text-2xl font-bold text-gray-300 mb-[30px]">
-              Point Difference: {Math.abs(teams.team1Pts - teams.team2Pts)}
-            </h2>
-          </div>
-        </div>
-      )}
+      <ResultModal
+        isOpen={isModalOpen}
+        teams={teams}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }

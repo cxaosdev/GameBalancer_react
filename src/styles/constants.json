@@ -1,11 +1,25 @@
 {
-  "Iron": "#5E5E5E",
-  "Bronze": "#8D6F46",
-  "Silver": "#BAC8D1",
-  "Gold": "#FFD700",
-  "Platinum": "#54D3E0",
-  "Diamond": "#A770F0",
-  "Ascendant": "#1CB952",
-  "Immortal": "#C23A73",
-  "Radiant": "#F3992E"
+  "vlrt_color": {
+    "Iron": "#5E5E5E",
+    "Bronze": "#8D6F46",
+    "Silver": "#BAC8D1",
+    "Gold": "#FFD700",
+    "Platinum": "#54D3E0",
+    "Diamond": "#A770F0",
+    "Ascendant": "#1CB952",
+    "Immortal": "#C23A73",
+    "Radiant": "#F3992E"
+  },
+  "lol_color": {
+    "Iron": "#5E5E5E",
+    "Bronze": "#8D6F46",
+    "Silver": "#BAC8D1",
+    "Gold": "#FFD700",
+    "Platinum": "#2C9FB4",
+    "Emerald": "#1CB952",
+    "Diamond": "#58B1E1",
+    "Master": "#B543EB",
+    "GrandMaster": "#E34033",
+    "Challenger": "#7DF7FE"
+  }
 }
