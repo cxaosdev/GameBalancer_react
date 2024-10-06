@@ -4,7 +4,7 @@ import logo from "../components/logo.jpg";
 
 function Header() {
   const navigate = useNavigate();
-  const [selectedGame, setSelectedGame] = useState("League of Legends");
+  const [selectedGame, setSelectedGame] = useState("Valorant");
 
   const handleGame = (event) => {
     const game = event.target.value;
@@ -16,7 +16,7 @@ function Header() {
     }
   };
   return (
-    <div className="flex items-center justify-between p-0 header">
+    <div className="fixed top-0 left-0 w-[100%] flex items-center justify-between p-0 header ">
       <div className="header__title flex mt-[10px] mb-[20px] items-end">
         <img
           className="header__title-logo mt-[10px] ml-[30px] w-[50px] bg-transparent"

@@ -9,6 +9,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
+          <Route path="/" element={<Vlrt />} />
           <Route path="/LeagueOfLegends" element={<Lol />} />
           <Route path="/Valorant" element={<Vlrt />} />
         </Routes>

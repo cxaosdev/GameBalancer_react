@@ -106,7 +106,6 @@ export default function PlayerLol({ playerNum, updatePlayerInfo }) {
               value={tier.id}
               type="radio"
               checked={selectedTier === tier.id}
-              defaultChecked={index === 0}
               onChange={handleTierChange}
             />
             <label

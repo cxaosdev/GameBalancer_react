@@ -2,4 +2,6 @@
 @import "players.scss";
 @import "reset.scss";
 
+@tailwind base;
+@tailwind components;
 @tailwind utilities;
