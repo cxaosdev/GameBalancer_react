@@ -1,23 +1,28 @@
 import React, { useState } from "react";
-
+import tierColors from "../styles/constants.json";
 import topLaneImage from "../assets/lol_lane/top.svg";
 import jungleLaneImage from "../assets/lol_lane/jungle.svg";
 import midLaneImage from "../assets/lol_lane/mid.svg";
 import adcLaneImage from "../assets/lol_lane/adc.svg";
 import supportLaneImage from "../assets/lol_lane/support.svg";
 
-export default function PlayerLol({ playerNum, updatePlayerInfo }) {
+export default function PlayerLol({
+  playerNum,
+  playerName,
+  selectedTier,
+  handlePlayerChange,
+}) {
   const tiers = [
-    { id: "iron", label: "Iron", pts: 7 },
-    { id: "bronze", label: "Bronze", pts: 13 },
-    { id: "silver", label: "Silver", pts: 17 },
-    { id: "gold", label: "Gold", pts: 25 },
-    { id: "platinum", label: "Platinum", pts: 29 },
-    { id: "emerald", label: "Emerald", pts: 36 },
-    { id: "diamond", label: "Diamond", pts: 42 },
-    { id: "master", label: "Master", pts: 45 },
-    { id: "grandmaster", label: "GrandMaster", pts: 49 },
-    { id: "challenger", label: "Challenger", pts: 52 },
+    { id: "Iron", label: "Iron", pts: 7 },
+    { id: "Bronze", label: "Bronze", pts: 13 },
+    { id: "Silver", label: "Silver", pts: 17 },
+    { id: "Gold", label: "Gold", pts: 25 },
+    { id: "Platinum", label: "Platinum", pts: 29 },
+    { id: "Emerald", label: "Emerald", pts: 36 },
+    { id: "Diamond", label: "Diamond", pts: 42 },
+    { id: "Master", label: "Master", pts: 45 },
+    { id: "GrandMaster", label: "GrandMaster", pts: 49 },
+    { id: "Challenger", label: "Challenger", pts: 52 },
   ];
 
   const lanes = [
@@ -28,53 +33,21 @@ export default function PlayerLol({ playerNum, updatePlayerInfo }) {
     { id: "support", label: "Support", image: supportLaneImage },
   ];
 
-  const [playerName, setPlayerName] = useState("");
-  const [selectedTier, setSelectedTier] = useState(tiers[0].id);
-  const [selectedLanes, setSelectedLanes] = useState([]);
-
-  const handleUpdate = () => {
-    updatePlayerInfo(playerNum, {
-      name: playerName,
-      tier: selectedTier,
-      lanes: selectedLanes,
-    });
-  };
-
-  const handleNameChange = (e) => {
-    setPlayerName(e.target.value);
-    handleUpdate();
-  };
-
-  const handleTierChange = (e) => {
-    setSelectedTier(e.target.value);
-    handleUpdate();
-  };
-
-  const handleLaneChange = (e) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setSelectedLanes((prev) => [...prev, value]);
-    } else {
-      setSelectedLanes((prev) => prev.filter((lane) => lane !== value));
-    }
-    handleUpdate();
-  };
-
   return (
     <div className="player">
       <section className="players">
-        {/* input player's name */}
+        {/* Player Name Input */}
         <input
           type="text"
           className="players__input-name"
-          id={`playerName${playerNum}`}
-          placeholder={`Player ${playerNum} Name`}
           value={playerName}
-          onChange={handleNameChange}
+          onChange={(e) =>
+            handlePlayerChange(playerNum - 1, "playerName", e.target.value)
+          }
+          placeholder={`Player ${playerNum} Name`}
           autoComplete="off"
         />
-        {/* input player's lane */}
-        <div className="players__lanes">
+        {/* <div className="players__lanes">
           {lanes.map((lane) => (
             <div className="lane" key={lane.id}>
               <input
@@ -95,9 +68,9 @@ export default function PlayerLol({ playerNum, updatePlayerInfo }) {
               />
             </div>
           ))}
-        </div>
-        {/* input player's tier */}
-        {tiers.map((tier, index) => (
+        </div> */}
+
+        {tiers.map((tier) => (
           <div className="tier" key={tier.id}>
             <input
               id={`player${playerNum}-${tier.id}`}
@@ -106,11 +79,14 @@ export default function PlayerLol({ playerNum, updatePlayerInfo }) {
               value={tier.id}
               type="radio"
               checked={selectedTier === tier.id}
-              onChange={handleTierChange}
+              onChange={() =>
+                handlePlayerChange(playerNum - 1, "tier", tier.id)
+              }
             />
             <label
               htmlFor={`player${playerNum}-${tier.id}`}
               className="players__tiers"
+              style={{ color: tierColors.lol_color[tier.id] }}
             >
               {tier.label}
             </label>
