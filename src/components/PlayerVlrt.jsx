@@ -27,9 +27,7 @@ export default function PlayerVlrt({
           type="text"
           className="players__input-name"
           value={playerName}
-          onChange={(e) =>
-            handlePlayerChange(playerNum - 1, "playerName", e.target.value)
-          }
+          onChange={(e) => handlePlayerChange("playerName", e.target.value)}
           placeholder={`Player ${playerNum} Name`}
           autoComplete="off"
         />
@@ -44,10 +42,9 @@ export default function PlayerVlrt({
               value={tier.id}
               type="radio"
               checked={selectedTier === tier.id}
-              onChange={() =>
-                handlePlayerChange(playerNum - 1, "tier", tier.id)
-              }
+              onChange={(e) => handlePlayerChange("tier", e.target.value)}
             />
+
             <label
               htmlFor={`player${playerNum}-${tier.id}`}
               className="players__tiers"

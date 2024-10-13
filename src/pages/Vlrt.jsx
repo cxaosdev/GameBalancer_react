@@ -134,11 +134,11 @@ export default function Vlrt() {
     <div className="vlrt__container relative mt-[100px]">
       {players.map((player, index) => (
         <PlayerVlrt
-          className="players__list"
           key={player}
           playerNum={index + 1}
+          playerName={playerData[index].playerName}
           selectedTier={playerData[index].tier}
-          handlePlayerChange={({ field, value }) =>
+          handlePlayerChange={(field, value) =>
             handlePlayerChange({ index, field, value })
           }
         />
