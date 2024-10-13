@@ -43,7 +43,7 @@ export default function Vlrt() {
     setIsMobile(mobileRegex.test(userAgent));
   }, []);
 
-  const handlePlayerChange = (index, field, value) => {
+  const handlePlayerChange = ({ index, field, value }) => {
     const updatedPlayers = [...playerData];
     updatedPlayers[index][field] = value;
     if (field === "tier") {
@@ -138,7 +138,9 @@ export default function Vlrt() {
           key={player}
           playerNum={index + 1}
           selectedTier={playerData[index].tier}
-          handlePlayerChange={handlePlayerChange}
+          handlePlayerChange={({ field, value }) =>
+            handlePlayerChange({ index, field, value })
+          }
         />
       ))}
 
