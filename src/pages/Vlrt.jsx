@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
 import ResultModal from "components/ResultModal.jsx";
 
@@ -43,14 +43,16 @@ export default function Vlrt() {
     setIsMobile(mobileRegex.test(userAgent));
   }, []);
 
-  const handlePlayerChange = ({ index, field, value }) => {
-    const updatedPlayers = [...playerData];
-    updatedPlayers[index][field] = value;
-    if (field === "tier") {
-      updatedPlayers[index].pts = tierToPoints[value] || 0;
-    }
-    setPlayerData(updatedPlayers);
-  };
+  const handlePlayerChange = useCallback(({ index, field, value }) => {
+    setPlayerData((prev) => {
+      const updatedPlayers = [...prev];
+      updatedPlayers[index][field] = value;
+      if (field === "tier") {
+        updatedPlayers[index].pts = tierToPoints[value] || 0;
+      }
+      return updatedPlayers;
+    });
+  }, []);
 
   const handleGenerateSpinner = (players) => {
     const spinner = document.createElement("div");
