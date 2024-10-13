@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
 import ResultModal from "components/ResultModal.jsx";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
+
 export default function Vlrt() {
   const [playerData, setPlayerData] = useState(
     players.map((_, index) => ({
       playerName: `Player ${index + 1}`,
       tier: "Iron",
       pts: 7,
-    }))
+    })),
   );
 
   const tierToPoints = {
@@ -32,6 +33,14 @@ export default function Vlrt() {
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const mobileRegex =
+      /android|iphone|ipad|ipod|blackberry|windows phone|webos|opera mini|iemobile/;
+    setIsMobile(mobileRegex.test(userAgent));
+  }, []);
 
   const handlePlayerChange = (index, field, value) => {
     const updatedPlayers = [...playerData];
@@ -60,12 +69,7 @@ export default function Vlrt() {
       }
     });
 
-    setTeams({
-      team1,
-      team1Pts,
-      team2,
-      team2Pts,
-    });
+    setTeams({ team1, team1Pts, team2, team2Pts });
 
     const spinner = document.createElement("div");
     spinner.className =
@@ -87,8 +91,16 @@ export default function Vlrt() {
     setIsModalOpen(false);
   };
 
+  if (isMobile) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900">
+        <h1 className="text-3xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
+      </div>
+    );
+  }
+
   return (
-    <div className="vlrt__container mt-[100px] relative">
+    <div className="vlrt__container relative mt-[100px]">
       {players.map((player, index) => (
         <PlayerVlrt
           className="players__list"
@@ -101,7 +113,7 @@ export default function Vlrt() {
 
       <div className="flex justify-center mt-4 bg-transparent">
         <button
-          className="mt-[20px] w-[300px] text-[30px] flex items-center justify-center px-4 py-2 text-white border border-transparent rounded-md shadow-sm bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="mt-[20px] flex w-[300px] items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           type="submit"
           onClick={handleGenerateTeams}
         >
