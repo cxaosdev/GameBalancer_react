@@ -9,7 +9,7 @@ export default function Lol() {
       playerName: `Player ${index + 1}`,
       tier: "Iron",
       pts: 7,
-    }))
+    })),
   );
 
   const tierToPoints = {
@@ -27,7 +27,7 @@ export default function Lol() {
 
   const handlePlayerChange = (index, field, value) => {
     console.log(
-      `Change detected for player ${index + 1}: ${field} -> ${value}`
+      `Change detected for player ${index + 1}: ${field} -> ${value}`,
     );
     const updatedPlayers = [...playerData];
     updatedPlayers[index][field] = value;
@@ -79,32 +79,34 @@ export default function Lol() {
   };
 
   return (
-    <div className="lol__container mt-[100px]">
-      {players.map((player, index) => (
-        <Playerlol
-          className="players__list"
-          key={player}
-          playerNum={index + 1}
-          selectedTier={playerData[index].tier}
-          handlePlayerChange={handlePlayerChange}
+    <>
+      <div className="lol__container mt-[100px]">
+        {players.map((player, index) => (
+          <Playerlol
+            className="players__list"
+            key={player}
+            playerNum={index + 1}
+            selectedTier={playerData[index].tier}
+            handlePlayerChange={handlePlayerChange}
+          />
+        ))}
+
+        <div className="flex justify-center mt-4 bg-transparent">
+          <button
+            className="mt-[20px] flex w-[300px] items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            type="submit"
+            onClick={handleGenerateTeams}
+          >
+            Generate Fair Match!
+          </button>
+        </div>
+
+        <ResultModal
+          isOpen={isModalOpen}
+          teams={teams}
+          onClose={handleCloseModal}
         />
-      ))}
-
-      <div className="flex justify-center mt-4 bg-transparent">
-        <button
-          className="mt-[20px] w-[300px] text-[30px] flex items-center justify-center px-4 py-2 text-white border border-transparent rounded-md shadow-sm bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          type="submit"
-          onClick={handleGenerateTeams}
-        >
-          Generate Fair Match!
-        </button>
       </div>
-
-      <ResultModal
-        isOpen={isModalOpen}
-        teams={teams}
-        onClose={handleCloseModal}
-      />
-    </div>
+    </>
   );
 }
