@@ -91,7 +91,7 @@ export default function Vlrt() {
 
   if (isMobile) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-900 text-white">
+      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900">
         <h1 className="text-3xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );
@@ -111,9 +111,9 @@ export default function Vlrt() {
         />
       ))}
 
-      <div className="mt-4 flex justify-center bg-transparent">
+      <div className="flex justify-center mt-4 mb-0 bg-transparent">
         <button
-          className="mt-[20px] flex w-[300px] items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="mt-[20px] flex w-[300px] justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           type="submit"
           onClick={handleGenerateTeams}
           disabled={showSpinner}
