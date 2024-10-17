@@ -36,7 +36,7 @@ function Header() {
 
   return (
     <div
-      className={`header left-0 top-0 z-[1000] flex h-[13vh] w-full items-center justify-between p-0`}
+      className={`header fixed left-0 top-0 z-[1000] flex h-[10vh] w-full items-center justify-between p-0`}
     >
       <div className="header__title mb-[20px] mt-[10px] flex items-end">
         <img

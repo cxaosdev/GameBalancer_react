@@ -98,7 +98,7 @@ export default function Vlrt() {
   }
 
   return (
-    <div className="relative vlrt__container">
+    <div className="vlrt__container relative pt-[12vh]">
       {players.map((player, index) => (
         <PlayerVlrt
           key={player}
@@ -111,9 +111,9 @@ export default function Vlrt() {
         />
       ))}
 
-      <div className="flex justify-center mt-4 mb-0 bg-transparent">
+      <div className="mb-[10px] mt-[30px] flex justify-center bg-transparent">
         <button
-          className="mt-[20px] flex w-[300px] justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="flex w-[300px] justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           type="submit"
           onClick={handleGenerateTeams}
           disabled={showSpinner}

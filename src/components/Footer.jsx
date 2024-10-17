@@ -4,12 +4,12 @@ export default function Footer() {
   const navigate = useNavigate();
 
   return (
-    <div className="do-hyeon-regular m-0 p-0 pb-[1rem] text-[#515255]">
+    <div className="do-hyeon-regular m-0 p-0 pb-[0.5rem] text-[#515255]">
       <div className="px-[2rem]">
-        <section className="w-100 pt-[2rem]">
-          <div className="mb-[1.25rem] flex justify-between">
-            <div className="text-[2rem]">Game Balancer</div>
-            <div className="flex flex-col items-end">
+        <section className="w-100 pt-[0.5rem]">
+          <div className="mb-[1rem] flex items-center justify-between">
+            <div className="text-[1.5rem]">Game Balancer</div>
+            <div className="flex flex-col items-end pr-[0.5rem] pt-[0.4rem] text-[0.9rem]">
               <a
                 href="https://github.com/cxaosdev/GameBalancer_react"
                 target="_blank"
