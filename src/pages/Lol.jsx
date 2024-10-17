@@ -80,11 +80,11 @@ export default function Lol() {
 
   return (
     <>
-      <div className="do-hyeon-regular pointer-events-none fixed inset-0 z-30 flex items-center justify-center bg-black bg-opacity-70 text-5xl text-white">
+      <div className="fixed inset-0 z-30 flex items-center justify-center text-5xl text-white bg-black pointer-events-none do-hyeon-regular bg-opacity-70">
         👩🏻‍💻 이 페이지는 개발 중입니다 👩🏻‍💻
       </div>
       <div className="relative">
-        <div className="lol__container mt-[100px]">
+        <div className="lol__container">
           {players.map((player, index) => (
             <Playerlol
               className="players__list"
@@ -95,7 +95,7 @@ export default function Lol() {
             />
           ))}
 
-          <div className="mt-4 flex justify-center bg-transparent">
+          <div className="flex justify-center mt-4 bg-transparent">
             <button
               className="mt-[20px] flex w-[300px] items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               type="submit"

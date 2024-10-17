@@ -98,7 +98,7 @@ export default function Vlrt() {
   }
 
   return (
-    <div className="vlrt__container relative mt-[100px]">
+    <div className="relative vlrt__container">
       {players.map((player, index) => (
         <PlayerVlrt
           key={player}
