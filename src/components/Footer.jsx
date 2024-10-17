@@ -1,13 +1,13 @@
-import { FaGithub, FaHeadphonesAlt, FaPhone, FaPhoneAlt } from "react-icons/fa";
+import { FaGithub, FaPhoneAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 export default function Footer() {
   const navigate = useNavigate();
 
   return (
-    <div className="do-hyeon-regular text-[#515255]">
-      <div className="px-[1.7rem]">
-        <section className="w-100 pt-[0.8rem]">
-          <div className="flex justify-between pb-[0.7rem] pr-[0.8rem]">
+    <div className="do-hyeon-regular bg-black bg-opacity-90 text-[#515255]">
+      <div className="bg-black bg-opacity-90 px-[1.7rem]">
+        <section className="w-100 bg-transparent pt-[0.8rem]">
+          <div className="flex justify-between bg-transparent pb-[0.7rem] pr-[0.8rem]">
             <div className="text-[1.4rem]">Game Balancer</div>
           </div>
           <section className="border-t border-[#c3c4c7] pt-[0.7rem] text-[1rem] text-[#868B94]">

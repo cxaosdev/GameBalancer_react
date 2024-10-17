@@ -36,14 +36,10 @@ function Header() {
 
   return (
     <div
-      className={`header fixed left-0 top-0 z-[1000] flex h-[10vh] w-full items-center justify-between p-0`}
+      className={`header fixed left-0 top-0 z-[1000] flex h-[10vh] w-full items-center justify-between bg-black bg-opacity-70 p-0`}
     >
       <div className="header__title mb-[20px] mt-[10px] flex items-end">
-        <img
-          className="ml-[30px] mt-[10px] w-[50px] bg-transparent"
-          src={logo}
-          alt="Logo"
-        />
+        <img className="ml-[30px] mt-[10px] w-[50px]" src={logo} alt="Logo" />
         <span className="ml-[20px] mt-[10px] text-[50px] leading-none">
           Game Balancer
         </span>
@@ -59,10 +55,10 @@ function Header() {
         />
         <label
           htmlFor="toggle-on"
-          className={`font-new-amsterdam text-aliceblue mr-[15px] inline-block cursor-pointer rounded-[25px] bg-[#444] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
+          className={`font-new-amsterdam text-aliceblue mr-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
             selectedGame === "League of Legends"
-              ? "bg-[#697dff] font-bold text-white"
-              : "hover:bg-[#555]"
+              ? "bg-indigo-600 font-bold text-white"
+              : "hover:text-indigo-600"
           }`}
         >
           League of Legends
@@ -77,10 +73,10 @@ function Header() {
         />
         <label
           htmlFor="toggle-off"
-          className={`font-new-amsterdam text-aliceblue mr-[15px] inline-block cursor-pointer rounded-[25px] bg-[#444] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
+          className={`font-new-amsterdam text-aliceblue mr-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
             selectedGame === "Valorant"
-              ? "bg-[#697dff] font-bold text-white"
-              : "hover:bg-[#555]"
+              ? "bg-indigo-600 font-bold text-white"
+              : "hover:text-indigo-600"
           }`}
         >
           Valorant
