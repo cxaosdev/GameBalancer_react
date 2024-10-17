@@ -5,7 +5,6 @@ import logo from "../components/logo.jpg";
 function Header() {
   const navigate = useNavigate();
   const [selectedGame, setSelectedGame] = useState("Valorant");
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
