@@ -111,9 +111,9 @@ export default function Vlrt() {
         />
       ))}
 
-      <div className="mb-[10px] mt-[30px] flex justify-center bg-transparent">
+      <div className="mb-[10px] mt-[1rem] flex justify-center bg-transparent">
         <button
-          className="flex w-[300px] justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="flex w-[18rem] justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:from-white focus:to-indigo-400 focus:text-indigo-600"
           type="submit"
           onClick={handleGenerateTeams}
           disabled={showSpinner}

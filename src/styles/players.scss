@@ -3,38 +3,78 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  padding: 20px;
+  padding: 0.5rem;
+}
+
+.lol__container {
+  position: relative;
+  background-image: url("../assets/lol_background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 0.5rem;
+}
+
+.lol__container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.lol__container > * {
+  position: relative;
+  z-index: 2;
 }
 
 .vlrt__container {
+  position: relative;
   background-image: url("../assets/vlrt_background.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  padding: 20px;
+  padding: 1rem;
+}
+
+.vlrt__container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.vlrt__container > * {
+  position: relative;
+  z-index: 2;
 }
 
 .players {
-  padding-left: 40px;
-  gap: 5px;
+  padding-left: 5rem;
+  padding-right: 5rem;
   display: flex;
-  font-size: 25px;
-  margin-bottom: 3px;
-  justify-content: space-around;
+  margin-bottom: 0.4rem;
+  justify-content: space-between;
   background-color: transparent;
 }
 
 .players__input-name {
   font-family: "New Amsterdam", sans-serif;
-  margin-top: 7px;
-  height: 40px;
+  margin: 0.2rem;
   padding: 0;
-  border: 2px solid #444;
-  border-radius: 5px;
+  border: 3px solid #444;
+  border-radius: 0.5rem;
   background-color: #333;
-  width: 150px;
+  width: 9.5rem;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.3rem;
   &:focus {
     background-color: #3949ab;
   }
@@ -48,12 +88,12 @@
 
 .players__tiers {
   display: inline-block;
-  padding: 1px 8px;
-  margin: 5px;
+  padding: 0.05rem 0.5rem;
+  margin: 0.4rem;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 30px;
-
+  height: 2.9rem;
+  font-size: 2rem;
   &:hover {
     background-color: #444;
   }
@@ -80,34 +120,34 @@
   background-color: transparent;
 }
 
-.players__lanes {
-  margin-left: 10px;
-  margin-right: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
+// .players__lanes {
+//   margin-left: 10px;
+//   margin-right: 10px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: transparent;
 
-  .lane {
-    background-color: transparent;
-  }
+//   .lane {
+//     background-color: transparent;
+//   }
 
-  input[type="checkbox"] {
-    display: none;
-  }
+//   input[type="checkbox"] {
+//     display: none;
+//   }
 
-  .players__lane-image {
-    margin: 3px;
-    height: 25px;
-    width: 25px;
-    cursor: pointer;
-    transition:
-      transform 0.2s,
-      border 0.2s;
+//   .players__lane-image {
+//     margin: 3px;
+//     height: 25px;
+//     width: 25px;
+//     cursor: pointer;
+//     transition:
+//       transform 0.2s,
+//       border 0.2s;
 
-    &.selected {
-      border: 2px solid #3949ab;
-      border-radius: 5px;
-    }
-  }
-}
+//     &.selected {
+//       border: 2px solid #3949ab;
+//       border-radius: 5px;
+//     }
+//   }
+// }
