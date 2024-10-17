@@ -8,14 +8,6 @@ export default function Footer() {
             <div className="text-[1.5rem] font-bold leading-[1.4]">
               Game Balancer
             </div>
-            <div className="flex w-[18.75rem] justify-between md:hidden">
-              <button className="h-[2.75rem] w-[9.375rem] rounded-[8px] border-none p-0 text-[1rem] font-bold">
-                App store
-              </button>
-              <button className="h-[2.75rem] w-[9.375rem] rounded-[8px] border-none p-0 text-[1rem] font-bold">
-                Google Play
-              </button>
-            </div>
           </div>
           <nav className="flex flex-wrap footer__nav md:flex-nowrap">
             <ul className="m-0 flex w-1/3 list-none gap-20 p-0 text-[0.875rem] leading-[1.4] md:mr-[15%]">
@@ -31,7 +23,6 @@ export default function Footer() {
                 href="https://github.com/cxaosdev/GameBalancer_react"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#007acc]"
               >
                 <strong className="flex items-center">
                   <FaGithub />{" "}
