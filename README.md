@@ -11,7 +11,7 @@
   <img src="https://github.com/user-attachments/assets/a1a17488-b867-498e-94ea-7d6d83930229" alt="SelectGame" width="900" />
 </div>
 
-## Features
+## 🔧 Features
 - 🏅 **Player Tier Input**: Select each player's rank.
 - ⚖️ **Fair Team Generation**: Automatically create two balanced teams based on player points.
 - 📊 **Result**: Displays the generated teams and their total points in a modal.
@@ -19,7 +19,7 @@
 
 ***
 
-## Project Structure
+## 📑 Project Structure
 ```
 src
 ├── assets
@@ -50,7 +50,7 @@ src
 ```
 ---
 
-## Algorithm for Team Generation
+## 🧮 Algorithm for Team Generation
 
 - The **tiers are mapped to points** as follows:
   - Valorant
@@ -66,27 +66,24 @@ src
 
 ---
 
-## How to Use:
+## ❓ How to Use
 
 1. **Select Your Game**
-   
    Choose the game you want to create a balanced match for.
 
-    ![Select Game](src/assets/ScreenShots/SelectGame.png)
+   ![SelectGame](https://github.com/user-attachments/assets/7a6c18db-a2ec-4f2e-a8b5-0cb24e1f59f0)
+
 
 3. **Enter Players' Ranks**
 
    Input the ranks of each player. Players who do not select a tier will be considered at the lowest tier for calculation purposes.
-
+   
    ![ValorantScreen](https://github.com/user-attachments/assets/373d9e63-823e-4487-9625-0f70650acb61)
 
-
-5. **Generate Fair Match**
-
+4. **Generate Fair Match**
+   
    Click on 'Generate Fair Match!' to see the balanced match results.
    
----
-
 ## Contact
 
 If you have any questions or suggestions, feel free to reach out:  
