@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Game Balancer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 🕹️ A fair match generator for **League of Leagends** and **Valorant** that divides 10 players into two balanced teams based on their **tiers and points**.
+<div align=center>
+  <img src="https://github.com/user-attachments/assets/c1f7cf12-523c-4581-ab0a-2e3a95b74f82" alt="GBlogo" height="100" />
+  <img src="https://github.com/user-attachments/assets/ecd4bacb-06c1-4bd9-bdad-34fa12f65ad6" alt="Valorant" height="100" />
+  <img src="https://github.com/user-attachments/assets/8c814e0e-3f97-4ed3-96a3-4a3161549520" alt="LeagueOfLegends" height="100" />
+</div>
+<br>
+<div align=center style="text-align: center; gap:20">
+  <img src="https://github.com/user-attachments/assets/a1a17488-b867-498e-94ea-7d6d83930229" alt="SelectGame" width="900" />
+</div>
 
-## Available Scripts
+## Features
+- 🏅 **Player Tier Input**: Select each player's rank.
+- ⚖️ **Fair Team Generation**: Automatically create two balanced teams based on player points.
+- 📊 **Result**: Displays the generated teams and their total points in a modal.
 
-In the project directory, you can run:
 
-### `npm start`
+***
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Structure
+```
+src
+├── assets
+├── components
+│   ├── Footer.jsx
+│   ├── Header.jsx
+│   ├── logo.jpg
+│   ├── OnBoarding.jsx
+│   ├── PlayerLol.jsx
+│   ├── PlayerVlrt.jsx
+│   ├── ResultModal.jsx
+│   ├── Spinner.jsx
+│   ├── WarningModal.jsx
+├── pages
+│   ├── Home.jsx
+│   ├── Lol.jsx
+│   ├── Vlrt.jsx
+├── styles
+│   ├── constants.json
+│   ├── index.css
+│   ├── players.scss
+│   ├── reset.scss
+├── util
+│   ├── teamGenerator.js
+│   ├── tierPoints.js
+├── App.jsx
+├── index.js
+```
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Algorithm for Team Generation
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- The **tiers are mapped to points** as follows:
+  - Valorant
+  ```
+  Iron: 7, Bronze: 13, Silver: 17, Gold: 25, Platinum: 29, Diamond: 37, Ascendant: 43, Immortal: 45, Radiant: 48
+  ```
+  - League of Legends
+  ```
+  Iron: 7, Bronze: 13, Silver: 17, Gold: 25, Platinum: 32, Emerald: 40, Diamond: 48, Master: 54, GrandMaster: 59, Challenger: 64,
+  ```
+- The players are **sorted by points** in descending order.
