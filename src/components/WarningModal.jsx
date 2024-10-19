@@ -3,7 +3,7 @@ import React from "react";
 export default function WarningModal({ onClose, onContinue }) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="rounded-md p-10 text-center">
+      <div className="rounded-md bg-black bg-opacity-90 p-10 text-center">
         <h2 className="do-hyeon-regular mb-10 text-4xl">
           Please fill out all fields.
         </h2>

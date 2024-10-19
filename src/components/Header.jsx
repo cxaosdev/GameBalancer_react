@@ -4,7 +4,7 @@ import logo from "../components/logo.jpg";
 
 function Header() {
   const navigate = useNavigate();
-  const [selectedGame, setSelectedGame] = useState("Valorant");
+  const [selectedGame, setSelectedGame] = useState("");
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
@@ -38,7 +38,10 @@ function Header() {
     <div
       className={`header fixed left-0 top-0 z-[1000] flex h-[10vh] w-full items-center justify-between bg-black bg-opacity-70 p-0`}
     >
-      <div className="header__title mb-[20px] mt-[10px] flex items-end">
+      <div
+        onClick={() => navigate("/")}
+        className="header__title mb-[20px] mt-[10px] flex items-end"
+      >
         <img className="ml-[30px] mt-[10px] w-[50px]" src={logo} alt="Logo" />
         <span className="ml-[20px] mt-[10px] text-[50px] leading-none">
           Game Balancer

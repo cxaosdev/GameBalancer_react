@@ -12,7 +12,7 @@ export default function Footer() {
           </div>
           <section className="border-t border-[#c3c4c7] pt-[0.7rem] text-[1rem] text-[#868B94]">
             <div className="flex w-[100%] justify-between">
-              <nav className="flex footer__nav flex-nowrap">
+              <nav className="footer__nav flex flex-nowrap">
                 <ul className="m-0 flex list-none flex-nowrap gap-20 text-[1rem]">
                   <li
                     className="mb-[1rem] cursor-pointer"

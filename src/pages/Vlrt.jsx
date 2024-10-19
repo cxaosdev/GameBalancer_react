@@ -91,8 +91,8 @@ export default function Vlrt() {
 
   if (isMobile) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900">
-        <h1 className="text-3xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
+      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
+        <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );
   }
@@ -113,12 +113,15 @@ export default function Vlrt() {
 
       <div className="mb-[1rem] mt-[1.3rem] flex justify-center bg-transparent">
         <button
-          className="flex w-[18rem] justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:from-white focus:to-indigo-400 focus:text-indigo-600"
+          className="flex w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
           type="submit"
           onClick={handleGenerateTeams}
           disabled={showSpinner}
         >
-          {showSpinner ? <Spinner /> : "Generate Fair Match!"}
+          {showSpinner && <Spinner />}
+          <span className={showSpinner ? "ml-2" : ""}>
+            Generate Fair Match!
+          </span>
         </button>
       </div>
 
