@@ -71,15 +71,16 @@ src
 1. **Select Your Game**
    Choose the game you want to create a balanced match for.
 
-    ![Select Game](src/assets/ScreenShots/SelectGame.png)
+   ![SelectGame](https://github.com/user-attachments/assets/7a6c18db-a2ec-4f2e-a8b5-0cb24e1f59f0)
 
-2. **Enter Players' Ranks**
+
+3. **Enter Players' Ranks**
 
    Input the ranks of each player. Players who do not select a tier will be considered at the lowest tier for calculation purposes.
    
    ![ValorantScreen](https://github.com/user-attachments/assets/373d9e63-823e-4487-9625-0f70650acb61)
 
-3. **Generate Fair Match**
+4. **Generate Fair Match**
    
    Click on 'Generate Fair Match!' to see the balanced match results.
    
