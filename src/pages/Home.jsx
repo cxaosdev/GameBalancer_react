@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LeagueLogo from "../assets/logo/LeagueOfLegends.webp";
+import ValorantLogo from "../assets/logo/Valorant.svg";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ export default function Home() {
           onClick={() => handleSelectGame("LeagueOfLegends")}
         >
           <img
-            src="/src/assets/logo/LeagueOfLegends.webp"
+            src={LeagueLogo}
             alt="League of Legends"
             className="h-[8rem] w-full object-contain"
           />
@@ -54,7 +56,7 @@ export default function Home() {
           onClick={() => handleSelectGame("Valorant")}
         >
           <img
-            src="/src/assets/logo/Valorant.svg"
+            src={ValorantLogo}
             alt="Valorant"
             className="h-[8rem] w-full object-contain"
           />
