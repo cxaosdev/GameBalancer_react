@@ -11,7 +11,7 @@
   <img src="https://github.com/user-attachments/assets/a1a17488-b867-498e-94ea-7d6d83930229" alt="SelectGame" width="900" />
 </div>
 
-## Features
+## 🔧 Features
 - 🏅 **Player Tier Input**: Select each player's rank.
 - ⚖️ **Fair Team Generation**: Automatically create two balanced teams based on player points.
 - 📊 **Result**: Displays the generated teams and their total points in a modal.
@@ -19,7 +19,7 @@
 
 ***
 
-## Project Structure
+## 📑 Project Structure
 ```
 src
 ├── assets
@@ -50,7 +50,7 @@ src
 ```
 ---
 
-## Algorithm for Team Generation
+## 🧮 Algorithm for Team Generation
 
 - The **tiers are mapped to points** as follows:
   - Valorant
@@ -62,3 +62,29 @@ src
   Iron: 7, Bronze: 13, Silver: 17, Gold: 25, Platinum: 32, Emerald: 40, Diamond: 48, Master: 54, GrandMaster: 59, Challenger: 64,
   ```
 - The players are **sorted by points** in descending order.
+- Players are **distributed between two teams** such that the total points of both teams are as close as possible.
+
+---
+
+## ❓ How to Use
+
+1. **Select Your Game**
+   Choose the game you want to create a balanced match for.
+
+    ![Select Game](src/assets/ScreenShots/SelectGame.png)
+
+2. **Enter Players' Ranks**
+
+   Input the ranks of each player. Players who do not select a tier will be considered at the lowest tier for calculation purposes.
+   
+   ![ValorantScreen](https://github.com/user-attachments/assets/373d9e63-823e-4487-9625-0f70650acb61)
+
+3. **Generate Fair Match**
+   
+   Click on 'Generate Fair Match!' to see the balanced match results.
+   
+## Contact
+
+If you have any questions or suggestions, feel free to reach out:  
+📧 **Email**: scy0723123@gmail.com  
+📱 **GitHub**: [cxaos](https://github.com/cxaosdev)
