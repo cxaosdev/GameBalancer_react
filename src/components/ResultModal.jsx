@@ -11,12 +11,12 @@ export default function ResultModal({ isOpen, teams, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-65 modal__overlay"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black modal__overlay bg-opacity-65"
       onClick={handleClickOutside}
     >
       <div className="relative w-full max-w-4xl p-10 rounded-lg shadow-2xl bg-gradient-to-r from-purple-800 to-indigo-900">
         <button
-          className="absolute text-white top-0 left-4 text-[40px] hover:text-yellow-300"
+          className="absolute right-4 top-0 text-[40px] text-white hover:text-yellow-300"
           onClick={onClose}
         >
           &times;
@@ -31,7 +31,7 @@ export default function ResultModal({ isOpen, teams, onClose }) {
             <h2 className="mb-6 text-2xl font-semibold text-center text-yellow-300 bg-transparent">
               [ Total Points: {teams.team1Pts} ]
             </h2>
-            <ul className="space-y-4 bg-transparent ">
+            <ul className="space-y-4 bg-transparent">
               {teams.team1.map((player, index) => (
                 <li
                   key={index}
@@ -47,14 +47,14 @@ export default function ResultModal({ isOpen, teams, onClose }) {
           </div>
 
           {/* Team 2 */}
-          <div className="p-6 text-white bg-transparent rounded-lg ">
+          <div className="p-6 text-white bg-transparent rounded-lg">
             <h2 className="text-4xl font-semibold text-center text-yellow-300 bg-transparent">
               Team 2
             </h2>
             <h2 className="mb-6 text-2xl font-semibold text-center text-yellow-300 bg-transparent">
               [ Total Points: {teams.team1Pts} ]
             </h2>
-            <ul className="space-y-4 bg-transparent ">
+            <ul className="space-y-4 bg-transparent">
               {teams.team2.map((player, index) => (
                 <li
                   key={index}

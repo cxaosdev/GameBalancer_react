@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
 import ResultModal from "components/ResultModal.jsx";
+import Spinner from "components/Spinner.jsx";
+import WarningModal from "../components/WarningModal.jsx";
+import { generateTeamsAlgorithm } from "../util/teamGenerator.js";
+import { tierToPoints } from "../util/tierPoints.js";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
@@ -13,18 +17,6 @@ export default function Vlrt() {
     })),
   );
 
-  const tierToPoints = {
-    Iron: 7,
-    Bronze: 13,
-    Silver: 17,
-    Gold: 25,
-    Platinum: 29,
-    Diamond: 37,
-    Ascendant: 43,
-    Immortal: 45,
-    Radiant: 48,
-  };
-
   const [teams, setTeams] = useState({
     team1: [],
     team1Pts: 0,
@@ -35,6 +27,7 @@ export default function Vlrt() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -54,23 +47,6 @@ export default function Vlrt() {
     });
   }, []);
 
-  const handleGenerateSpinner = (players) => {
-    const spinner = document.createElement("div");
-    spinner.className =
-      "fixed inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50";
-    spinner.innerHTML = `
-      <div class="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 bg-transparent border-purple-800 mb-4"></div>
-      <span class="text-white text-3xl text-yellow-300">Generating...</span>
-    `;
-    const container = document.querySelector(".vlrt__container");
-    container.appendChild(spinner);
-
-    setTimeout(() => {
-      spinner.remove();
-      generateTeams(players);
-    }, 500);
-  };
-
   const handleGenerateTeams = () => {
     const isAnyFieldEmpty = playerData.some(
       (player) => !player.playerName || !player.tier,
@@ -81,6 +57,16 @@ export default function Vlrt() {
     } else {
       handleGenerateSpinner(playerData);
     }
+  };
+
+  const handleGenerateSpinner = (players) => {
+    setShowSpinner(true);
+    setTimeout(() => {
+      const teams = generateTeamsAlgorithm(players);
+      setTeams(teams);
+      setShowSpinner(false);
+      setIsModalOpen(true);
+    }, 500);
   };
 
   const handleContinueWithDefaults = () => {
@@ -95,27 +81,6 @@ export default function Vlrt() {
     handleGenerateSpinner(updatedPlayers);
   };
 
-  const generateTeams = (players) => {
-    const sortedPlayers = [...players].sort((a, b) => b.pts - a.pts);
-    let team1 = [];
-    let team2 = [];
-    let team1Pts = 0;
-    let team2Pts = 0;
-
-    sortedPlayers.forEach((player) => {
-      if (team1.length < 5 && (team1Pts <= team2Pts || team2.length >= 5)) {
-        team1.push(player);
-        team1Pts += player.pts;
-      } else if (team2.length < 5) {
-        team2.push(player);
-        team2Pts += player.pts;
-      }
-    });
-
-    setTeams({ team1, team1Pts, team2, team2Pts });
-    setIsModalOpen(true);
-  };
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -126,14 +91,14 @@ export default function Vlrt() {
 
   if (isMobile) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-900 text-white">
-        <h1 className="text-3xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
+      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
+        <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );
   }
 
   return (
-    <div className="vlrt__container relative mt-[100px]">
+    <div className="vlrt__container relative pt-[12vh]">
       {players.map((player, index) => (
         <PlayerVlrt
           key={player}
@@ -146,13 +111,17 @@ export default function Vlrt() {
         />
       ))}
 
-      <div className="mt-4 flex justify-center bg-transparent">
+      <div className="mb-[1rem] mt-[1.3rem] flex justify-center bg-transparent">
         <button
-          className="mt-[20px] flex w-[300px] items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="flex w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
           type="submit"
           onClick={handleGenerateTeams}
+          disabled={showSpinner}
         >
-          Generate Fair Match!
+          {showSpinner && <Spinner />}
+          <span className={showSpinner ? "ml-2" : ""}>
+            Generate Fair Match!
+          </span>
         </button>
       </div>
 
@@ -163,27 +132,10 @@ export default function Vlrt() {
       />
 
       {isWarningModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="rounded-md p-10 text-center">
-            <h2 className="do-hyeon-regular mb-10 text-4xl">
-              Please fill out all fields.
-            </h2>
-            <div className="flex justify-center gap-5">
-              <button
-                onClick={handleContinueWithDefaults}
-                className="do-hyeon-regular rounded-md bg-red-500 px-7 py-3 text-2xl text-white"
-              >
-                Generate anyway
-              </button>
-              <button
-                onClick={handleCloseWarningModal}
-                className="do-hyeon-regular rounded-md bg-green-500 px-7 py-3 text-2xl text-white"
-              >
-                OK
-              </button>
-            </div>
-          </div>
-        </div>
+        <WarningModal
+          onClose={handleCloseWarningModal}
+          onContinue={handleContinueWithDefaults}
+        />
       )}
     </div>
   );
