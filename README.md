@@ -12,8 +12,6 @@
   <img src="https://github.com/user-attachments/assets/a1a17488-b867-498e-94ea-7d6d83930229" alt="SelectGame" width="800" />
 </div>
 
-
-
 ## Features
 - 🏅 **Player Tier Input**: Select each player's rank.
 - ⚖️ **Fair Team Generation**: Automatically create two balanced teams based on player points.
@@ -23,7 +21,34 @@
 ***
 
 ## Project Structure
-
+```
+src
+├── assets
+├── components
+│   ├── Footer.jsx
+│   ├── Header.jsx
+│   ├── logo.jpg
+│   ├── OnBoarding.jsx
+│   ├── PlayerLol.jsx
+│   ├── PlayerVlrt.jsx
+│   ├── ResultModal.jsx
+│   ├── Spinner.jsx
+│   ├── WarningModal.jsx
+├── pages
+│   ├── Home.jsx
+│   ├── Lol.jsx
+│   ├── Vlrt.jsx
+├── styles
+│   ├── constants.json
+│   ├── index.css
+│   ├── players.scss
+│   ├── reset.scss
+├── util
+│   ├── teamGenerator.js
+│   ├── tierPoints.js
+├── App.jsx
+├── index.js
+```
 ---
 
 ## Algorithm for Team Generation
