@@ -40,7 +40,7 @@ function Header() {
     >
       <div
         onClick={() => navigate("/")}
-        className="header__title mb-[20px] mt-[10px] flex items-end"
+        className="header__title mb-[20px] mt-[10px] flex cursor-pointer items-end"
       >
         <img className="ml-[30px] mt-[10px] w-[50px]" src={logo} alt="Logo" />
         <span className="ml-[20px] mt-[10px] text-[50px] leading-none">
