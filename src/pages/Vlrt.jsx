@@ -3,8 +3,8 @@ import PlayerVlrt from "components/PlayerVlrt.jsx";
 import ResultModal from "components/ResultModal.jsx";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
-import { generateTeamsAlgorithm } from "../util/teamGenerator.js";
-import { tierToPoints } from "../util/tierPoints.js";
+import { generateVlrtTeams } from "../util/teamGenerator.js";
+import { tierToPoints_vlrt } from "../util/tierPoints.js";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
@@ -41,7 +41,7 @@ export default function Vlrt() {
       const updatedPlayers = [...prev];
       updatedPlayers[index][field] = value;
       if (field === "tier") {
-        updatedPlayers[index].pts = tierToPoints[value] || 0;
+        updatedPlayers[index].pts = tierToPoints_vlrt[value] || 0;
       }
       return updatedPlayers;
     });
@@ -62,7 +62,7 @@ export default function Vlrt() {
   const handleGenerateSpinner = (players) => {
     setShowSpinner(true);
     setTimeout(() => {
-      const teams = generateTeamsAlgorithm(players);
+      const teams = generateVlrtTeams(players);
       setTeams(teams);
       setShowSpinner(false);
       setIsModalOpen(true);
@@ -73,7 +73,7 @@ export default function Vlrt() {
     const updatedPlayers = playerData.map((player, index) => ({
       playerName: player.playerName || `Player ${index + 1}`,
       tier: player.tier || "Iron",
-      pts: tierToPoints[player.tier || "Iron"],
+      pts: tierToPoints_vlrt[player.tier || "Iron"],
     }));
 
     setPlayerData(updatedPlayers);
@@ -91,7 +91,7 @@ export default function Vlrt() {
 
   if (isMobile) {
     return (
-      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
+      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900 do-hyeon-regular">
         <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );
