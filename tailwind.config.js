@@ -9,4 +9,11 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  theme: {
+    extend: {
+      screens: {
+        xs: "380px",
+      },
+    },
+  },
 };
