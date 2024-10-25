@@ -57,8 +57,8 @@
 }
 
 .players {
-  padding-left: 5rem;
-  padding-right: 5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
   display: flex;
   margin-bottom: 0.4rem;
   justify-content: space-between;
@@ -125,6 +125,7 @@
 
   &:checked + label {
     background-color: #3949ab;
+
     .lane__image {
       filter: invert(0%);
     }

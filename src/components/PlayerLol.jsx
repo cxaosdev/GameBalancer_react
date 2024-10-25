@@ -18,9 +18,9 @@ const PlayerLol = memo(
       { id: "Platinum", label: "Platinum", pts: 29 },
       { id: "Emerald", label: "Emerald", pts: 36 },
       { id: "Diamond", label: "Diamond", pts: 42 },
-      { id: "Master", label: "M", pts: 45 },
-      { id: "GrandMaster", label: "GM", pts: 49 },
-      { id: "Challenger", label: "C", pts: 52 },
+      { id: "Master", label: "Master", pts: 45 },
+      { id: "GrandMaster", label: "GrandMaster", pts: 49 },
+      { id: "Challenger", label: "Challenger", pts: 52 },
     ];
 
     const lanes = [
@@ -33,56 +33,64 @@ const PlayerLol = memo(
 
     return (
       <div className="player">
-        <section className="players">
+        <section className="flex justify-center players">
           <input
             type="text"
-            className="players__input-name"
+            className="players__input-name w-[8vw] text-[1.1vw]"
             value={playerName}
             onChange={(e) => handlePlayerChange("playerName", e.target.value)}
             placeholder={`Player ${playerNum} Name`}
             autoComplete="off"
           />
-          {lanes.map((lane) => (
-            <div className="flex items-center lane" key={lane.id}>
-              <input
-                id={`player${playerNum}-${lane.id}`}
-                className="players__input-lane"
-                name={`player${playerNum}-lane`}
-                type="checkbox"
-              />
-              <label
-                htmlFor={`player${playerNum}-${lane.id}`}
-                className="rounded-sm players__lanes opacity-90"
-              >
-                <img
-                  src={lane.image}
-                  alt={lane.label}
-                  className="lane__image w-[2rem] opacity-100"
-                />
-              </label>
-            </div>
-          ))}
 
-          {tiers.map((tier) => (
-            <div className="tier" key={tier.id}>
-              <input
-                id={`player${playerNum}-${tier.id}`}
-                className="players__input-tier"
-                name={`player${playerNum}-tier`}
-                value={tier.id}
-                type="radio"
-                checked={selectedTier === tier.id}
-                onChange={(e) => handlePlayerChange("tier", e.target.value)}
-              />
-              <label
-                htmlFor={`player${playerNum}-${tier.id}`}
-                className="players__tiers"
-                style={{ color: tierColors.lol_color[tier.id] }}
+          <div className="ml-[1vw] flex items-center justify-between gap-[5px]">
+            {lanes.map((lane) => (
+              <div
+                className="flex items-center justify-between lane"
+                key={lane.id}
               >
-                {tier.label}
-              </label>
-            </div>
-          ))}
+                <input
+                  id={`player${playerNum}-${lane.id}`}
+                  className="players__input-lane"
+                  name={`player${playerNum}-lane`}
+                  type="checkbox"
+                />
+                <label
+                  htmlFor={`player${playerNum}-${lane.id}`}
+                  className="flex items-center rounded-sm players__lanes opacity-90"
+                >
+                  <img
+                    src={lane.image}
+                    alt={lane.label}
+                    className="lane__image w-[1.9vw] opacity-100"
+                  />
+                </label>
+              </div>
+            ))}
+          </div>
+
+          <div className="ml-[1vw] flex items-center justify-between">
+            {tiers.map((tier) => (
+              <div className="tier" key={tier.id}>
+                <input
+                  id={`player${playerNum}-${tier.id}`}
+                  className="players__input-tier"
+                  name={`player${playerNum}-tier`}
+                  value={tier.id}
+                  type="radio"
+                  checked={selectedTier === tier.id}
+                  onChange={(e) => handlePlayerChange("tier", e.target.value)}
+                />
+                <label
+                  htmlFor={`player${playerNum}-${tier.id}`}
+                  className="players__tiers flex items-center text-center text-[1.8vw]"
+                  style={{ color: tierColors.lol_color[tier.id] }}
+                >
+                  {tier.label}
+                </label>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     );

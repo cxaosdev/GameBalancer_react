@@ -18,35 +18,37 @@ const PlayerVlrt = memo(
 
     return (
       <div className="player">
-        <section className="players">
+        <section className="flex justify-center players">
           <input
             type="text"
-            className="players__input-name"
+            className="players__input-name text-[1.1vw]"
             value={playerName}
             onChange={(e) => handlePlayerChange("playerName", e.target.value)}
             placeholder={`Player ${playerNum} Name`}
             autoComplete="off"
           />
-          {tiers.map((tier) => (
-            <div className="tier" key={tier.id}>
-              <input
-                id={`player${playerNum}-${tier.id}`}
-                className="players__input-tier"
-                name={`player${playerNum}`}
-                value={tier.id}
-                type="radio"
-                checked={selectedTier === tier.id}
-                onChange={(e) => handlePlayerChange("tier", e.target.value)}
-              />
-              <label
-                htmlFor={`player${playerNum}-${tier.id}`}
-                className="players__tiers"
-                style={{ color: tierColors.vlrt_color[tier.id] }}
-              >
-                {tier.label}
-              </label>
-            </div>
-          ))}
+          <div className="ml-[2.5vw] flex items-center justify-between gap-[1.8vw]">
+            {tiers.map((tier) => (
+              <div className="tier" key={tier.id}>
+                <input
+                  id={`player${playerNum}-${tier.id}`}
+                  className="players__input-tier"
+                  name={`player${playerNum}`}
+                  value={tier.id}
+                  type="radio"
+                  checked={selectedTier === tier.id}
+                  onChange={(e) => handlePlayerChange("tier", e.target.value)}
+                />
+                <label
+                  htmlFor={`player${playerNum}-${tier.id}`}
+                  className="players__tiers flex items-center text-center text-[1.8vw]"
+                  style={{ color: tierColors.vlrt_color[tier.id] }}
+                >
+                  {tier.label}
+                </label>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     );
