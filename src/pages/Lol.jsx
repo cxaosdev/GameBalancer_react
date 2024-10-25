@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import ResultModal from "components/ResultModal.jsx";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
@@ -9,11 +9,12 @@ import { generateLolTeams } from "../util/teamGenerator.js";
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
 export default function Lol() {
-  const [playerData, setPlayerData] = useState(
-    players.map((_, index) => ({
+  const [playerData, setPlayerData] = useState(() =>
+    players.map(() => ({
       playerName: "",
       tier: "",
       pts: 0,
+      selectedLanes: ["top", "jungle", "mid", "adc", "support"],
     })),
   );
 
@@ -36,18 +37,32 @@ export default function Lol() {
     setIsMobile(mobileRegex.test(userAgent));
   }, []);
 
-  const handlePlayerChange = useCallback(({ index, field, value }) => {
+  const handlePlayerChange = useCallback((index, field, value, checked) => {
     setPlayerData((prev) => {
       const updatedPlayers = [...prev];
-      updatedPlayers[index][field] = value;
-      if (field === "tier") {
-        updatedPlayers[index].pts = tierToPoints_lol[value] || 0;
+      if (field === "selectedLanes") {
+        const currentLanes = new Set(updatedPlayers[index].selectedLanes || []);
+        checked ? currentLanes.add(value) : currentLanes.delete(value);
+        updatedPlayers[index] = {
+          ...updatedPlayers[index],
+          selectedLanes: Array.from(currentLanes),
+        };
+      } else {
+        updatedPlayers[index] = {
+          ...updatedPlayers[index],
+          [field]: value,
+        };
+        if (field === "tier") {
+          updatedPlayers[index].pts = tierToPoints_lol[value] || 0;
+        }
       }
+      console.log(`Updated Player ${index + 1}:`, updatedPlayers[index]);
       return updatedPlayers;
     });
   }, []);
 
   const handleGenerateTeams = () => {
+    console.log("Player Data Before Generating:", playerData); // 초기 상태 확인
     const isAnyFieldEmpty = playerData.some(
       (player) => !player.playerName || !player.tier,
     );
@@ -57,6 +72,9 @@ export default function Lol() {
     } else {
       handleGenerateSpinner(playerData);
     }
+
+    // 팀 생성 후 상태 확인
+    console.log("Teams After Generating:", teams);
   };
 
   const handleGenerateSpinner = (players) => {
@@ -89,6 +107,8 @@ export default function Lol() {
     setIsWarningModalOpen(false);
   };
 
+  const memoizedPlayerData = useMemo(() => playerData, [playerData]);
+
   if (isMobile) {
     return (
       <div className="flex items-center justify-center min-h-screen text-white bg-gray-900 do-hyeon-regular">
@@ -103,10 +123,9 @@ export default function Lol() {
         <PlayerLol
           key={player}
           playerNum={index + 1}
-          playerName={playerData[index].playerName}
-          selectedTier={playerData[index].tier}
-          handlePlayerChange={(field, value) =>
-            handlePlayerChange({ index, field, value })
+          playerData={memoizedPlayerData[index]}
+          onPlayerChange={(field, value, checked) =>
+            handlePlayerChange(index, field, value, checked)
           }
         />
       ))}

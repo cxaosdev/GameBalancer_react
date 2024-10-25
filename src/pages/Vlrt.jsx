@@ -74,6 +74,10 @@ export default function Vlrt() {
       playerName: player.playerName || `Player ${index + 1}`,
       tier: player.tier || "Iron",
       pts: tierToPoints_vlrt[player.tier || "Iron"],
+      selectedLanes:
+        player.selectedLanes.length === 0
+          ? ["top", "jungle", "mid", "adc", "support"]
+          : player.selectedLanes,
     }));
 
     setPlayerData(updatedPlayers);
