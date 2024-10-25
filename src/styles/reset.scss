@@ -9,6 +9,10 @@ html {
   width: 100%;
   margin: 0;
   padding: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
 }
 
 .do-hyeon-regular {
@@ -19,4 +23,10 @@ html {
 
 .New-Amsterdam {
   font-family: "New Amsterdam", sans-serif;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
 }
