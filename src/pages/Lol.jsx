@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import ResultModal from "components/ResultModal.jsx";
+import ResultModal from "components/ResultModalLol.jsx";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
 import PlayerLol from "components/PlayerLol.jsx";

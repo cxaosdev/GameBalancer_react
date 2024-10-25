@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ResultModal({ isOpen, teams, onClose }) {
+export default function ResultModalLol({ isOpen, teams, onClose }) {
   const handleClickOutside = (e) => {
     if (e.target.classList.contains("modal__overlay")) {
       onClose();

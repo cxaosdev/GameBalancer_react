@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
-import ResultModal from "components/ResultModal.jsx";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
 import { generateVlrtTeams } from "../util/teamGenerator.js";
 import { tierToPoints_vlrt } from "../util/tierPoints.js";
+import ResultModalVlrt from "components/ResultModalVlrt.jsx";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
@@ -74,10 +74,6 @@ export default function Vlrt() {
       playerName: player.playerName || `Player ${index + 1}`,
       tier: player.tier || "Iron",
       pts: tierToPoints_vlrt[player.tier || "Iron"],
-      selectedLanes:
-        player.selectedLanes.length === 0
-          ? ["top", "jungle", "mid", "adc", "support"]
-          : player.selectedLanes,
     }));
 
     setPlayerData(updatedPlayers);
@@ -129,7 +125,7 @@ export default function Vlrt() {
         </button>
       </div>
 
-      <ResultModal
+      <ResultModalVlrt
         isOpen={isModalOpen}
         teams={teams}
         onClose={handleCloseModal}
