@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LeagueLogo from "../assets/logo/LeagueOfLegends.webp";
 import ValorantLogo from "../assets/logo/Valorant.svg";
-import OnBoarding from "components/OnBoarding";
 import Onboarding from "components/OnBoarding";
 
 export default function Home() {
@@ -38,10 +37,10 @@ export default function Home() {
         </div>
         <div className="mt-[4rem] flex gap-[4rem]">
           <button
-            className={`w-[13rem] rounded-lg border-4 p-2 transition-all duration-300 ${
+            className={`w-[13rem] transform rounded-xl border-4 p-2 transition-transform duration-300 hover:scale-105 active:scale-100 active:duration-75 ${
               selectedGame === "LeagueOfLegends"
-                ? "border-yellow-500 bg-yellow-900/20"
-                : "border-transparent hover:border-yellow-500"
+                ? "border-amber-500 bg-amber-500/30"
+                : "border-transparent hover:border-amber-500 hover:bg-amber-900/30"
             }`}
             onClick={() => handleSelectGame("LeagueOfLegends")}
           >
@@ -51,11 +50,12 @@ export default function Home() {
               className="h-[8rem] w-full object-contain"
             />
           </button>
+
           <button
-            className={`w-[13rem] rounded-lg border-4 p-2 transition-all duration-300 ${
+            className={`w-[13rem] transform rounded-xl border-4 p-2 transition-transform duration-300 hover:scale-105 active:scale-100 active:duration-75 ${
               selectedGame === "Valorant"
-                ? "border-red-500 bg-red-900/20"
-                : "border-transparent hover:border-red-500"
+                ? "border-red-500 bg-red-900/70"
+                : "border-transparent hover:border-red-500 hover:bg-red-900/20"
             }`}
             onClick={() => handleSelectGame("Valorant")}
           >
@@ -67,7 +67,7 @@ export default function Home() {
           </button>
         </div>
         <button
-          className="mt-6 cursor-pointer rounded-md bg-gradient-to-r from-red-800 to-indigo-800 p-3 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-red-900 hover:to-indigo-900 focus:ring-2"
+          className="mt-6 cursor-pointer rounded-md bg-gradient-to-r from-red-800 to-indigo-800 p-3 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-red-700 hover:to-indigo-700 focus:ring-2 active:from-red-500 active:to-indigo-500"
           onClick={handleGetStarted}
           disabled={!selectedGame}
         >
