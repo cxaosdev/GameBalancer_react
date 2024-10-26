@@ -4,7 +4,7 @@ export default function Footer() {
   const navigate = useNavigate();
 
   return (
-    <div className="do-hyeon-regular bg-black bg-opacity-90 text-[#515255]">
+    <div className="do-hyeon-regular z-[1000] bg-black bg-opacity-90 text-[#515255]">
       <div className="bg-black bg-opacity-90 px-[1.7rem]">
         <section className="w-100 bg-transparent pt-[0.8rem]">
           <div className="flex justify-between bg-transparent pb-[0.7rem] pr-[0.8rem]">

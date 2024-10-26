@@ -37,12 +37,14 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  height: 100vh;
+  overflow-y: auto;
   padding: 1rem;
 }
 
 .vlrt__container::before {
   content: "";
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

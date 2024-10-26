@@ -5,9 +5,9 @@ const PlayerVlrt = memo(
   ({ playerNum, playerName, selectedTier, handlePlayerChange }) => {
     console.log(`rendered player ${playerNum}`);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const [isSmallerView, setIsSmallerView] = useState(
-      window.innerWidth <= 1024,
-    );
+    const [isMdview, setIsMdView] = useState(window.innerWidth <= 1024);
+    const [isSmView, setIsSmView] = useState(window.innerWidth <= 768);
+
     const tiers = [
       { id: "Iron", label: "Iron", pts: 7 },
       { id: "Bronze", label: "Bronze", pts: 13 },
@@ -22,7 +22,8 @@ const PlayerVlrt = memo(
 
     useEffect(() => {
       const handleResize = () => {
-        setIsSmallerView(window.innerWidth <= 1024);
+        setIsMdView(window.innerWidth <= 1024);
+        setIsSmView(window.innerWidth <= 768);
       };
       window.addEventListener("resize", handleResize);
       return () => {
@@ -33,8 +34,8 @@ const PlayerVlrt = memo(
     const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
     return (
-      <div className="player">
-        <section className="players flex justify-center">
+      <div className="player mt-[1vh] flex justify-center">
+        <section className="players flex items-center justify-center">
           <input
             type="text"
             className="players__input-name text-[2.3vh]"
@@ -43,15 +44,15 @@ const PlayerVlrt = memo(
             placeholder={`Player ${playerNum} Name`}
             autoComplete="off"
           />
-          <div className="ml-[2.5vw] flex items-center justify-between gap-[17px]">
-            {isSmallerView ? (
+          <div className="ml-[2.5vw] flex flex-wrap items-center justify-center">
+            {isSmView ? (
               <div className="tier-selection flex h-[100%] flex-col">
                 <div
                   className="tier-dropdown w-[15vh] cursor-pointer rounded-md bg-white text-center text-[2.3vh]"
                   onClick={toggleDropdown}
                 >
                   <span
-                    className="selected-tier text-[3vh]"
+                    className="selected-tier m-0 p-0 text-[3vh]"
                     style={{
                       color: selectedTier
                         ? tierColors.vlrt_color[selectedTier]
@@ -81,26 +82,56 @@ const PlayerVlrt = memo(
                 )}
               </div>
             ) : (
-              tiers.map((tier) => (
-                <div className="tier" key={tier.id}>
-                  <input
-                    id={`player${playerNum}-${tier.id}`}
-                    className="players__input-tier"
-                    name={`player${playerNum}`}
-                    value={tier.id}
-                    type="radio"
-                    checked={selectedTier === tier.id}
-                    onChange={(e) => handlePlayerChange("tier", e.target.value)}
-                  />
-                  <label
-                    htmlFor={`player${playerNum}-${tier.id}`}
-                    className="players__tiers flex items-center text-center text-[3.5vh]"
-                    style={{ color: tierColors.vlrt_color[tier.id] }}
-                  >
-                    {tier.label}
-                  </label>
+              <>
+                <div className="flex flex-nowrap justify-center">
+                  {tiers.slice(0, 5).map((tier) => (
+                    <div className={`tier`} key={tier.id}>
+                      <input
+                        id={`player${playerNum}-${tier.id}`}
+                        className="players__input-tier flex"
+                        name={`player${playerNum}`}
+                        value={tier.id}
+                        type="radio"
+                        checked={selectedTier === tier.id}
+                        onChange={(e) =>
+                          handlePlayerChange("tier", e.target.value)
+                        }
+                      />
+                      <label
+                        htmlFor={`player${playerNum}-${tier.id}`}
+                        className="players__tiers flex items-center text-center text-[3.5vh]"
+                        style={{ color: tierColors.vlrt_color[tier.id] }}
+                      >
+                        {tier.label}
+                      </label>
+                    </div>
+                  ))}
                 </div>
-              ))
+                <div className="flex flex-nowrap">
+                  {tiers.slice(5).map((tier) => (
+                    <div className={`tier ]`} key={tier.id}>
+                      <input
+                        id={`player${playerNum}-${tier.id}`}
+                        className="players__input-tier"
+                        name={`player${playerNum}`}
+                        value={tier.id}
+                        type="radio"
+                        checked={selectedTier === tier.id}
+                        onChange={(e) =>
+                          handlePlayerChange("tier", e.target.value)
+                        }
+                      />
+                      <label
+                        htmlFor={`player${playerNum}-${tier.id}`}
+                        className="players__tiers flex items-center text-center text-[3.5vh]"
+                        style={{ color: tierColors.vlrt_color[tier.id] }}
+                      >
+                        {tier.label}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </>
             )}
           </div>
         </section>
