@@ -128,7 +128,7 @@ export default function Lol() {
   }
 
   return (
-    <div className="lol__container relative h-[100vh] flex-col items-center pt-[12vh]">
+    <div className="page-container lol__container relative h-[100vh] flex-col items-center pt-[12vh]">
       <div className="flex h-[calc(100%-3.5rem)] flex-wrap items-center justify-center">
         {players.map((player, index) => (
           <PlayerLol

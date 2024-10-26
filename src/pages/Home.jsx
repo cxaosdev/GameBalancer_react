@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <div
-      className={`vlrt__container relative bg-no-repeat pt-[12vh] ${
+      className={`page-container vlrt__container relative bg-no-repeat pt-[12vh] ${
         selectedGame === "LeagueOfLegends"
           ? "bg-[url('../assets/lol_background.jpg')]"
           : "bg-[url('../assets/vlrt_background.jpg')]"
@@ -74,7 +74,7 @@ export default function Home() {
           Get Started
         </button>
         <div className="mt-[8rem] flex flex-col justify-center">
-          <span className="text-3xl animate-bounce">▼ How to use</span>
+          <span className="animate-bounce text-3xl">▼ How to use</span>
         </div>
         <Onboarding></Onboarding>
       </div>

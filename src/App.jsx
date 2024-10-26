@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Lol from "./pages/Lol";
 import Vlrt from "./pages/Vlrt";
@@ -8,10 +7,10 @@ import Footer from "components/Footer";
 
 function App() {
   return (
-    <div className="root-wrap flex h-[100vh] min-h-screen flex-col">
+    <div className="root-wrap flex h-screen flex-col overflow-hidden">
       <BrowserRouter>
         <Header />
-        <div className="">
+        <div className="flex flex-1 flex-col overflow-auto">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/leagueOfLegends" element={<Lol />} />

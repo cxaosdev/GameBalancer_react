@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
@@ -38,7 +38,6 @@ export default function Vlrt() {
   }, []);
 
   useEffect(() => {
-    // 클린업을 위한 타이머 제거
     return () => {
       if (timerId) {
         clearTimeout(timerId);
@@ -107,10 +106,15 @@ export default function Vlrt() {
       </div>
     );
   }
+  const bottomRef = useRef(null);
+
+  const scrollToBottom = () => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <>
-      <div className="vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
+      <div className="page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
         <div className="mt-[3vh] flex flex-wrap items-center justify-center">
           {players.map((player, index) => (
             <PlayerVlrt
@@ -137,6 +141,27 @@ export default function Vlrt() {
             </span>
           </button>
         </div>
+        <div className="fixed right-[20px] top-1/2 mt-6 flex -translate-y-1/2 transform flex-col items-center">
+          <button
+            className="flex cursor-pointer flex-col items-center"
+            onClick={scrollToBottom}
+          >
+            <span
+              className="do-hyeon-regular mb-2 transform animate-pulse whitespace-nowrap text-[3vh] text-white"
+              style={{ writingMode: "vertical-rl" }}
+            >
+              If you're done, "Generate Fair Game" 〉
+            </span>
+
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M19 9l-7 7-7-7"
+            ></path>
+          </button>
+        </div>
+
         <ResultModalVlrt
           isOpen={isModalOpen}
           teams={teams}
@@ -148,6 +173,7 @@ export default function Vlrt() {
             onContinue={handleContinueWithDefaults}
           />
         )}
+        <div ref={bottomRef} className="mb-[10vh]"></div>
       </div>
     </>
   );
