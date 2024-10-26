@@ -5,34 +5,16 @@ import logo from "../components/logo.jpg";
 function Header() {
   const navigate = useNavigate();
   const [selectedGame, setSelectedGame] = useState("");
-  // const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY > lastScrollY && window.scrollY > 100) {
-  //       setIsHeaderVisible(false);
-  //     } else {
-  //       setIsHeaderVisible(true);
-  //     }
-  //     setLastScrollY(window.scrollY);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [lastScrollY]);
 
   const handleGame = (event) => {
     const game = event.target.value;
     setSelectedGame(game);
     if (game === "League of Legends") {
-      navigate("/LeagueOfLegends");
+      navigate("/leagueOfLegends");
     } else if (game === "Valorant") {
-      navigate("/Valorant");
+      navigate("/valorant");
     }
   };
 
@@ -48,10 +30,10 @@ function Header() {
     >
       <div
         onClick={() => navigate("/")}
-        className="flex items-center cursor-pointer header__title"
+        className="header__title flex cursor-pointer items-center"
       >
         <img className="ml-[1.5rem] w-[2.2rem]" src={logo} alt="Logo" />
-        <span className="xs:inline ml-[1.2rem] mt-[0.2rem] hidden text-[2.7rem] leading-none">
+        <span className="ml-[1.2rem] mt-[0.2rem] hidden text-[2.7rem] leading-none xs:inline">
           Game Balancer
         </span>
       </div>

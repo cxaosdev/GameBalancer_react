@@ -11,11 +11,11 @@ function App() {
     <div className="root-wrap flex min-h-screen flex-col">
       <BrowserRouter>
         <Header />
-        <div className="flex-grow">
+        <div className="h-[100vh]">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/LeagueOfLegends" element={<Lol />} />
-            <Route path="/Valorant" element={<Vlrt />} />
+            <Route path="/leagueOfLegends" element={<Lol />} />
+            <Route path="/valorant" element={<Vlrt />} />
           </Routes>
         </div>
         <Footer />

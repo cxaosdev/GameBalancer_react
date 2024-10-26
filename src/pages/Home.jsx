@@ -14,9 +14,9 @@ export default function Home() {
 
   const handleGetStarted = () => {
     if (selectedGame === "LeagueOfLegends") {
-      navigate("/LeagueOfLegends");
+      navigate("/leagueOfLegends");
     } else if (selectedGame === "Valorant") {
-      navigate("/Valorant");
+      navigate("/valorant");
     }
   };
 
@@ -74,7 +74,7 @@ export default function Home() {
           Get Started
         </button>
         <div className="mt-[8rem] flex flex-col justify-center">
-          <span className="animate-bounce text-3xl">▼ How to use</span>
+          <span className="text-3xl animate-bounce">▼ How to use</span>
         </div>
         <Onboarding></Onboarding>
       </div>

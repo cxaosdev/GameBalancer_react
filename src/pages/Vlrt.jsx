@@ -91,7 +91,7 @@ export default function Vlrt() {
 
   if (isMobile) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900 do-hyeon-regular">
+      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
         <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );
@@ -99,18 +99,19 @@ export default function Vlrt() {
 
   return (
     <div className="vlrt__container relative pt-[12vh]">
-      {players.map((player, index) => (
-        <PlayerVlrt
-          key={player}
-          playerNum={index + 1}
-          playerName={playerData[index].playerName}
-          selectedTier={playerData[index].tier}
-          handlePlayerChange={(field, value) =>
-            handlePlayerChange({ index, field, value })
-          }
-        />
-      ))}
-
+      <div className="relative flex flex-wrap">
+        {players.map((player, index) => (
+          <PlayerVlrt
+            key={player}
+            playerNum={index + 1}
+            playerName={playerData[index].playerName}
+            selectedTier={playerData[index].tier}
+            handlePlayerChange={(field, value) =>
+              handlePlayerChange({ index, field, value })
+            }
+          />
+        ))}
+      </div>
       <div className="mb-[1rem] mt-[1.3rem] flex justify-center bg-transparent">
         <button
           className="flex w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
@@ -124,13 +125,11 @@ export default function Vlrt() {
           </span>
         </button>
       </div>
-
       <ResultModalVlrt
         isOpen={isModalOpen}
         teams={teams}
         onClose={handleCloseModal}
       />
-
       {isWarningModalOpen && (
         <WarningModal
           onClose={handleCloseWarningModal}
