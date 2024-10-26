@@ -14,7 +14,7 @@ export default function Lol() {
       playerName: "",
       tier: "",
       pts: 0,
-      selectedLanes: ["top", "jungle", "mid", "adc", "support"],
+      selectedLanes: [],
     })),
   );
 
@@ -62,7 +62,7 @@ export default function Lol() {
   }, []);
 
   const handleGenerateTeams = () => {
-    console.log("Player Data Before Generating:", playerData); // 초기 상태 확인
+    console.log("Player Data Before Generating:", playerData);
     const isAnyFieldEmpty = playerData.some(
       (player) => !player.playerName || !player.tier,
     );
@@ -73,7 +73,6 @@ export default function Lol() {
       handleGenerateSpinner(playerData);
     }
 
-    // 팀 생성 후 상태 확인
     console.log("Teams After Generating:", teams);
   };
 
@@ -111,7 +110,7 @@ export default function Lol() {
 
   if (isMobile) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900 do-hyeon-regular">
+      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
         <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );
@@ -124,7 +123,7 @@ export default function Lol() {
           key={player}
           playerNum={index + 1}
           playerData={memoizedPlayerData[index]}
-          onPlayerChange={(field, value, checked) =>
+          handlePlayerChange={(field, value, checked) =>
             handlePlayerChange(index, field, value, checked)
           }
         />

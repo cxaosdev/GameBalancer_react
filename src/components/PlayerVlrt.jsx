@@ -34,7 +34,7 @@ const PlayerVlrt = memo(
 
     return (
       <div className="player">
-        <section className="players flex justify-center">
+        <section className="players flex items-center justify-center">
           <input
             type="text"
             className="players__input-name text-[2.5vh]"
@@ -43,9 +43,9 @@ const PlayerVlrt = memo(
             placeholder={`Player ${playerNum} Name`}
             autoComplete="off"
           />
-          <div className="ml-[2.5vw] flex items-center justify-between gap-[1.8vw]">
+          <div className="ml-[2.5vw] flex items-center justify-between gap-x-[1.8vw]">
             {isSmallerView ? (
-              <div className="tier-selection flex flex-col">
+              <div className="tier-selection flex h-[100%] flex-col">
                 <div
                   className="tier-dropdown w-[15vh] cursor-pointer rounded-md bg-white text-center text-[2.3vh]"
                   onClick={toggleDropdown}

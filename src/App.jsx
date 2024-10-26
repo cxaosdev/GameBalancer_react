@@ -8,10 +8,10 @@ import Footer from "components/Footer";
 
 function App() {
   return (
-    <div className="root-wrap flex min-h-screen flex-col">
+    <div className="root-wrap flex h-[100vh] min-h-screen flex-col">
       <BrowserRouter>
         <Header />
-        <div className="h-[100vh]">
+        <div className="">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/leagueOfLegends" element={<Lol />} />

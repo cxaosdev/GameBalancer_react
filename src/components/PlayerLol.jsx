@@ -6,7 +6,7 @@ import supportLaneImage from "../assets/lol_lane/support.svg";
 import React, { memo } from "react";
 import tierColors from "../styles/constants.json";
 
-const PlayerLol = memo(({ playerNum, playerData, onPlayerChange }) => {
+const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
   const tiers = [
     { id: "Iron", label: "Iron", pts: 7 },
     { id: "Bronze", label: "Bronze", pts: 13 },
@@ -35,7 +35,7 @@ const PlayerLol = memo(({ playerNum, playerData, onPlayerChange }) => {
           type="text"
           className="players__input-name w-[8vw] text-[1.1vw]"
           value={playerData.playerName}
-          onChange={(e) => onPlayerChange("playerName", e.target.value)}
+          onChange={(e) => handlePlayerChange("playerName", e.target.value)}
           placeholder={`Player ${playerNum} Name`}
           autoComplete="off"
         />
@@ -53,7 +53,7 @@ const PlayerLol = memo(({ playerNum, playerData, onPlayerChange }) => {
                 type="checkbox"
                 checked={(playerData.selectedLanes || []).includes(lane.id)}
                 onChange={(e) =>
-                  onPlayerChange("selectedLanes", lane.id, e.target.checked)
+                  handlePlayerChange("selectedLanes", lane.id, e.target.checked)
                 }
               />
               <label
@@ -80,7 +80,7 @@ const PlayerLol = memo(({ playerNum, playerData, onPlayerChange }) => {
                 value={tier.id}
                 type="radio"
                 checked={playerData.tier === tier.id}
-                onChange={(e) => onPlayerChange("tier", e.target.value)}
+                onChange={(e) => handlePlayerChange("tier", e.target.value)}
               />
               <label
                 htmlFor={`player${playerNum}-${tier.id}`}
