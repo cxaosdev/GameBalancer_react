@@ -28,6 +28,7 @@ export default function Vlrt() {
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [timerId, setTimerId] = useState(null);
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -35,6 +36,15 @@ export default function Vlrt() {
       /android|iphone|ipad|ipod|blackberry|windows phone|webos|opera mini|iemobile/;
     setIsMobile(mobileRegex.test(userAgent));
   }, []);
+
+  useEffect(() => {
+    // 클린업을 위한 타이머 제거
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+    };
+  }, [timerId]);
 
   const handlePlayerChange = useCallback(({ index, field, value }) => {
     setPlayerData((prev) => {
@@ -61,12 +71,13 @@ export default function Vlrt() {
 
   const handleGenerateSpinner = (players) => {
     setShowSpinner(true);
-    setTimeout(() => {
+    const id = setTimeout(() => {
       const teams = generateVlrtTeams(players);
       setTeams(teams);
       setShowSpinner(false);
       setIsModalOpen(true);
     }, 500);
+    setTimerId(id);
   };
 
   const handleContinueWithDefaults = () => {
@@ -91,7 +102,7 @@ export default function Vlrt() {
 
   if (isMobile) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900 do-hyeon-regular">
+      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
         <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );

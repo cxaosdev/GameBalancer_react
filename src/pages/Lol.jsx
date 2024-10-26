@@ -29,6 +29,7 @@ export default function Lol() {
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [timerId, setTimerId] = useState(null);
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -36,6 +37,15 @@ export default function Lol() {
       /android|iphone|ipad|ipod|blackberry|windows phone|webos|opera mini|iemobile/;
     setIsMobile(mobileRegex.test(userAgent));
   }, []);
+
+  useEffect(() => {
+    // 타이머 클린업
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+    };
+  }, [timerId]);
 
   const handlePlayerChange = useCallback((index, field, value, checked) => {
     setPlayerData((prev) => {
@@ -78,12 +88,13 @@ export default function Lol() {
 
   const handleGenerateSpinner = (players) => {
     setShowSpinner(true);
-    setTimeout(() => {
+    const id = setTimeout(() => {
       const teams = generateLolTeams(players);
       setTeams(teams);
       setShowSpinner(false);
       setIsModalOpen(true);
     }, 500);
+    setTimerId(id);
   };
 
   const handleContinueWithDefaults = () => {
