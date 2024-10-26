@@ -30,10 +30,10 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
 
   return (
     <div className="player">
-      <section className="flex justify-center players">
+      <section className="players flex justify-center">
         <input
           type="text"
-          className="players__input-name w-[8vw] text-[1.1vw]"
+          className="players__input-name text-[2.3vh]"
           value={playerData.playerName}
           onChange={(e) => handlePlayerChange("playerName", e.target.value)}
           placeholder={`Player ${playerNum} Name`}
@@ -43,7 +43,7 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
         <div className="ml-[1vw] flex items-center justify-between gap-[5px]">
           {lanes.map((lane) => (
             <div
-              className="flex items-center justify-between lane"
+              className="lane flex items-center justify-between"
               key={lane.id}
             >
               <input
@@ -58,7 +58,7 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
               />
               <label
                 htmlFor={`player${playerNum}-${lane.id}`}
-                className="flex items-center rounded-sm players__lanes opacity-90"
+                className="players__lanes flex items-center rounded-sm opacity-90"
               >
                 <img
                   src={lane.image}
@@ -84,7 +84,7 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
               />
               <label
                 htmlFor={`player${playerNum}-${tier.id}`}
-                className="players__tiers flex items-center text-center text-[1.8vw]"
+                className="players__tiers flex items-center text-center text-[3vh]"
                 style={{ color: tierColors.lol_color[tier.id] }}
               >
                 {tier.label}

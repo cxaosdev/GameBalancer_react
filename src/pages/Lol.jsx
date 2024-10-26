@@ -117,21 +117,23 @@ export default function Lol() {
   }
 
   return (
-    <div className="lol__container relative pt-[12vh]">
-      {players.map((player, index) => (
-        <PlayerLol
-          key={player}
-          playerNum={index + 1}
-          playerData={memoizedPlayerData[index]}
-          handlePlayerChange={(field, value, checked) =>
-            handlePlayerChange(index, field, value, checked)
-          }
-        />
-      ))}
+    <div className="lol__container relative h-[100vh] flex-col items-center pt-[12vh]">
+      <div className="flex h-[calc(100%-3.5rem)] flex-wrap items-center justify-center">
+        {players.map((player, index) => (
+          <PlayerLol
+            key={player}
+            playerNum={index + 1}
+            playerData={memoizedPlayerData[index]}
+            handlePlayerChange={(field, value, checked) =>
+              handlePlayerChange(index, field, value, checked)
+            }
+          />
+        ))}
+      </div>
 
-      <div className="mb-[1rem] mt-[1.3rem] flex justify-center bg-transparent">
+      <div className="mb-[1.3rem] mt-[0.4rem] flex justify-center bg-transparent">
         <button
-          className="flex w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
+          className="flex h-[3rem] w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
           type="submit"
           onClick={handleGenerateTeams}
           disabled={showSpinner}

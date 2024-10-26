@@ -34,16 +34,16 @@ const PlayerVlrt = memo(
 
     return (
       <div className="player">
-        <section className="players flex items-center justify-center">
+        <section className="players flex justify-center">
           <input
             type="text"
-            className="players__input-name text-[2.5vh]"
+            className="players__input-name text-[2.3vh]"
             value={playerName}
             onChange={(e) => handlePlayerChange("playerName", e.target.value)}
             placeholder={`Player ${playerNum} Name`}
             autoComplete="off"
           />
-          <div className="ml-[2.5vw] flex items-center justify-between gap-x-[1.8vw]">
+          <div className="ml-[2.5vw] flex items-center justify-between gap-[17px]">
             {isSmallerView ? (
               <div className="tier-selection flex h-[100%] flex-col">
                 <div
