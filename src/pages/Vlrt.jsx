@@ -5,6 +5,7 @@ import WarningModal from "../components/WarningModal.jsx";
 import { generateVlrtTeams } from "../util/teamGenerator.js";
 import { tierToPoints_vlrt } from "../util/tierPoints.js";
 import ResultModalVlrt from "components/ResultModalVlrt.jsx";
+import { MOBILE_OR_TABLET_REGEX } from "../util/mobileRegex.js";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
@@ -32,9 +33,7 @@ export default function Vlrt() {
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
-    const mobileRegex =
-      /android|iphone|ipad|ipod|blackberry|windows phone|webos|opera mini|iemobile/;
-    setIsMobile(mobileRegex.test(userAgent));
+    setIsMobile(MOBILE_OR_TABLET_REGEX.test(userAgent));
   }, []);
 
   useEffect(() => {

@@ -5,6 +5,7 @@ import PlayerLol from "components/PlayerLol.jsx";
 import { tierToPoints_lol } from "../util/tierPoints.js";
 import { generateLolTeams } from "../util/teamGenerator.js";
 import ResultModalLol from "components/ResultModalLol.jsx";
+import { MOBILE_OR_TABLET_REGEX } from "../util/mobileRegex.js";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
@@ -33,13 +34,10 @@ export default function Lol() {
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
-    const mobileRegex =
-      /android|iphone|ipad|ipod|blackberry|windows phone|webos|opera mini|iemobile/;
-    setIsMobile(mobileRegex.test(userAgent));
+    setIsMobile(MOBILE_OR_TABLET_REGEX.test(userAgent));
   }, []);
 
   useEffect(() => {
-    // 타이머 클린업
     return () => {
       if (timerId) {
         clearTimeout(timerId);
