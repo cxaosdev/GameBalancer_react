@@ -101,7 +101,7 @@ export default function Vlrt() {
 
   if (isMobile) {
     return (
-      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
+      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900 do-hyeon-regular">
         <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );
@@ -130,7 +130,7 @@ export default function Vlrt() {
         </div>
         <div className="mb-[1.3rem] mt-[0.4rem] flex justify-center bg-transparent">
           <button
-            className="mt-[2vh] flex h-[3rem] w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
+            className="z-[10000] mt-[2vh] flex h-[3rem] w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
             type="submit"
             onClick={handleGenerateTeams}
             disabled={showSpinner}
@@ -143,7 +143,7 @@ export default function Vlrt() {
         </div>
         <div className="fixed right-[20px] top-1/2 mt-6 flex -translate-y-1/2 transform flex-col items-center">
           <button
-            className="flex cursor-pointer flex-col items-center"
+            className="flex flex-col items-center cursor-pointer"
             onClick={scrollToBottom}
           >
             <span
