@@ -128,12 +128,11 @@ export default function Vlrt() {
             />
           ))}
         </div>
-        <div className="mb-[1.3rem] mt-[0.4rem] flex justify-center bg-transparent">
+        <div className="z-[10000] mb-[1.3rem] mt-[0.4rem] flex justify-center bg-transparent">
           <button
-            className="z-[10000] mt-[2vh] flex h-[3rem] w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
+            className="mt-[2vh] flex h-[3rem] w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
             type="submit"
             onClick={handleGenerateTeams}
-            disabled={showSpinner}
           >
             {showSpinner && <Spinner />}
             <span className={showSpinner ? "ml-2" : ""}>
@@ -152,13 +151,6 @@ export default function Vlrt() {
             >
               If you're done, "Generate Fair Game" 〉
             </span>
-
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M19 9l-7 7-7-7"
-            ></path>
           </button>
         </div>
 

@@ -24,7 +24,6 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
           &times;
         </button>
 
-        {/* 부족한 포지션 메시지 출력 */}
         {teams.missingPositions && teams.missingPositions.length > 0 ? (
           <div className="text-center">
             <h2 className="text-4xl font-bold text-red-500 bg-transparent">
@@ -44,7 +43,6 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
                   [ Total Points: {teams.team1Pts} ]
                 </h2>
                 <ul className="space-y-4 bg-transparent">
-                  {/* 팀 1 */}
                   <ul className="space-y-4 bg-transparent">
                     {teams.team1.map((player, index) => (
                       <li

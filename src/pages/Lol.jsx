@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import ResultModal from "components/ResultModalLol.jsx";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
 import PlayerLol from "components/PlayerLol.jsx";
 import { tierToPoints_lol } from "../util/tierPoints.js";
 import { generateLolTeams } from "../util/teamGenerator.js";
+import ResultModalLol from "components/ResultModalLol.jsx";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
@@ -121,7 +121,7 @@ export default function Lol() {
 
   if (isMobile) {
     return (
-      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
+      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900 do-hyeon-regular">
         <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );
@@ -144,7 +144,7 @@ export default function Lol() {
 
       <div className="mb-[1.3rem] mt-[0.4rem] flex justify-center bg-transparent">
         <button
-          className="flex h-[3rem] w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
+          className="z-[10000] mt-[2vh] flex h-[3rem] w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
           type="submit"
           onClick={handleGenerateTeams}
           disabled={showSpinner}
@@ -156,7 +156,7 @@ export default function Lol() {
         </button>
       </div>
 
-      <ResultModal
+      <ResultModalLol
         isOpen={isModalOpen}
         teams={teams}
         onClose={handleCloseModal}
