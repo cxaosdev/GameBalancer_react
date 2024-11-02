@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../components/logo.jpg";
 
-function Header() {
+function Header({ selectedGame, setSelectedGame }) {
   const navigate = useNavigate();
-  const [selectedGame, setSelectedGame] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
   const handleGame = (event) => {
     const game = event.target.value;
     setSelectedGame(game);
-    if (game === "League of Legends") {
+    if (game === "LeagueOfLegends") {
       navigate("/leagueOfLegends");
     } else if (game === "Valorant") {
       navigate("/valorant");
@@ -48,16 +47,16 @@ function Header() {
       <div className="header__game mb-[10px] ml-[30px] mt-[15px] hidden md:flex">
         <input
           id="toggle-on"
-          value="League of Legends"
+          value="LeagueOfLegends"
           type="radio"
-          checked={selectedGame === "League of Legends"}
+          checked={selectedGame === "LeagueOfLegends"}
           onChange={handleGame}
           className="hidden"
         />
         <label
           htmlFor="toggle-on"
           className={`font-new-amsterdam text-aliceblue mr-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
-            selectedGame === "League of Legends"
+            selectedGame === "LeagueOfLegends"
               ? "bg-indigo-600 font-bold text-white"
               : "hover:text-indigo-600"
           }`}
@@ -83,47 +82,6 @@ function Header() {
           Valorant
         </label>
       </div>
-
-      {isMenuOpen && (
-        <div className="absolute left-0 top-[10vh] z-[999] flex w-full flex-col items-center bg-black bg-opacity-80 py-4 md:hidden">
-          <input
-            id="toggle-on"
-            value="League of Legends"
-            type="radio"
-            checked={selectedGame === "League of Legends"}
-            onChange={handleGame}
-            className="hidden"
-          />
-          <label
-            htmlFor="toggle-on"
-            className={`font-new-amsterdam text-aliceblue mb-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
-              selectedGame === "League of Legends"
-                ? "bg-indigo-600 font-bold text-white"
-                : "hover:text-indigo-600"
-            }`}
-          >
-            League of Legends
-          </label>
-          <input
-            id="toggle-off"
-            value="Valorant"
-            type="radio"
-            checked={selectedGame === "Valorant"}
-            onChange={handleGame}
-            className="hidden"
-          />
-          <label
-            htmlFor="toggle-off"
-            className={`font-new-amsterdam text-aliceblue mb-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
-              selectedGame === "Valorant"
-                ? "bg-indigo-600 font-bold text-white"
-                : "hover:text-indigo-600"
-            }`}
-          >
-            Valorant
-          </label>
-        </div>
-      )}
     </div>
   );
 }

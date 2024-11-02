@@ -1,17 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import LeagueLogo from "../assets/logo/LeagueOfLegends.webp";
 import ValorantLogo from "../assets/logo/Valorant.svg";
 import Onboarding from "components/OnBoarding";
 
-export default function Home() {
+export default function Home({ selectedGame, setSelectedGame }) {
   const navigate = useNavigate();
-  const [selectedGame, setSelectedGame] = useState(null);
   const onboardingRef = useRef(null);
-
-  const handleSelectGame = (game) => {
-    setSelectedGame(game);
-  };
 
   const handleGetStarted = () => {
     if (selectedGame === "LeagueOfLegends") {
@@ -50,7 +45,7 @@ export default function Home() {
                 ? "border-amber-500 bg-amber-500/30"
                 : "border-transparent hover:border-amber-500 hover:bg-amber-900/30"
             }`}
-            onClick={() => handleSelectGame("LeagueOfLegends")}
+            onClick={() => setSelectedGame("LeagueOfLegends")}
           >
             <img
               src={LeagueLogo}
@@ -65,7 +60,7 @@ export default function Home() {
                 ? "border-red-500 bg-red-900/70"
                 : "border-transparent hover:border-red-500 hover:bg-red-900/20"
             }`}
-            onClick={() => handleSelectGame("Valorant")}
+            onClick={() => setSelectedGame("Valorant")}
           >
             <img
               src={ValorantLogo}

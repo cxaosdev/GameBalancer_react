@@ -113,7 +113,7 @@ export default function Vlrt() {
 
   return (
     <>
-      <div className="page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
+      <div className="page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
         <div className="mt-[3vh] flex flex-wrap items-center justify-center">
           {players.map((player, index) => (
             <PlayerVlrt
