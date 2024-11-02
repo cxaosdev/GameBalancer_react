@@ -75,13 +75,14 @@ export default function Home() {
           </button>
         </div>
         <button
-          className="mt-6 cursor-pointer rounded-md bg-gradient-to-r from-red-800 to-indigo-800 p-3 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-red-700 hover:to-indigo-700 focus:ring-2 active:from-red-500 active:to-indigo-500"
+          className="mt-8 cursor-pointer rounded-md bg-gradient-to-r from-red-700 to-indigo-800 px-5 py-4 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-red-600 hover:to-indigo-700 focus:ring-2 active:from-red-500 active:to-indigo-500"
           onClick={handleGetStarted}
           disabled={!selectedGame}
         >
           Get Started
         </button>
-        <div className="mt-[8rem] flex flex-col justify-center">
+
+        <div className="mt-[10vh] flex flex-col justify-center">
           <span
             className="animate-bounce cursor-pointer text-3xl"
             onClick={handleScrollToOnboarding}

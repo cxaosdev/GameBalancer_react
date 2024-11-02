@@ -26,10 +26,9 @@ export default function Onboarding() {
             </span>
             <img className="my-[1rem]" src={selectTier} alt="" />
           </li>
-          <li className="mb-3 flex flex-col text-2xl">
+          <li className="mb-3 text-2xl">
             Click 'Generate Fair Match!' to see the balanced match results.
-            <div className="w[100%] flex justify-center">
-              {" "}
+            <div className="flex w-full justify-center">
               <button className="New-Amsterdam ml-2 mt-10 flex w-[18rem] cursor-default items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm">
                 <span>Generate Fair Match!</span>
               </button>
