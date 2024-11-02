@@ -11,8 +11,8 @@ export default function Footer() {
         </div>
         <section className="text-[0.9rem]">
           <div className="flex w-[100%] justify-between">
-            <nav className="flex footer__nav flex-nowrap">
-              <ul className="flex flex-col gap-0 p-0 m-0 list-none flex-nowrap">
+            <nav className="footer__nav flex flex-nowrap">
+              <ul className="m-0 flex list-none flex-col flex-nowrap gap-0 p-0">
                 <li
                   className="cursor-pointer text-white/80"
                   onClick={() => navigate("/LeagueOfLegends")}
@@ -34,7 +34,7 @@ export default function Footer() {
                   &nbsp;Contact: scy0723123@gmail.com &nbsp;
                 </span>
               </div>
-              <div className="flex items-center mt-1 text-white/80">
+              <div className="mt-1 flex items-center text-white/80">
                 <FaGithub />
                 <span className="ml-2 cursor-pointer text-white/80 hover:text-indigo-500">
                   cxaosdev

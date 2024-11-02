@@ -34,7 +34,7 @@ const PlayerVlrt = memo(
     const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
     return (
-      <div className="player mt-[1vh] flex justify-center">
+      <div className="player mt-[0.5vh] flex justify-center">
         <section className="players flex items-center justify-center">
           <input
             type="text"
@@ -44,7 +44,7 @@ const PlayerVlrt = memo(
             placeholder={`Player ${playerNum} Name`}
             autoComplete="off"
           />
-          <div className="ml-[2.5vw] flex flex-wrap items-center justify-center">
+          <div className="ml-[1vw] flex flex-wrap items-center justify-center">
             {isSmView ? (
               <div className="tier-selection flex h-[100%] flex-col">
                 <div
@@ -85,7 +85,7 @@ const PlayerVlrt = memo(
               <>
                 <div className="flex flex-nowrap justify-center">
                   {tiers.slice(0, 5).map((tier) => (
-                    <div className={`tier`} key={tier.id}>
+                    <div className={`tier ml-[0.5vw]`} key={tier.id}>
                       <input
                         id={`player${playerNum}-${tier.id}`}
                         className="players__input-tier flex"
@@ -109,7 +109,7 @@ const PlayerVlrt = memo(
                 </div>
                 <div className="flex flex-nowrap">
                   {tiers.slice(5).map((tier) => (
-                    <div className={`tier ]`} key={tier.id}>
+                    <div className={`tier ml-[0.5vw]`} key={tier.id}>
                       <input
                         id={`player${playerNum}-${tier.id}`}
                         className="players__input-tier"

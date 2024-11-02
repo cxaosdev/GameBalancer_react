@@ -100,7 +100,7 @@ export default function Vlrt() {
 
   if (isMobile) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900 do-hyeon-regular">
+      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
         <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );
@@ -113,7 +113,7 @@ export default function Vlrt() {
 
   return (
     <>
-      <div className="page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
+      <div className="page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
         <div className="mt-[3vh] flex flex-wrap items-center justify-center">
           {players.map((player, index) => (
             <PlayerVlrt
@@ -129,9 +129,14 @@ export default function Vlrt() {
         </div>
         <div className="z-[10000] mb-[1.3rem] mt-[0.4rem] flex justify-center bg-transparent">
           <button
-            className="mt-[2vh] flex h-[3rem] w-[18rem] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
+            className="sparkle fixed bottom-[4.5vh] mt-[2vh] flex h-[6vh] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-2xl shadow-indigo-900/50 hover:from-purple-700 hover:to-indigo-700 hover:shadow-indigo-900/70 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
+            style={{
+              boxShadow:
+                "0px 0px 20px rgba(255, 255, 255, 0.7), 4px 4px 40px rgba(0, 0, 0, 0.2)",
+            }}
             type="submit"
             onClick={handleGenerateTeams}
+            disabled={showSpinner}
           >
             {showSpinner && <Spinner />}
             <span className={showSpinner ? "ml-2" : ""}>
@@ -139,9 +144,30 @@ export default function Vlrt() {
             </span>
           </button>
         </div>
+
+        <style jsx>{`
+          @keyframes sparkle {
+            0%,
+            100% {
+              box-shadow:
+                0px 0px 10px rgba(255, 255, 255, 0.7),
+                4px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+              box-shadow:
+                0px 0px 20px rgba(255, 255, 255, 1),
+                4px 4px 20px rgba(0, 0, 0, 0.3);
+            }
+          }
+
+          .sparkle {
+            animation: sparkle 1.5s infinite alternate;
+          }
+        `}</style>
+
         <div className="fixed right-[20px] top-1/2 mt-6 flex -translate-y-1/2 transform flex-col items-center">
           <button
-            className="flex flex-col items-center cursor-pointer"
+            className="flex cursor-pointer flex-col items-center"
             onClick={scrollToBottom}
           >
             <span

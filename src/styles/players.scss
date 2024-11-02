@@ -11,11 +11,13 @@
 }
 
 .lol__container {
+  position: relative;
   background-image: url("../assets/lol_background.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  padding: 0.5rem;
+  overflow-y: auto;
+  padding: 1rem;
 }
 
 .lol__container::before {
@@ -145,35 +147,3 @@
 .tier {
   background-color: transparent;
 }
-
-// .players__lanes {
-//   margin-left: 10px;
-//   margin-right: 10px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: transparent;
-
-//   .lane {
-//     background-color: transparent;
-//   }
-
-//   input[type="checkbox"] {
-//     display: none;
-//   }
-
-//   .players__lane-image {
-//     margin: 3px;
-//     height: 25px;
-//     width: 25px;
-//     cursor: pointer;
-//     transition:
-//       transform 0.2s,
-//       border 0.2s;
-
-//     &.selected {
-//       border: 2px solid #3949ab;
-//       border-radius: 5px;
-//     }
-//   }
-// }
