@@ -100,6 +100,9 @@ export default function Lol() {
       playerName: player.playerName || `Player ${index + 1}`,
       tier: player.tier || "Iron",
       pts: tierToPoints_lol[player.tier || "Iron"],
+      selectedLanes: player.selectedLanes.length
+        ? player.selectedLanes
+        : ["Top", "Jungle", "Mid", "ADC", "Support"],
     }));
 
     setPlayerData(updatedPlayers);
@@ -119,7 +122,7 @@ export default function Lol() {
 
   if (isMobile) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-white bg-gray-900 do-hyeon-regular">
+      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
         <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
       </div>
     );
