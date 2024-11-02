@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import LeagueLogo from "../assets/logo/LeagueOfLegends.webp";
 import ValorantLogo from "../assets/logo/Valorant.svg";
@@ -7,6 +7,7 @@ import Onboarding from "components/OnBoarding";
 export default function Home() {
   const navigate = useNavigate();
   const [selectedGame, setSelectedGame] = useState(null);
+  const onboardingRef = useRef(null);
 
   const handleSelectGame = (game) => {
     setSelectedGame(game);
@@ -18,6 +19,13 @@ export default function Home() {
     } else if (selectedGame === "Valorant") {
       navigate("/valorant");
     }
+  };
+
+  const handleScrollToOnboarding = () => {
+    onboardingRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   return (
@@ -74,9 +82,16 @@ export default function Home() {
           Get Started
         </button>
         <div className="mt-[8rem] flex flex-col justify-center">
-          <span className="animate-bounce text-3xl">▼ How to use</span>
+          <span
+            className="animate-bounce cursor-pointer text-3xl"
+            onClick={handleScrollToOnboarding}
+          >
+            ▼ How to use
+          </span>
         </div>
-        <Onboarding></Onboarding>
+        <div ref={onboardingRef}>
+          <Onboarding />
+        </div>
       </div>
     </div>
   );
