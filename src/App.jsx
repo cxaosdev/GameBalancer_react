@@ -8,11 +8,21 @@ import { useState } from "react";
 
 function App() {
   const [selectedGame, setSelectedGame] = useState(null);
+  const [isKorean, setIsKorean] = useState(false);
+
+  const toggleLanguage = () => {
+    setIsKorean((prev) => !prev);
+  };
 
   return (
     <div className="root-wrap flex h-screen flex-col overflow-hidden">
       <BrowserRouter>
-        <Header selectedGame={selectedGame} setSelectedGame={setSelectedGame} />
+        <Header
+          selectedGame={selectedGame}
+          setSelectedGame={setSelectedGame}
+          isKorean={isKorean}
+          toggleLanguage={toggleLanguage}
+        />
         <div className="flex flex-1 flex-col overflow-auto">
           <Routes>
             <Route
@@ -21,6 +31,7 @@ function App() {
                 <Home
                   selectedGame={selectedGame}
                   setSelectedGame={setSelectedGame}
+                  isKorean={isKorean}
                 />
               }
             />

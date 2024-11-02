@@ -4,7 +4,7 @@ import LeagueLogo from "../assets/logo/LeagueOfLegends.webp";
 import ValorantLogo from "../assets/logo/Valorant.svg";
 import Onboarding from "components/OnBoarding";
 
-export default function Home({ selectedGame, setSelectedGame }) {
+export default function Home({ selectedGame, setSelectedGame, isKorean }) {
   const navigate = useNavigate();
   const onboardingRef = useRef(null);
 
@@ -34,8 +34,10 @@ export default function Home({ selectedGame, setSelectedGame }) {
       <div className="flex flex-col items-center justify-center">
         <div className="mt-[8vw] text-center">
           <h1 className="mb-3 text-6xl font-bold">Welcome to Game Balancer</h1>
-          <p className="text-3xl">
-            Create fair matches for your favorite games!
+          <p className={`text-3xl ${isKorean ? "do-hyeon-regular" : ""}`}>
+            {isKorean
+              ? "손쉽게 팀을 구성하고 게임을 시작하세요!"
+              : "Create fair matches for your favorite games!"}
           </p>
         </div>
         <div className="mt-[4rem] flex gap-[4rem]">
@@ -70,19 +72,19 @@ export default function Home({ selectedGame, setSelectedGame }) {
           </button>
         </div>
         <button
-          className="mt-8 cursor-pointer rounded-md bg-gradient-to-r from-red-700 to-indigo-800 px-5 py-4 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-red-600 hover:to-indigo-700 focus:ring-2 active:from-red-500 active:to-indigo-500"
+          className={`mt-8 cursor-pointer rounded-md bg-gradient-to-r from-red-700 to-indigo-800 px-5 py-4 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-red-600 hover:to-indigo-700 focus:ring-2 active:from-red-500 active:to-indigo-500 ${isKorean ? "do-hyeon-regular" : ""}`}
           onClick={handleGetStarted}
           disabled={!selectedGame}
         >
-          Get Started
+          {isKorean ? "시작하기" : "Get Started"}
         </button>
 
         <div className="mt-[10vh] flex flex-col justify-center">
           <span
-            className="animate-bounce cursor-pointer text-3xl"
+            className={`animate-bounce cursor-pointer text-3xl ${isKorean ? "do-hyeon-regular" : ""}`}
             onClick={handleScrollToOnboarding}
           >
-            ▼ How to use
+            ▼ {isKorean ? "사용 방법" : "How to use"}
           </span>
         </div>
         <div ref={onboardingRef}>
