@@ -88,7 +88,7 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
           </span>
         </div>
         <div ref={onboardingRef}>
-          <Onboarding />
+          <Onboarding isKorean={isKorean} />
         </div>
       </div>
     </div>
