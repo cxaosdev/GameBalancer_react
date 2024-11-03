@@ -9,6 +9,9 @@ export default defineConfig({
       components: path.resolve(__dirname, "src/components"),
     },
   },
+  rollupOptions: {
+    external: ["react-router-dom"],
+  },
   extends: [
     "airbnb",
     "airbnb/hooks",

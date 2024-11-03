@@ -1,41 +1,67 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../components/logo.jpg";
 
 function Header() {
   const navigate = useNavigate();
-  const [selectedGame, setSelectedGame] = useState("Valorant");
+  const [selectedGame, setSelectedGame] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
   const handleGame = (event) => {
     const game = event.target.value;
     setSelectedGame(game);
     if (game === "League of Legends") {
-      navigate("/LeagueOfLegends");
+      navigate("/leagueOfLegends");
     } else if (game === "Valorant") {
-      navigate("/Valorant");
+      navigate("/valorant");
     }
   };
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prevState) => !prevState);
+  };
+
   return (
-    <div className="fixed top-0 left-0 w-[100%] flex items-center justify-between p-0 header ">
-      <div className="header__title flex mt-[10px] mb-[20px] items-end">
-        <img
-          className="header__title-logo mt-[10px] ml-[30px] w-[50px] bg-transparent"
-          src={logo}
-          alt="Logo"
-        />
-        <span className="header__title-text ml-[20px] mt-[10px] text-[50px] leading-none">
+    <div
+      className={`header fixed left-0 top-0 z-[1000] flex h-[10vh] w-full items-center justify-between bg-black bg-opacity-70 p-0 ${
+        isHeaderVisible ? "visible" : "hidden"
+      }`}
+    >
+      <div
+        onClick={() => navigate("/")}
+        className="header__title flex cursor-pointer items-center"
+      >
+        <img className="ml-[1.5rem] w-[2.2rem]" src={logo} alt="Logo" />
+        <span className="ml-[1.2rem] mt-[0.2rem] hidden text-[2.7rem] leading-none xs:inline">
           Game Balancer
         </span>
       </div>
-      <div className="header__game mt-[15px] ml-[30px] mb-[10px] ">
+
+      <button
+        className="mr-[1.5rem] flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[0.5rem] bg-black bg-opacity-80 md:hidden"
+        onClick={toggleMenu}
+      >
+        <span className="text-aliceblue text-[2rem]">☰</span>
+      </button>
+
+      <div className="header__game mb-[10px] ml-[30px] mt-[15px] hidden md:flex">
         <input
           id="toggle-on"
           value="League of Legends"
           type="radio"
           checked={selectedGame === "League of Legends"}
           onChange={handleGame}
+          className="hidden"
         />
-        <label htmlFor="toggle-on" className="btn">
+        <label
+          htmlFor="toggle-on"
+          className={`font-new-amsterdam text-aliceblue mr-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
+            selectedGame === "League of Legends"
+              ? "bg-indigo-600 font-bold text-white"
+              : "hover:text-indigo-600"
+          }`}
+        >
           League of Legends
         </label>
         <input
@@ -44,9 +70,60 @@ function Header() {
           type="radio"
           checked={selectedGame === "Valorant"}
           onChange={handleGame}
+          className="hidden"
         />
-        <label htmlFor="toggle-off">Valorant</label>
+        <label
+          htmlFor="toggle-off"
+          className={`font-new-amsterdam text-aliceblue mr-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
+            selectedGame === "Valorant"
+              ? "bg-indigo-600 font-bold text-white"
+              : "hover:text-indigo-600"
+          }`}
+        >
+          Valorant
+        </label>
       </div>
+
+      {isMenuOpen && (
+        <div className="absolute left-0 top-[10vh] z-[999] flex w-full flex-col items-center bg-black bg-opacity-80 py-4 md:hidden">
+          <input
+            id="toggle-on"
+            value="League of Legends"
+            type="radio"
+            checked={selectedGame === "League of Legends"}
+            onChange={handleGame}
+            className="hidden"
+          />
+          <label
+            htmlFor="toggle-on"
+            className={`font-new-amsterdam text-aliceblue mb-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
+              selectedGame === "League of Legends"
+                ? "bg-indigo-600 font-bold text-white"
+                : "hover:text-indigo-600"
+            }`}
+          >
+            League of Legends
+          </label>
+          <input
+            id="toggle-off"
+            value="Valorant"
+            type="radio"
+            checked={selectedGame === "Valorant"}
+            onChange={handleGame}
+            className="hidden"
+          />
+          <label
+            htmlFor="toggle-off"
+            className={`font-new-amsterdam text-aliceblue mb-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
+              selectedGame === "Valorant"
+                ? "bg-indigo-600 font-bold text-white"
+                : "hover:text-indigo-600"
+            }`}
+          >
+            Valorant
+          </label>
+        </div>
+      )}
     </div>
   );
 }
