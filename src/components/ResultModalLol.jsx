@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FaClipboard } from "react-icons/fa";
+import { toPng } from "html-to-image";
 
 export default function ResultModalLol({ isOpen, teams, onClose }) {
+  const modalRef = useRef(null);
+
   const handleClickOutside = (e) => {
     if (e.target.classList.contains("modal__overlay")) {
       onClose();
@@ -11,9 +14,9 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
   if (!isOpen) return null;
 
   const positionNames = {
-    top: "Top lane",
+    top: "Top",
     jungle: "Jungle",
-    mid: "Mid lane",
+    mid: "Mid",
     adc: "ADC",
     support: "Support",
   };
@@ -49,12 +52,30 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
     });
   };
 
+  const saveAsImage = () => {
+    if (modalRef.current) {
+      toPng(modalRef.current)
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "result.png";
+          link.click();
+        })
+        .catch((error) => {
+          console.error("Error generating image:", error);
+        });
+    }
+  };
+
   return (
     <div
       className="modal__overlay fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-65"
       onClick={handleClickOutside}
     >
-      <div className="relative w-full max-w-4xl rounded-lg bg-gradient-to-r from-purple-800 to-indigo-900 p-10 shadow-2xl">
+      <div
+        ref={modalRef}
+        className="relative w-full max-w-4xl rounded-lg bg-gradient-to-r from-purple-800 to-indigo-900 p-10 shadow-2xl"
+      >
         <button
           className="absolute right-4 top-0 text-[40px] text-white hover:text-yellow-300"
           onClick={onClose}
@@ -140,13 +161,20 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
           </>
         )}
 
-        <div className="mt-1 flex justify-center">
+        <div className="mt-4 flex justify-center gap-4">
           <button
             onClick={copyToClipboard}
             className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
           >
             <FaClipboard className="text-2xl" />
             <span>copy results</span>
+          </button>
+          <button
+            onClick={saveAsImage}
+            className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
+          >
+            <FaClipboard className="text-2xl" />
+            <span>save as image</span>
           </button>
         </div>
       </div>
