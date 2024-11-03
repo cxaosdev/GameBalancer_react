@@ -1,4 +1,5 @@
 import React from "react";
+import { FaClipboard } from "react-icons/fa";
 
 export default function ResultModalLol({ isOpen, teams, onClose }) {
   const handleClickOutside = (e) => {
@@ -21,6 +22,32 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
     ...(teams.missingPositions || []),
     ...(teams.insufficientPositions || []),
   ];
+
+  const generateResultText = () => {
+    const team1Text = teams.team1
+      .map(
+        (player) =>
+          `${positionNames[player.selectedLanes[0]]}: ${player.playerName} (${player.tier})`,
+      )
+      .join("\n");
+    const team2Text = teams.team2
+      .map(
+        (player) =>
+          `${positionNames[player.selectedLanes[0]]}: ${player.playerName} (${player.tier})`,
+      )
+      .join("\n");
+
+    return `Team 1 [Total Points: ${teams.team1Pts}]:\n${team1Text}\n\nTeam 2 [Total Points: ${teams.team2Pts}]:\n${team2Text}\n\nPoint Difference: ${Math.abs(
+      teams.team1Pts - teams.team2Pts,
+    )}`;
+  };
+
+  const copyToClipboard = () => {
+    const resultText = generateResultText();
+    navigator.clipboard.writeText(resultText).then(() => {
+      alert("copied results!");
+    });
+  };
 
   return (
     <div
@@ -104,7 +131,6 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
                 </ul>
               </div>
 
-              {/* Point Difference */}
               <div className="col-span-2 bg-transparent text-center">
                 <h2 className="mb-5 bg-transparent text-4xl font-bold text-yellow-300">
                   Point Difference: {Math.abs(teams.team1Pts - teams.team2Pts)}
@@ -113,6 +139,16 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
             </div>
           </>
         )}
+
+        <div className="mt-1 flex justify-center">
+          <button
+            onClick={copyToClipboard}
+            className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
+          >
+            <FaClipboard className="text-2xl" />
+            <span>copy results</span>
+          </button>
+        </div>
       </div>
     </div>
   );

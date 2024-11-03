@@ -1,4 +1,5 @@
 import React from "react";
+import { FaClipboard } from "react-icons/fa";
 
 export default function ResultModalVlrt({ isOpen, teams, onClose }) {
   const handleClickOutside = (e) => {
@@ -8,6 +9,26 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
   };
 
   if (!isOpen) return null;
+
+  const generateResultText = () => {
+    const team1Text = teams.team1
+      .map((player) => `${player.playerName} (${player.tier})`)
+      .join("\n");
+    const team2Text = teams.team2
+      .map((player) => `${player.playerName} (${player.tier})`)
+      .join("\n");
+
+    return `Team 1 [Total Points: ${teams.team1Pts}]:\n${team1Text}\n\nTeam 2 [Total Points: ${teams.team2Pts}]:\n${team2Text}\n\nPoint Difference: ${Math.abs(
+      teams.team1Pts - teams.team2Pts,
+    )}`;
+  };
+
+  const copyToClipboard = () => {
+    const resultText = generateResultText();
+    navigator.clipboard.writeText(resultText).then(() => {
+      alert("copied results");
+    });
+  };
 
   return (
     <div
@@ -75,6 +96,16 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
               Point Difference: {Math.abs(teams.team1Pts - teams.team2Pts)}
             </h2>
           </div>
+        </div>
+
+        <div className="mt-1 flex justify-center">
+          <button
+            onClick={copyToClipboard}
+            className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
+          >
+            <FaClipboard className="text-2xl" />
+            <span>copy results</span>
+          </button>
         </div>
       </div>
     </div>
