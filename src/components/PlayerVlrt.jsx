@@ -5,7 +5,7 @@ const PlayerVlrt = memo(
   ({ playerNum, playerName, selectedTier, handlePlayerChange }) => {
     console.log(`rendered player ${playerNum}`);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const [isMdview, setIsMdView] = useState(window.innerWidth <= 1024);
+    const [isLgView, setIsLgView] = useState(window.innerWidth <= 1200);
     const [isSmView, setIsSmView] = useState(window.innerWidth <= 768);
 
     const tiers = [
@@ -22,7 +22,7 @@ const PlayerVlrt = memo(
 
     useEffect(() => {
       const handleResize = () => {
-        setIsMdView(window.innerWidth <= 1024);
+        setIsLgView(window.innerWidth <= 1200);
         setIsSmView(window.innerWidth <= 768);
       };
       window.addEventListener("resize", handleResize);
@@ -35,16 +35,20 @@ const PlayerVlrt = memo(
 
     return (
       <div className="player mt-[0.5vh] flex justify-center">
-        <section className="players flex items-center justify-center">
+        <section className="players flex items-center justify-between">
           <input
             type="text"
-            className="players__input-name text-[2.3vh]"
+            className="players__input-name w-[7em] text-[1.3em]"
             value={playerName}
             onChange={(e) => handlePlayerChange("playerName", e.target.value)}
             placeholder={`Player ${playerNum} Name`}
             autoComplete="off"
           />
-          <div className="ml-[1vw] flex flex-wrap items-center justify-center">
+          <div
+            className={`ml-[1vw] flex items-center justify-center gap-[0.4em] ${
+              isSmView ? "w-[15em]" : isLgView ? "w-[45em]" : "w-[70em]"
+            }`}
+          >
             {isSmView ? (
               <div className="tier-selection flex h-[100%] flex-col">
                 <div
@@ -81,39 +85,15 @@ const PlayerVlrt = memo(
                   </div>
                 )}
               </div>
-            ) : (
-              <>
-                <div className="flex flex-nowrap justify-center">
+            ) : isLgView ? (
+              <div className="ml-3 mt-3 flex-col">
+                <div className="flex justify-start">
                   {tiers.slice(0, 5).map((tier) => (
-                    <div className={`tier ml-[0.5vw]`} key={tier.id}>
-                      <input
-                        id={`player${playerNum}-${tier.id}`}
-                        className="players__input-tier flex"
-                        name={`player${playerNum}`}
-                        value={tier.id}
-                        type="radio"
-                        checked={selectedTier === tier.id}
-                        onChange={(e) =>
-                          handlePlayerChange("tier", e.target.value)
-                        }
-                      />
-                      <label
-                        htmlFor={`player${playerNum}-${tier.id}`}
-                        className="players__tiers flex items-center text-center text-[3.5vh]"
-                        style={{ color: tierColors.vlrt_color[tier.id] }}
-                      >
-                        {tier.label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex flex-nowrap">
-                  {tiers.slice(5).map((tier) => (
-                    <div className={`tier ml-[0.5vw]`} key={tier.id}>
+                    <div className="tier" key={tier.id}>
                       <input
                         id={`player${playerNum}-${tier.id}`}
                         className="players__input-tier"
-                        name={`player${playerNum}`}
+                        name={`player${playerNum}-tier`}
                         value={tier.id}
                         type="radio"
                         checked={selectedTier === tier.id}
@@ -131,7 +111,52 @@ const PlayerVlrt = memo(
                     </div>
                   ))}
                 </div>
-              </>
+                <div className="flex justify-start">
+                  {tiers.slice(5).map((tier) => (
+                    <div className="tier" key={tier.id}>
+                      <input
+                        id={`player${playerNum}-${tier.id}`}
+                        className="players__input-tier"
+                        name={`player${playerNum}-tier`}
+                        value={tier.id}
+                        type="radio"
+                        checked={selectedTier === tier.id}
+                        onChange={(e) =>
+                          handlePlayerChange("tier", e.target.value)
+                        }
+                      />
+                      <label
+                        htmlFor={`player${playerNum}-${tier.id}`}
+                        className="players__tiers flex items-center text-center text-[3.5vh]"
+                        style={{ color: tierColors.vlrt_color[tier.id] }}
+                      >
+                        {tier.label}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              tiers.map((tier) => (
+                <div className="tier" key={tier.id}>
+                  <input
+                    id={`player${playerNum}-${tier.id}`}
+                    className="players__input-tier"
+                    name={`player${playerNum}-tier`}
+                    value={tier.id}
+                    type="radio"
+                    checked={selectedTier === tier.id}
+                    onChange={(e) => handlePlayerChange("tier", e.target.value)}
+                  />
+                  <label
+                    htmlFor={`player${playerNum}-${tier.id}`}
+                    className="players__tiers flex items-center text-center text-[2em]"
+                    style={{ color: tierColors.vlrt_color[tier.id] }}
+                  >
+                    {tier.label}
+                  </label>
+                </div>
+              ))
             )}
           </div>
         </section>
