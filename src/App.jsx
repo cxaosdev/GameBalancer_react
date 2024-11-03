@@ -4,15 +4,33 @@ import Lol from "./pages/Lol";
 import Vlrt from "./pages/Vlrt";
 import Home from "./pages/Home";
 import Footer from "components/Footer";
-import { useState } from "react";
+import UnsupportedPage from "./pages/UnsupportedPage";
+import { useState, useEffect } from "react";
+
+const MOBILE_OR_TABLET_REGEX =
+  /android|iphone|ipad|ipod|windows phone|tablet|kindle/;
 
 function App() {
   const [selectedGame, setSelectedGame] = useState(null);
   const [isKorean, setIsKorean] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    setIsMobile(MOBILE_OR_TABLET_REGEX.test(userAgent));
+  }, []);
 
   const toggleLanguage = () => {
     setIsKorean((prev) => !prev);
   };
+
+  if (isMobile) {
+    return (
+      <BrowserRouter>
+        <UnsupportedPage />
+      </BrowserRouter>
+    );
+  }
 
   return (
     <div className="root-wrap flex h-screen flex-col overflow-hidden">

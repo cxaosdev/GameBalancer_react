@@ -42,7 +42,7 @@ function Header({ selectedGame, setSelectedGame, isKorean, toggleLanguage }) {
     >
       <div
         onClick={() => navigate("/")}
-        className="header__title flex cursor-pointer items-center"
+        className="flex items-center cursor-pointer header__title"
       >
         <img className="ml-[1.5rem] w-[2.2rem]" src={logo} alt="Logo" />
         <span className="ml-[1.2rem] mt-[0.2rem] hidden text-[2.7rem] leading-none xs:inline">

@@ -5,7 +5,7 @@ import PlayerLol from "components/PlayerLol.jsx";
 import { tierToPoints_lol } from "../util/tierPoints.js";
 import { generateLolTeams } from "../util/teamGenerator.js";
 import ResultModalLol from "components/ResultModalLol.jsx";
-import { MOBILE_OR_TABLET_REGEX } from "../util/mobileRegex.js";
+
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
@@ -28,14 +28,8 @@ export default function Lol() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const [timerId, setTimerId] = useState(null);
-
-  useEffect(() => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    setIsMobile(MOBILE_OR_TABLET_REGEX.test(userAgent));
-  }, []);
 
   useEffect(() => {
     return () => {
@@ -122,13 +116,6 @@ export default function Lol() {
 
   const memoizedPlayerData = useMemo(() => playerData, [playerData]);
 
-  if (isMobile) {
-    return (
-      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
-        <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
-      </div>
-    );
-  }
 
   return (
     <div className="page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
@@ -185,7 +172,7 @@ export default function Lol() {
 
       <div className="fixed right-[20px] top-1/2 mt-6 flex -translate-y-1/2 transform flex-col items-center">
         <button
-          className="flex cursor-pointer flex-col items-center"
+          className="flex flex-col items-center cursor-pointer"
           onClick={scrollToBottom}
         >
           <span

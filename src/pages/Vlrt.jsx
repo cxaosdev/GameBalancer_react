@@ -5,7 +5,6 @@ import WarningModal from "../components/WarningModal.jsx";
 import { generateVlrtTeams } from "../util/teamGenerator.js";
 import { tierToPoints_vlrt } from "../util/tierPoints.js";
 import ResultModalVlrt from "components/ResultModalVlrt.jsx";
-import { MOBILE_OR_TABLET_REGEX } from "../util/mobileRegex.js";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
@@ -27,14 +26,8 @@ export default function Vlrt() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const [timerId, setTimerId] = useState(null);
-
-  useEffect(() => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    setIsMobile(MOBILE_OR_TABLET_REGEX.test(userAgent));
-  }, []);
 
   useEffect(() => {
     return () => {
@@ -98,13 +91,6 @@ export default function Vlrt() {
     setIsWarningModalOpen(false);
   };
 
-  if (isMobile) {
-    return (
-      <div className="do-hyeon-regular flex min-h-screen items-center justify-center bg-gray-900 text-white">
-        <h1 className="text-xl">GB는 모바일 기기에서 지원되지 않습니다.</h1>
-      </div>
-    );
-  }
   const bottomRef = useRef(null);
 
   const scrollToBottom = () => {
