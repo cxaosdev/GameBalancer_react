@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { FaClipboard, FaImage } from "react-icons/fa";
 import { toPng } from "html-to-image";
+import tierColors from "../styles/constants.json";
 
 export default function ResultModalLol({ isOpen, teams, onClose }) {
   const modalRef = useRef(null);
@@ -118,7 +119,10 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
                         {positionNames[player.selectedLanes[0]]}:{" "}
                         {player.playerName}
                       </span>
-                      <span className="text-xl text-white bg-transparent">
+                      <span
+                        className="text-xl text-white bg-transparent"
+                        style={{ color: tierColors.lol_color[player.tier] }}
+                      >
                         {player.tier}
                       </span>
                     </li>
@@ -144,7 +148,10 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
                         {positionNames[player.selectedLanes[0]]}:{" "}
                         {player.playerName}
                       </span>
-                      <span className="text-xl text-white bg-transparent">
+                      <span
+                        className="text-xl text-white bg-transparent"
+                        style={{ color: tierColors.lol_color[player.tier] }}
+                      >
                         {player.tier}
                       </span>
                     </li>

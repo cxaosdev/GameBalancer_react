@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { FaClipboard, FaImage } from "react-icons/fa";
 import { toPng } from "html-to-image";
+import tierColors from "../styles/constants.json";
 
 export default function ResultModalVlrt({ isOpen, teams, onClose }) {
   const modalRef = useRef(null);
@@ -82,7 +83,12 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
                   <span className="text-2xl bg-transparent do-hyeon-regular">
                     {player.playerName}
                   </span>
-                  <span className="text-xl bg-transparent">{player.tier}</span>
+                  <span
+                    className="text-xl bg-transparent"
+                    style={{ color: tierColors.vlrt_color[player.tier] }}
+                  >
+                    {player.tier}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -105,7 +111,12 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
                   <span className="text-2xl bg-transparent do-hyeon-regular">
                     {player.playerName}
                   </span>
-                  <span className="text-xl bg-transparent">{player.tier}</span>
+                  <span
+                    className="text-xl bg-transparent"
+                    style={{ color: tierColors.vlrt_color[player.tier] }}
+                  >
+                    {player.tier}
+                  </span>
                 </li>
               ))}
             </ul>
