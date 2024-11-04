@@ -51,12 +51,12 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black modal__overlay bg-opacity-65"
+      className="modal__overlay fixed inset-0 z-[100000] flex items-center justify-center bg-black bg-opacity-65"
       onClick={handleClickOutside}
     >
       <div
         ref={modalRef}
-        className="relative w-full max-w-4xl p-10 rounded-lg shadow-2xl bg-gradient-to-r from-purple-800 to-indigo-900"
+        className="relative w-full max-w-4xl rounded-lg shadow-2xl bg-gradient-to-r from-purple-800 to-indigo-900 p-7"
       >
         <button
           className="absolute right-4 top-0 text-[40px] text-white hover:text-yellow-300"
@@ -67,7 +67,7 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
 
         <div className="grid grid-cols-1 gap-2 bg-transparent sm:grid-cols-2">
           {/* Team 1 */}
-          <div className="p-6 text-white bg-transparent rounded-lg">
+          <div className="p-3 text-white bg-transparent rounded-lg">
             <h2 className="text-4xl font-semibold text-center text-yellow-300 bg-transparent">
               Team 1
             </h2>
@@ -95,7 +95,7 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
           </div>
 
           {/* Team 2 */}
-          <div className="p-6 text-white bg-transparent rounded-lg">
+          <div className="p-3 text-white bg-transparent rounded-lg">
             <h2 className="text-4xl font-semibold text-center text-yellow-300 bg-transparent">
               Team 2
             </h2>
@@ -124,13 +124,13 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
 
           {/* Point Difference */}
           <div className="col-span-2 text-center bg-transparent">
-            <h2 className="mb-5 text-4xl font-bold text-yellow-300 bg-transparent">
+            <h2 className="mb-2 text-4xl font-bold text-yellow-300 bg-transparent">
               Point Difference: {Math.abs(teams.team1Pts - teams.team2Pts)}
             </h2>
           </div>
         </div>
 
-        <div className="flex justify-center gap-4 mt-4">
+        <div className="flex justify-center gap-4">
           <button
             onClick={copyToClipboard}
             className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
