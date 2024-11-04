@@ -6,7 +6,6 @@ import { tierToPoints_lol } from "../util/tierPoints.js";
 import { generateLolTeams } from "../util/teamGenerator.js";
 import ResultModalLol from "components/ResultModalLol.jsx";
 
-
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
 export default function Lol() {
@@ -116,10 +115,9 @@ export default function Lol() {
 
   const memoizedPlayerData = useMemo(() => playerData, [playerData]);
 
-
   return (
     <div className="page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
-      <div className="mb-[6vh] mt-[3vh] flex flex-wrap items-center justify-center">
+      <div className="mb-[8vh] mt-[3vh] flex flex-wrap items-center justify-center">
         {players.map((player, index) => (
           <PlayerLol
             key={player}
