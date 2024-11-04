@@ -109,19 +109,25 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
                   {teams.team1.map((player, index) => (
                     <li
                       key={index}
-                      className="flex justify-between p-3 bg-opacity-50 rounded-lg shadow-md bg-zinc-900"
+                      className="flex items-center bg-opacity-50 rounded-lg shadow-md bg-zinc-900"
+                      style={{ padding: "1em" }}
                     >
                       <img
                         src={laneIcons[player.selectedLanes[0]]}
                         alt={player.selectedLanes[0]}
-                        className="w-8 h-8"
+                        className="w-8 h-8 mr-2"
                       />
-                      <span className="text-2xl text-white bg-transparent do-hyeon-regular">
+
+                      <span className="flex-grow text-2xl text-center text-white do-hyeon-regular">
                         {player.playerName}
                       </span>
+
                       <span
-                        className="text-xl text-white bg-transparent"
-                        style={{ color: tierColors.lol_color[player.tier] }}
+                        className="text-xl text-right text-white"
+                        style={{
+                          color: tierColors.lol_color[player.tier],
+                          minWidth: "11em",
+                        }}
                       >
                         {player.tier}
                       </span>
@@ -142,19 +148,25 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
                   {teams.team2.map((player, index) => (
                     <li
                       key={index}
-                      className="flex justify-between p-3 bg-opacity-50 rounded-lg shadow-md bg-zinc-900"
+                      className="flex items-center bg-opacity-50 rounded-lg shadow-md bg-zinc-900"
+                      style={{ padding: "1em" }}
                     >
                       <img
                         src={laneIcons[player.selectedLanes[0]]}
                         alt={player.selectedLanes[0]}
-                        className="w-8 h-8"
+                        className="w-8 h-8 mr-2"
                       />
-                      <span className="text-2xl text-white bg-transparent do-hyeon-regular">
+
+                      <span className="flex-grow text-2xl text-center text-white do-hyeon-regular">
                         {player.playerName}
                       </span>
+
                       <span
-                        className="text-xl text-white bg-transparent"
-                        style={{ color: tierColors.lol_color[player.tier] }}
+                        className="text-xl text-right text-white"
+                        style={{
+                          color: tierColors.lol_color[player.tier],
+                          minWidth: "11em",
+                        }}
                       >
                         {player.tier}
                       </span>
