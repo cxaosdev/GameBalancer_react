@@ -100,7 +100,7 @@ export default function Vlrt() {
   return (
     <>
       <div className="page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
-        <div className="mt-[3vh] flex flex-wrap items-center justify-center">
+        <div className="mt-[3vh] flex flex-col flex-wrap items-center justify-center">
           {players.map((player, index) => (
             <PlayerVlrt
               key={player}
@@ -153,7 +153,7 @@ export default function Vlrt() {
 
         <div className="fixed right-[20px] top-1/2 mt-6 flex -translate-y-1/2 transform flex-col items-center">
           <button
-            className="flex cursor-pointer flex-col items-center"
+            className="flex flex-col items-center cursor-pointer"
             onClick={scrollToBottom}
           >
             <span

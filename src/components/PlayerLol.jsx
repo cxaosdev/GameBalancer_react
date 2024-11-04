@@ -8,8 +8,8 @@ import tierColors from "../styles/constants.json";
 
 const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [isLgView, setIsLgView] = useState(window.innerWidth <= 1200);
-  const [isSmView, setIsSmView] = useState(window.innerWidth <= 768);
+  const [isLgView, setIsLgView] = useState(window.innerWidth <= 1380);
+  const [isSmView, setIsSmView] = useState(window.innerWidth <= 1080);
 
   const tiers = [
     { id: "Iron", label: "Iron", pts: 7 },
@@ -34,8 +34,8 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsLgView(window.innerWidth <= 1200);
-      setIsSmView(window.innerWidth <= 768);
+      setIsLgView(window.innerWidth <= 1380);
+      setIsSmView(window.innerWidth <= 1080);
     };
     window.addEventListener("resize", handleResize);
     return () => {
@@ -47,7 +47,7 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
 
   return (
     <div className="player mt-[0.5vh] flex justify-center">
-      <section className="players flex items-center justify-between">
+      <section className="flex items-center justify-between players">
         <input
           type="text"
           className="players__input-name w-[7em] text-[1.3em]"
@@ -59,12 +59,12 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
 
         <div
           className={`ml-[1vw] flex items-center justify-center gap-[0.4em] ${
-            isSmView ? "w-[25em]" : isLgView ? "w-[45em]" : "w-[70em]"
+            isSmView ? "w-[25em]" : isLgView ? "w-[48em]" : "w-[70em]"
           }`}
         >
           {lanes.map((lane) => (
             <div
-              className="lane flex items-center justify-between"
+              className="flex items-center justify-between lane"
               key={lane.id}
             >
               <input
@@ -79,7 +79,7 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
               />
               <label
                 htmlFor={`player${playerNum}-${lane.id}`}
-                className="players__lanes flex items-center rounded-sm opacity-90"
+                className="flex items-center rounded-sm players__lanes opacity-90"
               >
                 <img
                   src={lane.image}
@@ -94,11 +94,11 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
             {isSmView ? (
               <div className="tier-selection-dropdown">
                 <div
-                  className="tier-dropdown ml-[2vw] w-[15vh] cursor-pointer rounded-md bg-white text-center text-[2.3vh]"
+                  className="tier-dropdown ml-[2vw] w-[7em] cursor-pointer rounded-md bg-white text-center text-[1.3em]"
                   onClick={toggleDropdown}
                 >
                   <span
-                    className="selected-tier p-0 text-[3vh]"
+                    className="selected-tier p-0 text-[1.3em]"
                     style={{
                       color: playerData.tier
                         ? tierColors.lol_color[playerData.tier]
@@ -109,7 +109,7 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
                   </span>
                 </div>
                 {isDropdownOpen && (
-                  <div className="tier-dropdown-menu absolute flex flex-wrap rounded-md bg-white">
+                  <div className="absolute flex flex-wrap bg-white rounded-md tier-dropdown-menu">
                     {tiers.map((tier) => (
                       <div
                         key={tier.id}
@@ -127,7 +127,7 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
                 )}
               </div>
             ) : isLgView ? (
-              <div className="ml-3 mt-3 flex-col">
+              <div className="flex-col mt-3 ml-3">
                 <div className="flex justify-start">
                   {tiers.slice(0, 5).map((tier) => (
                     <div className="tier" key={tier.id}>

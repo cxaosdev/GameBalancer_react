@@ -5,8 +5,8 @@ const PlayerVlrt = memo(
   ({ playerNum, playerName, selectedTier, handlePlayerChange }) => {
     console.log(`rendered player ${playerNum}`);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const [isLgView, setIsLgView] = useState(window.innerWidth <= 1200);
-    const [isSmView, setIsSmView] = useState(window.innerWidth <= 768);
+    const [isLgView, setIsLgView] = useState(window.innerWidth <= 1380);
+    const [isSmView, setIsSmView] = useState(window.innerWidth <= 1080);
 
     const tiers = [
       { id: "Iron", label: "Iron", pts: 7 },
@@ -22,8 +22,8 @@ const PlayerVlrt = memo(
 
     useEffect(() => {
       const handleResize = () => {
-        setIsLgView(window.innerWidth <= 1200);
-        setIsSmView(window.innerWidth <= 768);
+        setIsLgView(window.innerWidth <= 1380);
+        setIsSmView(window.innerWidth <= 1080);
       };
       window.addEventListener("resize", handleResize);
       return () => {
@@ -35,7 +35,7 @@ const PlayerVlrt = memo(
 
     return (
       <div className="player mt-[0.5vh] flex justify-center">
-        <section className="players flex items-center justify-between">
+        <section className="flex items-center justify-between players">
           <input
             type="text"
             className="players__input-name w-[7em] text-[1.3em]"
@@ -52,11 +52,11 @@ const PlayerVlrt = memo(
             {isSmView ? (
               <div className="tier-selection flex h-[100%] flex-col">
                 <div
-                  className="tier-dropdown w-[15vh] cursor-pointer rounded-md bg-white text-center text-[2.3vh]"
+                  className="tier-dropdown w-[7em] cursor-pointer rounded-md bg-white text-center text-[1.3em]"
                   onClick={toggleDropdown}
                 >
                   <span
-                    className="selected-tier m-0 p-0 text-[3vh]"
+                    className="selected-tier m-0 p-0 text-[1.3em]"
                     style={{
                       color: selectedTier
                         ? tierColors.vlrt_color[selectedTier]
@@ -67,7 +67,7 @@ const PlayerVlrt = memo(
                   </span>
                 </div>
                 {isDropdownOpen && (
-                  <div className="tier-dropdown-menu absolute flex flex-wrap rounded-md bg-white">
+                  <div className="absolute flex flex-wrap bg-white rounded-md tier-dropdown-menu">
                     {tiers.map((tier) => (
                       <div
                         className="tier-option cursor-pointer px-[0.5em] text-center text-[3vh]"
@@ -86,7 +86,7 @@ const PlayerVlrt = memo(
                 )}
               </div>
             ) : isLgView ? (
-              <div className="ml-3 mt-3 flex-col">
+              <div className="flex-col mt-3 ml-3">
                 <div className="flex justify-start">
                   {tiers.slice(0, 5).map((tier) => (
                     <div className="tier" key={tier.id}>
