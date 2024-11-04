@@ -80,7 +80,7 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
                   key={index}
                   className="flex justify-between p-3 bg-opacity-50 rounded-lg shadow-md bg-zinc-900"
                 >
-                  <span className="text-2xl bg-transparent do-hyeon-regular">
+                  <span className="text-2xl bg-transparent">
                     {player.playerName}
                   </span>
                   <span
@@ -108,7 +108,7 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
                   key={index}
                   className="flex justify-between p-3 bg-opacity-50 rounded-lg shadow-md bg-zinc-900"
                 >
-                  <span className="text-2xl bg-transparent do-hyeon-regular">
+                  <span className="text-2xl bg-transparent">
                     {player.playerName}
                   </span>
                   <span

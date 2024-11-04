@@ -8,7 +8,16 @@ import adcLaneImage from "../assets/lol_lane/adc.svg";
 import supportLaneImage from "../assets/lol_lane/support.svg";
 import tierColors from "../styles/constants.json";
 
-export default function ResultModalLol({ isOpen, teams, onClose }) {
+export default function ResultModalLol({
+  isOpen,
+  teams = {
+    team1: [],
+    team2: [],
+    missingPositions: [],
+    insufficientPositions: [],
+  },
+  onClose,
+}) {
   const modalRef = useRef(null);
 
   const handleClickOutside = (e) => {
@@ -35,8 +44,8 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
       .map((player) => `${player.playerName} (${player.tier})`)
       .join("\n");
 
-    return `Team 1 [Total Points: ${teams.team1Pts}]:\n${team1Text}\n\nTeam 2 [Total Points: ${teams.team2Pts}]:\n${team2Text}\n\nPoint Difference: ${Math.abs(
-      teams.team1Pts - teams.team2Pts,
+    return `Team 1 [Total Points: ${teams.team1Pts || 0}]:\n${team1Text}\n\nTeam 2 [Total Points: ${teams.team2Pts || 0}]:\n${team2Text}\n\nPoint Difference: ${Math.abs(
+      (teams.team1Pts || 0) - (teams.team2Pts || 0),
     )}`;
   };
 
@@ -81,18 +90,17 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
         {teams.missingPositions?.length > 0 ||
         teams.insufficientPositions?.length > 0 ? (
           <div className="text-center">
-            <h2 className="text-4xl font-bold bg-transparent">
-              <span className="text-white">⚠️ Need more players for</span>{" "}
-              {teams.missingPositions.map((pos) => (
-                <img
-                  key={pos}
-                  src={laneIcons[pos]}
-                  alt={pos}
-                  className="inline w-8 h-8"
-                />
-              ))}
-              &nbsp;⚠️
+            <h2 className="flex items-center justify-center gap-2 text-4xl font-bold bg-transparent">
+              <span className="text-white">❗️Need more players for..</span>
             </h2>
+            <div className="mt-2 text-3xl">
+              {(teams.missingPositions || []).map((pos, index) => (
+                <span className="text-amber-300" key={pos}>
+                  {pos.charAt(0).toUpperCase() + pos.slice(1)}
+                  {index < teams.missingPositions.length - 1 ? ", " : ""}
+                </span>
+              ))}
+            </div>
           </div>
         ) : (
           <>
@@ -103,10 +111,10 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
                   Team 1
                 </h2>
                 <h2 className="mb-6 text-2xl font-semibold text-center text-yellow-300 bg-transparent">
-                  [ Total Points: {teams.team1Pts} ]
+                  [ Total Points: {teams.team1Pts || 0} ]
                 </h2>
                 <ul className="space-y-4 bg-transparent">
-                  {teams.team1.map((player, index) => (
+                  {(teams.team1 || []).map((player, index) => (
                     <li
                       key={index}
                       className="flex items-center bg-opacity-50 rounded-lg shadow-md bg-zinc-900"
@@ -142,10 +150,10 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
                   Team 2
                 </h2>
                 <h2 className="mb-6 text-2xl font-semibold text-center text-yellow-300 bg-transparent">
-                  [ Total Points: {teams.team2Pts} ]
+                  [ Total Points: {teams.team2Pts || 0} ]
                 </h2>
                 <ul className="space-y-4 bg-transparent">
-                  {teams.team2.map((player, index) => (
+                  {(teams.team2 || []).map((player, index) => (
                     <li
                       key={index}
                       className="flex items-center bg-opacity-50 rounded-lg shadow-md bg-zinc-900"
@@ -177,7 +185,8 @@ export default function ResultModalLol({ isOpen, teams, onClose }) {
 
               <div className="col-span-2 text-center bg-transparent">
                 <h2 className="mb-2 text-4xl font-bold text-yellow-300 bg-transparent">
-                  Point Difference: {Math.abs(teams.team1Pts - teams.team2Pts)}
+                  Point Difference:{" "}
+                  {Math.abs((teams.team1Pts || 0) - (teams.team2Pts || 0))}
                 </h2>
               </div>
             </div>
