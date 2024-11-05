@@ -170,6 +170,10 @@ export default function Lol() {
       <div className="z-[10000] mb-[1.3rem] mt-[0.4rem] flex justify-center bg-transparent">
         <button
           className="sparkle fixed bottom-[4.5vh] mt-[2vh] flex h-[6vh] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-2xl shadow-indigo-900/50 hover:from-purple-700 hover:to-indigo-700 hover:shadow-indigo-900/70 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
+          style={{
+            boxShadow:
+              "0px 0px 20px rgba(255, 255, 255, 0.7), 4px 4px 40px rgba(0, 0, 0, 0.2)",
+          }}
           onClick={handleGenerateTeams}
           disabled={showSpinner}
         >
