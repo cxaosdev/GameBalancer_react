@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { FaClipboard, FaImage } from "react-icons/fa";
+import { FaClipboard, FaImage, FaLink } from "react-icons/fa";
 import { toPng } from "html-to-image";
 import topLaneImage from "../assets/lol_lane/top.svg";
 import jungleLaneImage from "../assets/lol_lane/jungle.svg";
@@ -17,6 +17,7 @@ export default function ResultModalLol({
     insufficientPositions: [],
   },
   onClose,
+  generateShareableLink,
 }) {
   const modalRef = useRef(null);
 
@@ -52,7 +53,7 @@ export default function ResultModalLol({
   const copyToClipboard = () => {
     const resultText = generateResultText();
     navigator.clipboard.writeText(resultText).then(() => {
-      alert("copied results!");
+      alert("Results copied!");
     });
   };
 
@@ -69,6 +70,13 @@ export default function ResultModalLol({
           console.error("Error generating image:", error);
         });
     }
+  };
+
+  const copyLink = () => {
+    const link = generateShareableLink();
+    navigator.clipboard.writeText(link).then(() => {
+      alert("Link copied to clipboard!");
+    });
   };
 
   return (
@@ -94,7 +102,7 @@ export default function ResultModalLol({
               <span className="text-white">❗️Need more players for..</span>
             </h2>
             <div className="mt-2 text-3xl">
-              {(teams.missingPositions || []).map((pos, index) => (
+              {teams.missingPositions.map((pos, index) => (
                 <span className="text-amber-300" key={pos}>
                   {pos.charAt(0).toUpperCase() + pos.slice(1)}
                   {index < teams.missingPositions.length - 1 ? ", " : ""}
@@ -105,7 +113,6 @@ export default function ResultModalLol({
         ) : (
           <>
             <div className="grid grid-cols-1 gap-2 bg-transparent sm:grid-cols-2">
-              {/* Team 1 */}
               <div className="p-3 text-white bg-transparent rounded-lg">
                 <h2 className="text-4xl font-semibold text-center text-yellow-300 bg-transparent">
                   Team 1
@@ -114,7 +121,7 @@ export default function ResultModalLol({
                   [ Total Points: {teams.team1Pts || 0} ]
                 </h2>
                 <ul className="space-y-4 bg-transparent">
-                  {(teams.team1 || []).map((player, index) => (
+                  {teams.team1.map((player, index) => (
                     <li
                       key={index}
                       className="flex items-center bg-opacity-50 rounded-lg shadow-md bg-zinc-900"
@@ -144,7 +151,6 @@ export default function ResultModalLol({
                 </ul>
               </div>
 
-              {/* Team 2 */}
               <div className="p-3 text-white bg-transparent rounded-lg">
                 <h2 className="text-4xl font-semibold text-center text-yellow-300 bg-transparent">
                   Team 2
@@ -153,7 +159,7 @@ export default function ResultModalLol({
                   [ Total Points: {teams.team2Pts || 0} ]
                 </h2>
                 <ul className="space-y-4 bg-transparent">
-                  {(teams.team2 || []).map((player, index) => (
+                  {teams.team2.map((player, index) => (
                     <li
                       key={index}
                       className="flex items-center bg-opacity-50 rounded-lg shadow-md bg-zinc-900"
@@ -197,14 +203,21 @@ export default function ResultModalLol({
                 className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
               >
                 <FaClipboard className="text-2xl" />
-                <span>copy results</span>
+                <span>Copy Results</span>
               </button>
               <button
                 onClick={saveAsImage}
                 className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
               >
                 <FaImage className="text-2xl" />
-                <span>save as image</span>
+                <span>Save as Image</span>
+              </button>
+              <button
+                onClick={copyLink}
+                className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
+              >
+                <FaLink className="text-2xl" />
+                <span>Copy Link</span>
               </button>
             </div>
           </>

@@ -91,11 +91,50 @@ export default function Vlrt() {
     setIsWarningModalOpen(false);
   };
 
-  const bottomRef = useRef(null);
+  const generateShareableLink = () => {
+    const baseUrl = `${window.location.origin}${window.location.pathname}`;
+    const queryParams = playerData
+      .map((player, index) => {
+        const playerName = encodeURIComponent(player.playerName);
+        const tier = encodeURIComponent(player.tier);
+        return `player${index}=name:${playerName},tier:${tier}`;
+      })
+      .join("&");
 
+    const shareableLink = `${baseUrl}?${queryParams}&isModalOpen=true`;
+    navigator.clipboard.writeText(shareableLink);
+
+    return shareableLink;
+  };
+
+  const bottomRef = useRef(null);
   const scrollToBottom = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const newPlayerData = players.map((_, index) => {
+      const param = params.get(`player${index}`);
+      if (param) {
+        const [name, tier] = param.split(",").map((p) => p.split(":")[1]);
+        return {
+          playerName: decodeURIComponent(name || ""),
+          tier: tier || "",
+          pts: tierToPoints_vlrt[tier || "Iron"] || 0,
+        };
+      }
+      return { playerName: "", tier: "", pts: 0 };
+    });
+    setPlayerData(newPlayerData);
+
+    const isModalOpenParam = params.get("isModalOpen");
+    if (isModalOpenParam === "true") {
+      const generatedTeams = generateVlrtTeams(newPlayerData);
+      setTeams(generatedTeams);
+      setIsModalOpen(true);
+    }
+  }, []);
 
   return (
     <>
@@ -131,26 +170,6 @@ export default function Vlrt() {
           </button>
         </div>
 
-        <style jsx>{`
-          @keyframes sparkle {
-            0%,
-            100% {
-              box-shadow:
-                0px 0px 10px rgba(255, 255, 255, 0.7),
-                4px 4px 10px rgba(0, 0, 0, 0.2);
-            }
-            50% {
-              box-shadow:
-                0px 0px 20px rgba(255, 255, 255, 1),
-                4px 4px 20px rgba(0, 0, 0, 0.3);
-            }
-          }
-
-          .sparkle {
-            animation: sparkle 1.5s infinite alternate;
-          }
-        `}</style>
-
         <div className="fixed right-[20px] top-1/2 mt-6 flex -translate-y-1/2 transform flex-col items-center">
           <button
             className="flex flex-col items-center cursor-pointer"
@@ -169,7 +188,9 @@ export default function Vlrt() {
           isOpen={isModalOpen}
           teams={teams}
           onClose={handleCloseModal}
+          generateShareableLink={generateShareableLink}
         />
+
         {isWarningModalOpen && (
           <WarningModal
             onClose={handleCloseWarningModal}

@@ -1,9 +1,14 @@
 import React, { useRef } from "react";
-import { FaClipboard, FaImage } from "react-icons/fa";
+import { FaClipboard, FaImage, FaLink } from "react-icons/fa";
 import { toPng } from "html-to-image";
 import tierColors from "../styles/constants.json";
 
-export default function ResultModalVlrt({ isOpen, teams, onClose }) {
+export default function ResultModalVlrt({
+  isOpen,
+  teams,
+  onClose,
+  generateShareableLink,
+}) {
   const modalRef = useRef(null);
 
   const handleClickOutside = (e) => {
@@ -49,6 +54,11 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
     }
   };
 
+  const copyLink = () => {
+    const link = generateShareableLink();
+    navigator.clipboard.writeText(link).then(() => alert("copied link"));
+  };
+
   return (
     <div
       className="modal__overlay fixed inset-0 z-[100000] flex items-center justify-center bg-black bg-opacity-65"
@@ -65,6 +75,7 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
           &times;
         </button>
 
+        {/* Team Details and Points */}
         <div className="grid grid-cols-1 gap-2 bg-transparent sm:grid-cols-2">
           {/* Team 1 */}
           <div className="p-3 text-white bg-transparent rounded-lg">
@@ -136,14 +147,21 @@ export default function ResultModalVlrt({ isOpen, teams, onClose }) {
             className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
           >
             <FaClipboard className="text-2xl" />
-            <span>copy results</span>
+            <span>Copy Results</span>
           </button>
           <button
             onClick={saveAsImage}
             className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
           >
             <FaImage className="text-2xl" />
-            <span>save as image</span>
+            <span>Save as Image</span>
+          </button>
+          <button
+            onClick={copyLink}
+            className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
+          >
+            <FaLink className="text-2xl" />
+            <span>Copy Link</span>
           </button>
         </div>
       </div>
