@@ -1,5 +1,5 @@
 # Game Balancer
-
+[Go to GameBalancer page > ](https://gamebalancer.netlify.app/)
 > 🕹️ A fair match generator for **League of Leagends** and **Valorant** that divides 10 players into two balanced teams based on their **tiers and points**.
 <div align=center>
   <img src="https://github.com/user-attachments/assets/c1f7cf12-523c-4581-ab0a-2e3a95b74f82" alt="GBlogo" height="100" />
@@ -51,7 +51,6 @@ src
 ---
 
 ## 🧮 Algorithm for Team Generation
-
 - The **tiers are mapped to points** as follows:
   - Valorant
   ```
@@ -63,6 +62,19 @@ src
   ```
 - The players are **sorted by points** in descending order.
 - Players are **distributed between two teams** such that the total points of both teams are as close as possible.
+
+### Valorant Team Generation (`generateVlrtTeams`)
+1. **Generate Combinations**: Create all possible 5-player combinations for `team1`.
+2. **Calculate Differences**: For each combination, calculate the point difference between `team1` and `team2`.
+3. **Find Optimal Teams**: Track the combination with the smallest point difference for the most balanced teams.
+4. **Sort Teams**: Sort `team1` and `team2` by points in descending order.
+
+### League of Legends Team Generation (`generateLolTeams`)
+1. **Organize by Position**: Group players by their selected positions and sort by points.
+2. **Validate Positions**: Ensure each position (Top, Jungle, Mid, ADC, Support) has at least two players. If not, return an error.
+3. **Recursive Team Assignment**: Assign players to `team1` and `team2` for each position, ensuring no player is used in both teams.
+4. **Optimize Balance**: Track and update the team combination with the smallest point difference.
+5. **Sort by Position**: Once optimized, sort each team by position for clarity.
 
 ---
 

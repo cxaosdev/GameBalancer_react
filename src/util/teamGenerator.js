@@ -38,53 +38,106 @@ export const generateVlrtTeams = (players) => {
 export const generateLolTeams = (players) => {
   const positions = ["top", "jungle", "mid", "adc", "support"];
 
-  // 각 포지션에 플레이어를 할당
+  // 각 포지션별 플레이어 분류 및 높은 점수 순으로 정렬
   const playersByPosition = positions.reduce((acc, position) => {
-    acc[position] = players.filter((player) =>
-      (player.selectedLanes || []).includes(position),
-    );
+    acc[position] = players
+      .filter((player) => (player.selectedLanes || []).includes(position))
+      .sort((a, b) => b.pts - a.pts);
     return acc;
   }, {});
 
-  // 부족한 포지션이 있는지 확인
+  // 포지션에 플레이어가 없는 경우 확인
   const missingPositions = positions.filter(
     (position) => playersByPosition[position].length === 0,
   );
 
+  // 포지션에 2명 미만의 플레이어가 있는 경우 확인
+  const insufficientPositions = positions.filter(
+    (position) => playersByPosition[position].length < 2,
+  );
+
   if (missingPositions.length > 0) {
-    return { missingPositions }; // 부족한 포지션 반환
+    return { missingPositions }; // 포지션이 부족할 경우 반환
   }
 
-  // 각 포지션에서 플레이어를 배치할 때 점수를 고려해 팀 나누기
-  const team1 = [];
-  const team2 = [];
-  let team1Pts = 0;
-  let team2Pts = 0;
+  if (insufficientPositions.length > 0) {
+    return { insufficientPositions }; // 포지션별 플레이어가 2명 미만일 경우 반환
+  }
 
-  positions.forEach((position) => {
+  let optimalTeams = null;
+  let minDifference = Infinity;
+
+  // 포지션별로 한 번 할당된 플레이어는 중복되지 않도록 추적
+  const generateTeams = (
+    positionIndex,
+    team1,
+    team2,
+    team1Pts,
+    team2Pts,
+    usedPlayers,
+  ) => {
+    if (positionIndex === positions.length) {
+      const difference = Math.abs(team1Pts - team2Pts);
+      if (difference < minDifference) {
+        minDifference = difference;
+        optimalTeams = {
+          team1: [...team1],
+          team2: [...team2],
+          team1Pts,
+          team2Pts,
+        };
+      }
+      return;
+    }
+
+    const position = positions[positionIndex];
     const playersForPosition = playersByPosition[position];
 
-    // 포지션에 할당된 플레이어들을 점수를 기준으로 정렬 (높은 점수 순)
-    playersForPosition.sort((a, b) => b.pts - a.pts);
+    // 각 포지션에서 팀 1과 팀 2에 중복되지 않게 다른 플레이어를 할당
+    for (let i = 0; i < playersForPosition.length; i++) {
+      const playerForTeam1 = playersForPosition[i];
+      if (usedPlayers.has(playerForTeam1)) continue; // 이미 사용된 플레이어는 건너뜀
 
-    // 팀의 점수 차이가 최소가 되도록 배분
-    playersForPosition.forEach((player) => {
-      if (team1Pts <= team2Pts) {
-        team1.push(player);
-        team1Pts += player.pts;
-      } else {
-        team2.push(player);
-        team2Pts += player.pts;
+      for (let j = 0; j < playersForPosition.length; j++) {
+        if (i === j) continue; // 같은 플레이어가 두 팀에 배정되지 않도록 건너뜀
+        const playerForTeam2 = playersForPosition[j];
+        if (usedPlayers.has(playerForTeam2)) continue; // 이미 사용된 플레이어는 건너뜀
+
+        // 현재 포지션에서 선택한 플레이어들을 사용된 목록에 추가
+        usedPlayers.add(playerForTeam1);
+        usedPlayers.add(playerForTeam2);
+
+        generateTeams(
+          positionIndex + 1,
+          [...team1, playerForTeam1],
+          [...team2, playerForTeam2],
+          team1Pts + playerForTeam1.pts,
+          team2Pts + playerForTeam2.pts,
+          new Set([...usedPlayers]), // 새로운 Set을 사용하여 상태를 복사
+        );
+
+        // 백트래킹: 다음 조합을 위해 사용한 플레이어 제거
+        usedPlayers.delete(playerForTeam1);
+        usedPlayers.delete(playerForTeam2);
       }
-    });
-  });
+    }
+  };
 
-  // 팀1, 팀2를 포지션 순서대로 정렬하여 반환
+  generateTeams(0, [], [], 0, 0, new Set());
+
+  // 각 팀을 포지션 순서대로 정렬
+  const sortTeamByPosition = (team) => {
+    return team.sort(
+      (a, b) => positions.indexOf(a.position) - positions.indexOf(b.position),
+    );
+  };
+
   return {
-    team1,
-    team1Pts,
-    team2,
-    team2Pts,
-    missingPositions: [], // 부족한 포지션이 없으면 빈 배열
+    team1: sortTeamByPosition(optimalTeams.team1),
+    team1Pts: optimalTeams.team1Pts,
+    team2: sortTeamByPosition(optimalTeams.team2),
+    team2Pts: optimalTeams.team2Pts,
+    missingPositions: [], // 모든 포지션이 있으면 빈 배열 반환
+    insufficientPositions: [], // 모든 포지션에 충분한 플레이어가 있으면 빈 배열 반환
   };
 };

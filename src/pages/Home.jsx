@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import LeagueLogo from "../assets/logo/LeagueOfLegends.webp";
 import ValorantLogo from "../assets/logo/Valorant.svg";
 import Onboarding from "components/OnBoarding";
 
-export default function Home() {
+export default function Home({ selectedGame, setSelectedGame, isKorean }) {
   const navigate = useNavigate();
-  const [selectedGame, setSelectedGame] = useState(null);
-
-  const handleSelectGame = (game) => {
-    setSelectedGame(game);
-  };
+  const onboardingRef = useRef(null);
 
   const handleGetStarted = () => {
     if (selectedGame === "LeagueOfLegends") {
@@ -18,6 +14,13 @@ export default function Home() {
     } else if (selectedGame === "Valorant") {
       navigate("/valorant");
     }
+  };
+
+  const handleScrollToOnboarding = () => {
+    onboardingRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   return (
@@ -31,8 +34,10 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center">
         <div className="mt-[8vw] text-center">
           <h1 className="mb-3 text-6xl font-bold">Welcome to Game Balancer</h1>
-          <p className="text-3xl">
-            Create fair matches for your favorite games!
+          <p className={`text-3xl ${isKorean ? "do-hyeon-regular" : ""}`}>
+            {isKorean
+              ? "손쉽게 팀을 구성하고 게임을 시작하세요!"
+              : "Create fair matches for your favorite games!"}
           </p>
         </div>
         <div className="mt-[4rem] flex gap-[4rem]">
@@ -42,7 +47,7 @@ export default function Home() {
                 ? "border-amber-500 bg-amber-500/30"
                 : "border-transparent hover:border-amber-500 hover:bg-amber-900/30"
             }`}
-            onClick={() => handleSelectGame("LeagueOfLegends")}
+            onClick={() => setSelectedGame("LeagueOfLegends")}
           >
             <img
               src={LeagueLogo}
@@ -57,7 +62,7 @@ export default function Home() {
                 ? "border-red-500 bg-red-900/70"
                 : "border-transparent hover:border-red-500 hover:bg-red-900/20"
             }`}
-            onClick={() => handleSelectGame("Valorant")}
+            onClick={() => setSelectedGame("Valorant")}
           >
             <img
               src={ValorantLogo}
@@ -67,16 +72,24 @@ export default function Home() {
           </button>
         </div>
         <button
-          className="mt-6 cursor-pointer rounded-md bg-gradient-to-r from-red-800 to-indigo-800 p-3 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-red-700 hover:to-indigo-700 focus:ring-2 active:from-red-500 active:to-indigo-500"
+          className={`mt-8 cursor-pointer rounded-md bg-gradient-to-r from-red-700 to-indigo-800 px-5 py-4 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-red-600 hover:to-indigo-700 focus:ring-2 active:from-red-500 active:to-indigo-500 ${isKorean ? "do-hyeon-regular" : ""}`}
           onClick={handleGetStarted}
           disabled={!selectedGame}
         >
-          Get Started
+          {isKorean ? "시작하기" : "Get Started"}
         </button>
-        <div className="mt-[8rem] flex flex-col justify-center">
-          <span className="animate-bounce text-3xl">▼ How to use</span>
+
+        <div className="mt-[10vh] flex flex-col justify-center">
+          <span
+            className={`animate-bounce cursor-pointer text-3xl ${isKorean ? "do-hyeon-regular" : ""}`}
+            onClick={handleScrollToOnboarding}
+          >
+            ▼ {isKorean ? "사용 방법" : "How to use"}
+          </span>
         </div>
-        <Onboarding></Onboarding>
+        <div ref={onboardingRef}>
+          <Onboarding isKorean={isKorean} />
+        </div>
       </div>
     </div>
   );
