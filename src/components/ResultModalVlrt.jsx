@@ -10,11 +10,50 @@ export default function ResultModalVlrt({
   generateShareableLink,
 }) {
   const modalRef = useRef(null);
+  const toastRef = useRef(null);
 
   const handleClickOutside = (e) => {
     if (e.target.classList.contains("modal__overlay")) {
       onClose();
     }
+  };
+
+  const showToast = (message) => {
+    if (toastRef.current) {
+      toastRef.current.innerText = message;
+      toastRef.current.classList.remove("opacity-0");
+      setTimeout(() => {
+        toastRef.current.classList.add("opacity-0");
+      }, 4000);
+    }
+  };
+
+  const copyToClipboard = () => {
+    const resultText = generateResultText();
+    navigator.clipboard.writeText(resultText).then(() => {
+      showToast("Results copied!");
+    });
+  };
+
+  const saveAsImage = () => {
+    if (modalRef.current) {
+      toPng(modalRef.current)
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "result.png";
+          link.click();
+          showToast("Image saved!");
+        })
+        .catch((error) => {
+          console.error("Error generating image:", error);
+        });
+    }
+  };
+
+  const copyLink = () => {
+    const link = generateShareableLink();
+    navigator.clipboard.writeText(link).then(() => showToast("Link copied!"));
   };
 
   if (!isOpen) return null;
@@ -32,33 +71,6 @@ export default function ResultModalVlrt({
     )}`;
   };
 
-  const copyToClipboard = () => {
-    const resultText = generateResultText();
-    navigator.clipboard.writeText(resultText).then(() => {
-      alert("copied results");
-    });
-  };
-
-  const saveAsImage = () => {
-    if (modalRef.current) {
-      toPng(modalRef.current)
-        .then((dataUrl) => {
-          const link = document.createElement("a");
-          link.href = dataUrl;
-          link.download = "result.png";
-          link.click();
-        })
-        .catch((error) => {
-          console.error("Error generating image:", error);
-        });
-    }
-  };
-
-  const copyLink = () => {
-    const link = generateShareableLink();
-    navigator.clipboard.writeText(link).then(() => alert("copied link"));
-  };
-
   return (
     <div
       className="modal__overlay fixed inset-0 z-[100000] flex items-center justify-center bg-black bg-opacity-65"
@@ -74,6 +86,11 @@ export default function ResultModalVlrt({
         >
           &times;
         </button>
+
+        <div
+          ref={toastRef}
+          className="fixed bottom-8 left-1/2 -translate-x-1/2 transform rounded-md bg-zinc-700 px-4 py-2 text-[1.3em] text-white opacity-0 shadow-lg transition-opacity duration-500 ease-out"
+        ></div>
 
         {/* Team Details and Points */}
         <div className="grid grid-cols-1 gap-2 bg-transparent sm:grid-cols-2">
@@ -141,7 +158,7 @@ export default function ResultModalVlrt({
           </div>
         </div>
 
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4 mt-4">
           <button
             onClick={copyToClipboard}
             className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"

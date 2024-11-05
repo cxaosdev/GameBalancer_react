@@ -20,6 +20,7 @@ export default function ResultModalLol({
   generateShareableLink,
 }) {
   const modalRef = useRef(null);
+  const toastRef = useRef(null);
 
   const handleClickOutside = (e) => {
     if (e.target.classList.contains("modal__overlay")) {
@@ -27,14 +28,14 @@ export default function ResultModalLol({
     }
   };
 
-  if (!isOpen) return null;
-
-  const laneIcons = {
-    top: topLaneImage,
-    jungle: jungleLaneImage,
-    mid: midLaneImage,
-    adc: adcLaneImage,
-    support: supportLaneImage,
+  const showToast = (message) => {
+    if (toastRef.current) {
+      toastRef.current.innerText = message;
+      toastRef.current.classList.remove("opacity-0");
+      setTimeout(() => {
+        toastRef.current.classList.add("opacity-0");
+      }, 4000);
+    }
   };
 
   const generateResultText = () => {
@@ -53,7 +54,7 @@ export default function ResultModalLol({
   const copyToClipboard = () => {
     const resultText = generateResultText();
     navigator.clipboard.writeText(resultText).then(() => {
-      alert("Results copied!");
+      showToast("Results copied!");
     });
   };
 
@@ -65,6 +66,7 @@ export default function ResultModalLol({
           link.href = dataUrl;
           link.download = "result.png";
           link.click();
+          showToast("Image saved!");
         })
         .catch((error) => {
           console.error("Error generating image:", error);
@@ -74,9 +76,17 @@ export default function ResultModalLol({
 
   const copyLink = () => {
     const link = generateShareableLink();
-    navigator.clipboard.writeText(link).then(() => {
-      alert("Link copied to clipboard!");
-    });
+    navigator.clipboard.writeText(link).then(() => showToast("Link copied!"));
+  };
+
+  if (!isOpen) return null;
+
+  const laneIcons = {
+    top: topLaneImage,
+    jungle: jungleLaneImage,
+    mid: midLaneImage,
+    adc: adcLaneImage,
+    support: supportLaneImage,
   };
 
   return (
@@ -94,6 +104,11 @@ export default function ResultModalLol({
         >
           &times;
         </button>
+
+        <div
+          ref={toastRef}
+          className="fixed bottom-8 left-1/2 -translate-x-1/2 transform rounded-md bg-zinc-700 px-4 py-2 text-[1.3em] text-white opacity-0 shadow-lg transition-opacity duration-500 ease-out"
+        ></div>
 
         {teams.missingPositions?.length > 0 ||
         teams.insufficientPositions?.length > 0 ? (
@@ -113,6 +128,7 @@ export default function ResultModalLol({
         ) : (
           <>
             <div className="grid grid-cols-1 gap-2 bg-transparent sm:grid-cols-2">
+              {/* Team 1 */}
               <div className="p-3 text-white bg-transparent rounded-lg">
                 <h2 className="text-4xl font-semibold text-center text-yellow-300 bg-transparent">
                   Team 1
@@ -151,6 +167,7 @@ export default function ResultModalLol({
                 </ul>
               </div>
 
+              {/* Team 2 */}
               <div className="p-3 text-white bg-transparent rounded-lg">
                 <h2 className="text-4xl font-semibold text-center text-yellow-300 bg-transparent">
                   Team 2
@@ -189,6 +206,7 @@ export default function ResultModalLol({
                 </ul>
               </div>
 
+              {/* Point Difference */}
               <div className="col-span-2 text-center bg-transparent">
                 <h2 className="mb-2 text-4xl font-bold text-yellow-300 bg-transparent">
                   Point Difference:{" "}
@@ -197,7 +215,7 @@ export default function ResultModalLol({
               </div>
             </div>
 
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4 mt-4">
               <button
                 onClick={copyToClipboard}
                 className="flex items-center gap-2 text-xl text-white hover:text-yellow-300"
