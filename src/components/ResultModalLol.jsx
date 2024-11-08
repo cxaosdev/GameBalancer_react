@@ -110,6 +110,7 @@ export default function ResultModalLol({
           className="fixed bottom-8 left-1/2 -translate-x-1/2 transform rounded-md bg-zinc-700 px-4 py-2 text-[1.3em] text-white opacity-0 shadow-lg transition-opacity duration-500 ease-out"
         ></div>
 
+        {/* 포지션 부족 경고 */}
         {teams.missingPositions?.length > 0 ||
         teams.insufficientPositions?.length > 0 ? (
           <div className="text-center">
@@ -206,12 +207,17 @@ export default function ResultModalLol({
                 </ul>
               </div>
 
-              {/* Point Difference */}
+              {/* Point Difference*/}
               <div className="col-span-2 text-center bg-transparent">
                 <h2 className="mb-2 text-4xl font-bold text-yellow-300 bg-transparent">
                   Point Difference:{" "}
                   {Math.abs((teams.team1Pts || 0) - (teams.team2Pts || 0))}
                 </h2>
+                {teams.largeDifference && (
+                  <p className="text-2xl font-semibold text-red-500">
+                    ⚠️ Team balance difference is significant. Try to adjust player positions.
+                  </p>
+                )}
               </div>
             </div>
 

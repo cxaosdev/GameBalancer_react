@@ -107,9 +107,7 @@ export default function Lol() {
       playerName: player.playerName || `Player ${index + 1}`,
       tier: player.tier || "Iron",
       pts: tierToPoints_lol[player.tier || "Iron"],
-      selectedLanes: player.selectedLanes.length
-        ? player.selectedLanes
-        : ["Top", "Jungle", "Mid", "ADC", "Support"],
+      selectedLanes: player.selectedLanes.length ? player.selectedLanes : [],
     }));
 
     setPlayerData(updatedPlayers);
