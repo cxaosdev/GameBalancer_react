@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
 import PlayerLol from "components/PlayerLol.jsx";
@@ -6,9 +6,25 @@ import { tierToPoints_lol } from "../util/tierPoints.js";
 import { generateLolTeams } from "../util/teamGenerator.js";
 import ResultModalLol from "components/ResultModalLol.jsx";
 
+import l1 from "../assets/league of legends/lol_background.webp";
+import l2 from "../assets/league of legends/c-o-project-hunters-login.webp";
+import l3 from "../assets/league of legends/c-o-videostill-getjinxed-10.webp";
+import l4 from "../assets/league of legends/c-o-videostill-projecthunters-22.webp";
+import l5 from "../assets/league of legends/c-o-war-2020-01.webp";
+import l6 from "../assets/league of legends/lol_T12023.webp";
+import l7 from "../assets/league of legends/c-o-war-2020-02.webp";
+import l8 from "../assets/league of legends/war-2020-04.webp";
+
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
 export default function Lol() {
+  const backgroundImages = [l1, l2, l3, l4, l5, l6, l7, l8];
+
+  const backgroundImageRef = useRef(
+    backgroundImages[Math.floor(Math.random() * backgroundImages.length)],
+  );
+  const backgroundImage = backgroundImageRef.current;
+
   const [playerData, setPlayerData] = useState(() =>
     players.map(() => ({
       playerName: "",
@@ -151,7 +167,12 @@ export default function Lol() {
   }, []);
 
   return (
-    <div className="page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
+    <div
+      className="page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+      }}
+    >
       <div className="mb-[8vh] mt-[3vh] flex flex-wrap items-center justify-center">
         {players.map((player, index) => (
           <PlayerLol
