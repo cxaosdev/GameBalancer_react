@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useRef,
   useLayoutEffect,
+  useMemo,
 } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
 import Spinner from "components/Spinner.jsx";
@@ -30,17 +31,19 @@ export default function Vlrt() {
     SageFire,
     ValorantTeaser,
   ];
+  const backgroundImage = useMemo(() => {
+    return backgroundImages[
+      Math.floor(Math.random() * backgroundImages.length)
+    ];
+  }, [backgroundImages]);
 
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const backgroundImageRef = useRef(
-    backgroundImages[Math.floor(Math.random() * backgroundImages.length)],
-  );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const img = new Image();
-    img.src = backgroundImageRef.current;
+    img.src = backgroundImage;
     img.onload = () => setIsImageLoaded(true);
-  }, []);
+  }, [backgroundImage]);
 
   const [playerData, setPlayerData] = useState(
     players.map(() => ({
@@ -171,11 +174,9 @@ export default function Vlrt() {
   return (
     <>
       <div
-        className={`page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
+        className="scrollbar-custom page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]"
         style={{
-          backgroundImage: isImageLoaded
-            ? `url(${backgroundImageRef.current})`
-            : "none",
+          backgroundImage: `url(${backgroundImage})`,
         }}
       >
         <div className="mt-[3vh] flex flex-col flex-wrap items-center justify-center">
