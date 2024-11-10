@@ -76,7 +76,7 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
           </button>
         </div>
         <button
-          className={`cursor-pointer rounded-md bg-gradient-to-bl from-rose-900 to-amber-500 px-4 py-3 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-pink-700 hover:to-amber-400 focus:ring-2 active:from-red-500 active:to-amber-300 ${isKorean ? "do-hyeon-regular" : ""}`}
+          className={`cursor-pointer rounded-md bg-gradient-to-bl from-rose-900 to-amber-500 px-4 py-3 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-pink-700 hover:to-amber-400 focus:outline-none focus:ring-0 active:from-red-500 active:to-amber-300 ${isKorean ? "do-hyeon-regular" : ""}`}
           onClick={handleGetStarted}
           disabled={!selectedGame}
         >
