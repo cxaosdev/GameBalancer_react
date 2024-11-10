@@ -6,37 +6,29 @@ import { generateVlrtTeams } from "../util/teamGenerator.js";
 import { tierToPoints_vlrt } from "../util/tierPoints.js";
 import ResultModalVlrt from "components/ResultModalVlrt.jsx";
 
+import VlrtBackground from "../assets/valorant/vlrt_background.webp";
+import Valorant2 from "../assets/valorant/Valorant2.webp";
+import JettJump from "../assets/valorant/China_CG_Jett_Jump_Full.webp";
+import PhxCool from "../assets/valorant/China_CG_phxcool_fullres.webp";
+import SageFire from "../assets/valorant/China_CG_Sagefire_Full.webp";
+import ValorantTeaser from "../assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp";
+
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
 export default function Vlrt() {
   const backgroundImages = [
-    "/assets/valorant/vlrt_background.webp",
-    "/assets/valorant/Valorant2.webp",
-    "/assets/valorant/China_CG_Jett_Jump_Full.webp",
-    "/assets/valorant/China_CG_phxcool_fullres.webp",
-    "/assets/valorant/China_CG_Sagefire_Full.webp",
-    "/assets/valorant/Valorant2.webp",
-    "/assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp",
+    VlrtBackground,
+    Valorant2,
+    JettJump,
+    PhxCool,
+    SageFire,
+    ValorantTeaser,
   ];
 
   const backgroundImageRef = useRef(
     backgroundImages[Math.floor(Math.random() * backgroundImages.length)],
-  ); // 초기 랜덤 배경 이미지 설정, 이후 변경되지 않음
+  );
   const backgroundImage = backgroundImageRef.current;
-
-  console.log(backgroundImage); // 한 번만 설정된 배경 이미지를 출력
-
-  // 이미지 미리 로드
-  useEffect(() => {
-    const selectedImage =
-      backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
-    const img = new Image();
-    img.src = selectedImage;
-
-    img.onload = () => {
-      setBackgroundImage(selectedImage);
-    };
-  }, []);
 
   const [playerData, setPlayerData] = useState(
     players.map((_, index) => ({
