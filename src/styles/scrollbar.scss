@@ -1,0 +1,19 @@
+.scrollbar-custom {
+  @apply overflow-y-auto;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-gray-600/70;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}

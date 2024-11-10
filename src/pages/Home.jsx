@@ -29,7 +29,7 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
 
   return (
     <div
-      className={`page-container vlrt__container relative bg-no-repeat pt-[12vh] ${
+      className={`scrollbar-custom page-container vlrt__container relative bg-no-repeat pt-[12vh] ${
         selectedGame === "LeagueOfLegends"
           ? "bg-[url('../assets/league%20of%20legends/c-o-war-2020-01.webp')]"
           : "bg-[url('../assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp')]"

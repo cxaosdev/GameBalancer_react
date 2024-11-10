@@ -1,32 +1,7 @@
 @import "players.scss";
 @import "reset.scss";
+@import "scrollbar.scss";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-.scrollbar-custom {
-    @apply overflow-y-auto;
-    /* 스크롤바 활성화 */
-}
-
-.scrollbar-custom::-webkit-scrollbar {
-    width: 8px;
-    /* 스크롤 바의 너비 설정 */
-}
-
-.scrollbar-custom::-webkit-scrollbar-track {
-    @apply bg-gray-700;
-    /* 스크롤 바 트랙 배경 색상 */
-}
-
-.scrollbar-custom::-webkit-scrollbar-thumb {
-    @apply bg-gray-500 rounded-lg;
-    /* 스크롤 바 핸들 색상 및 둥글게 */
-}
-
-.scrollbar-custom::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400;
-    /* 호버 시 스크롤 바 핸들 색상 */
-}

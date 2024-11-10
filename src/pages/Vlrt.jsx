@@ -160,7 +160,7 @@ export default function Vlrt() {
   return (
     <>
       <div
-        className="page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh]"
+        className="scrollbar-custom page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh]"
         style={{
           backgroundImage: `url(${backgroundImage})`,
         }}
