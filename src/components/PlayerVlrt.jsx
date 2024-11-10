@@ -6,7 +6,7 @@ const PlayerVlrt = memo(
     console.log(`rendered player ${playerNum}`);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isLgView, setIsLgView] = useState(window.innerWidth <= 1380);
-    const [isSmView, setIsSmView] = useState(window.innerWidth <= 1080);
+    const [isSmView, setIsSmView] = useState(window.innerWidth <= 920);
 
     const tiers = [
       { id: "Iron", label: "Iron", pts: 7 },
@@ -23,7 +23,7 @@ const PlayerVlrt = memo(
     useEffect(() => {
       const handleResize = () => {
         setIsLgView(window.innerWidth <= 1380);
-        setIsSmView(window.innerWidth <= 1080);
+        setIsSmView(window.innerWidth <= 920);
       };
       window.addEventListener("resize", handleResize);
       return () => {
@@ -69,7 +69,7 @@ const PlayerVlrt = memo(
                   </span>
                 </div>
                 {isDropdownOpen && (
-                  <div className="scrollbar-custom tier-dropdown-menu absolute z-[100000000] ml-[2vw] mt-2 max-h-[7em] w-[7em] overflow-y-auto rounded-md bg-[#121212] text-[1.3em] shadow-lg">
+                  <div className="scrollbar-custom tier-dropdown-menu absolute z-[100000000] ml-[2vw] max-h-[7em] w-[7em] overflow-y-auto rounded-md bg-[#333] text-[1.3em] shadow-lg">
                     {tiers.map((tier) => (
                       <div
                         className="tier-option cursor-pointer px-[0.5em] py-[0.4em] text-center"

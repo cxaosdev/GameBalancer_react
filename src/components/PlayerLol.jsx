@@ -112,11 +112,11 @@ const PlayerLol = memo(({ playerNum, playerData, handlePlayerChange }) => {
                 </div>
 
                 {isDropdownOpen && (
-                  <div className="scrollbar-custom tier-dropdown-menu absolute z-[100000000] ml-[2vw] mt-2 max-h-[7em] w-[7em] overflow-y-auto rounded-md bg-[#121212] text-[1.3em] shadow-lg">
+                  <div className="scrollbar-custom tier-dropdown-menu absolute z-[100000000] ml-[2vw] max-h-[7em] w-[7em] overflow-y-auto rounded-md bg-[#333] text-[1.3em] shadow-lg">
                     {tiers.map((tier) => (
                       <div
                         key={tier.id}
-                        className="tier-option cursor-pointer px-[0.5em] py-[0.4em] text-center "
+                        className="tier-option cursor-pointer px-[0.5em] py-[0.4em] text-center"
                         style={{ color: tierColors.lol_color[tier.id] }}
                         onClick={() => {
                           handlePlayerChange("tier", tier.id);
