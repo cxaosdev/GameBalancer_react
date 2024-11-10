@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useCallback, useRef, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useLayoutEffect,
+  useMemo,
+} from "react";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
 import PlayerLol from "components/PlayerLol.jsx";
@@ -24,16 +31,12 @@ export default function Lol() {
   const backgroundImageRef = useRef(
     backgroundImages[Math.floor(Math.random() * backgroundImages.length)],
   );
-  const backgroundImage = backgroundImageRef.current;
 
   useLayoutEffect(() => {
-    const preloadImages = () => {
-      const img = new Image();
-      img.src = backgroundImage;
-      img.onload = () => setIsImageLoaded(true);
-    };
-    preloadImages();
-  }, [backgroundImage]);
+    const img = new Image();
+    img.src = backgroundImageRef.current;
+    img.onload = () => setIsImageLoaded(true);
+  }, []);
 
   const [playerData, setPlayerData] = useState(() =>
     players.map(() => ({
@@ -180,7 +183,9 @@ export default function Lol() {
     <div
       className={`page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
       style={{
-        backgroundImage: isImageLoaded ? `url(${backgroundImage})` : "none",
+        backgroundImage: isImageLoaded
+          ? `url(${backgroundImageRef.current})`
+          : "none",
       }}
     >
       <div className="mb-[8vh] mt-[3vh] flex flex-wrap items-center justify-center">

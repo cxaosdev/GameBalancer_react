@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useRef,
   useLayoutEffect,
+  useMemo,
 } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
 import Spinner from "components/Spinner.jsx";
@@ -35,14 +36,12 @@ export default function Vlrt() {
   const backgroundImageRef = useRef(
     backgroundImages[Math.floor(Math.random() * backgroundImages.length)],
   );
-  const backgroundImage = backgroundImageRef.current;
 
   useLayoutEffect(() => {
     const img = new Image();
-    img.src = backgroundImage;
+    img.src = backgroundImageRef.current;
     img.onload = () => setIsImageLoaded(true);
-  }, [backgroundImage]);
-
+  }, []);
   const [playerData, setPlayerData] = useState(
     players.map((_, index) => ({
       playerName: "",
@@ -173,9 +172,11 @@ export default function Vlrt() {
   return (
     <>
       <div
-        className={`page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
+        className={`page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
         style={{
-          backgroundImage: isImageLoaded ? `url(${backgroundImage})` : "none",
+          backgroundImage: isImageLoaded
+            ? `url(${backgroundImageRef.current})`
+            : "none",
         }}
       >
         <div className="mt-[3vh] flex flex-col flex-wrap items-center justify-center">
