@@ -1,10 +1,16 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import LeagueLogo from "../assets/logo/LeagueOfLegends.webp";
 import ValorantLogo from "../assets/logo/Valorant.svg";
 import Onboarding from "components/OnBoarding";
 
-// 배경 이미지 파일을 import로 불러옵니다
 import LolBackground from "../assets/league of legends/c-o-war-2020-01.webp";
 import ValorantBackground from "../assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp";
 
@@ -13,39 +19,42 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
   const navigate = useNavigate();
   const onboardingRef = useRef(null);
 
+  const backgroundImage = useMemo(
+    () =>
+      selectedGame === "LeagueOfLegends" ? LolBackground : ValorantBackground,
+    [selectedGame],
+  );
+
   useLayoutEffect(() => {
     const img = new Image();
-    img.src =
-      selectedGame === "LeagueOfLegends" ? LolBackground : ValorantBackground;
+    img.src = backgroundImage;
     img.onload = () => setIsImageLoaded(true);
-  }, [selectedGame]);
+  }, [backgroundImage]);
 
   useEffect(() => {
     setSelectedGame(null);
   }, [setSelectedGame]);
 
-  const handleGetStarted = () => {
+  const handleGetStarted = useCallback(() => {
     if (selectedGame === "LeagueOfLegends") {
       navigate("/leagueOfLegends");
     } else if (selectedGame === "Valorant") {
       navigate("/valorant");
     }
-  };
+  }, [navigate, selectedGame]);
 
-  const handleScrollToOnboarding = () => {
+  const handleScrollToOnboarding = useCallback(() => {
     onboardingRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
-  };
+  }, []);
 
   return (
     <div
       className={`page-container vlrt__container relative bg-no-repeat pt-[12vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
       style={{
-        backgroundImage: isImageLoaded
-          ? `url(${selectedGame === "LeagueOfLegends" ? LolBackground : ValorantBackground})`
-          : "none",
+        backgroundImage: isImageLoaded ? `url(${backgroundImage})` : "none",
       }}
     >
       <div className="flex flex-col items-center justify-center">

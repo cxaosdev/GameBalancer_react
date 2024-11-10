@@ -4,33 +4,37 @@ import React, {
   useCallback,
   useRef,
   useLayoutEffect,
-  useMemo,
 } from "react";
+import PlayerVlrt from "components/PlayerVlrt.jsx";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
-import PlayerLol from "components/PlayerLol.jsx";
-import { tierToPoints_lol } from "../util/tierPoints.js";
-import { generateLolTeams } from "../util/teamGenerator.js";
-import ResultModalLol from "components/ResultModalLol.jsx";
+import { generateVlrtTeams } from "../util/teamGenerator.js";
+import { tierToPoints_vlrt } from "../util/tierPoints.js";
+import ResultModalVlrt from "components/ResultModalVlrt.jsx";
 
-import l1 from "../assets/league of legends/lol_background.webp";
-import l2 from "../assets/league of legends/c-o-project-hunters-login.webp";
-import l3 from "../assets/league of legends/c-o-videostill-getjinxed-10.webp";
-import l4 from "../assets/league of legends/c-o-videostill-projecthunters-22.webp";
-import l5 from "../assets/league of legends/c-o-war-2020-01.webp";
-import l6 from "../assets/league of legends/lol_T12023.webp";
-import l7 from "../assets/league of legends/c-o-war-2020-02.webp";
-import l8 from "../assets/league of legends/war-2020-04.webp";
+import VlrtBackground from "../assets/valorant/vlrt_background.webp";
+import Valorant2 from "../assets/valorant/Valorant2.webp";
+import JettJump from "../assets/valorant/China_CG_Jett_Jump_Full.webp";
+import PhxCool from "../assets/valorant/China_CG_phxcool_fullres.webp";
+import SageFire from "../assets/valorant/China_CG_Sagefire_Full.webp";
+import ValorantTeaser from "../assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
-export default function Lol() {
-  const backgroundImages = [l1, l2, l3, l4, l5, l6, l7, l8];
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
+export default function Vlrt() {
+  const backgroundImages = [
+    VlrtBackground,
+    Valorant2,
+    JettJump,
+    PhxCool,
+    SageFire,
+    ValorantTeaser,
+  ];
 
   const backgroundImageRef = useRef(
     backgroundImages[Math.floor(Math.random() * backgroundImages.length)],
   );
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   useLayoutEffect(() => {
     const img = new Image();
@@ -38,12 +42,11 @@ export default function Lol() {
     img.onload = () => setIsImageLoaded(true);
   }, []);
 
-  const [playerData, setPlayerData] = useState(() =>
+  const [playerData, setPlayerData] = useState(
     players.map(() => ({
       playerName: "",
       tier: "",
       pts: 0,
-      selectedLanes: [],
     })),
   );
 
@@ -52,57 +55,27 @@ export default function Lol() {
     team1Pts: 0,
     team2: [],
     team2Pts: 0,
-    missingPositions: [],
-    insufficientPositions: [],
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
-  const [timerId, setTimerId] = useState(null);
+  const timerIdRef = useRef(null);
 
   useEffect(() => {
     return () => {
-      if (timerId) {
-        clearTimeout(timerId);
+      if (timerIdRef.current) {
+        clearTimeout(timerIdRef.current);
       }
     };
-  }, [timerId]);
+  }, []);
 
-  const generateShareableLink = () => {
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    const queryParams = playerData
-      .map((player, index) => {
-        const playerName = encodeURIComponent(player.playerName);
-        const tier = encodeURIComponent(player.tier);
-        const lanes = encodeURIComponent(player.selectedLanes.join(","));
-        return `player${index}=name:${playerName},tier:${tier},lanes:${lanes}`;
-      })
-      .join("&");
-
-    const shareableLink = `${baseUrl}?${queryParams}&isModalOpen=true`;
-    navigator.clipboard.writeText(shareableLink);
-    return shareableLink;
-  };
-
-  const handlePlayerChange = useCallback((index, field, value, checked) => {
+  const handlePlayerChange = useCallback(({ index, field, value }) => {
     setPlayerData((prev) => {
       const updatedPlayers = [...prev];
-      if (field === "selectedLanes") {
-        const currentLanes = new Set(updatedPlayers[index].selectedLanes || []);
-        checked ? currentLanes.add(value) : currentLanes.delete(value);
-        updatedPlayers[index] = {
-          ...updatedPlayers[index],
-          selectedLanes: Array.from(currentLanes),
-        };
-      } else {
-        updatedPlayers[index] = {
-          ...updatedPlayers[index],
-          [field]: value,
-        };
-        if (field === "tier") {
-          updatedPlayers[index].pts = tierToPoints_lol[value] || 0;
-        }
+      updatedPlayers[index][field] = value;
+      if (field === "tier") {
+        updatedPlayers[index].pts = tierToPoints_vlrt[value] || 0;
       }
       return updatedPlayers;
     });
@@ -116,32 +89,30 @@ export default function Lol() {
     if (isAnyFieldEmpty) {
       setIsWarningModalOpen(true);
     } else {
-      handleGenerateSpinner(playerData);
+      handleGenerateSpinner();
     }
   };
 
-  const handleGenerateSpinner = (players) => {
+  const handleGenerateSpinner = useCallback(() => {
     setShowSpinner(true);
-    const id = setTimeout(() => {
-      const teams = generateLolTeams(players);
+    timerIdRef.current = setTimeout(() => {
+      const teams = generateVlrtTeams(playerData);
       setTeams(teams);
       setShowSpinner(false);
       setIsModalOpen(true);
     }, 500);
-    setTimerId(id);
-  };
+  }, [playerData]);
 
   const handleContinueWithDefaults = () => {
     const updatedPlayers = playerData.map((player, index) => ({
       playerName: player.playerName || `Player ${index + 1}`,
       tier: player.tier || "Iron",
-      pts: tierToPoints_lol[player.tier || "Iron"],
-      selectedLanes: player.selectedLanes.length ? player.selectedLanes : [],
+      pts: tierToPoints_vlrt[player.tier || "Iron"],
     }));
 
     setPlayerData(updatedPlayers);
     setIsWarningModalOpen(false);
-    handleGenerateSpinner(updatedPlayers);
+    handleGenerateSpinner();
   };
 
   const handleCloseModal = () => {
@@ -152,28 +123,46 @@ export default function Lol() {
     setIsWarningModalOpen(false);
   };
 
+  const generateShareableLink = () => {
+    const baseUrl = `${window.location.origin}${window.location.pathname}`;
+    const queryParams = playerData
+      .map((player, index) => {
+        const playerName = encodeURIComponent(player.playerName);
+        const tier = encodeURIComponent(player.tier);
+        return `player${index}=name:${playerName},tier:${tier}`;
+      })
+      .join("&");
+
+    const shareableLink = `${baseUrl}?${queryParams}&isModalOpen=true`;
+    navigator.clipboard.writeText(shareableLink);
+
+    return shareableLink;
+  };
+
+  const bottomRef = useRef(null);
+  const scrollToBottom = () => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const newPlayerData = players.map((_, index) => {
       const param = params.get(`player${index}`);
       if (param) {
-        const [name, tier, lanes] = param
-          .split(",")
-          .map((p) => p.split(":")[1]);
+        const [name, tier] = param.split(",").map((p) => p.split(":")[1]);
         return {
           playerName: decodeURIComponent(name || ""),
           tier: tier || "",
-          pts: tierToPoints_lol[tier || "Iron"] || 0,
-          selectedLanes: lanes ? lanes.split(",") : [],
+          pts: tierToPoints_vlrt[tier || "Iron"] || 0,
         };
       }
-      return { playerName: "", tier: "", pts: 0, selectedLanes: [] };
+      return { playerName: "", tier: "", pts: 0 };
     });
     setPlayerData(newPlayerData);
 
     const isModalOpenParam = params.get("isModalOpen");
     if (isModalOpenParam === "true") {
-      const generatedTeams = generateLolTeams(newPlayerData);
+      const generatedTeams = generateVlrtTeams(newPlayerData);
       setTeams(generatedTeams);
       setIsModalOpen(true);
     }
@@ -181,21 +170,24 @@ export default function Lol() {
 
   return (
     <div
-      className={`page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
+      className={`page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh] ${
+        isImageLoaded ? "" : "skeleton-bg"
+      }`}
       style={{
         backgroundImage: isImageLoaded
           ? `url(${backgroundImageRef.current})`
           : "none",
       }}
     >
-      <div className="mb-[8vh] mt-[3vh] flex flex-wrap items-center justify-center">
-        {players.map((player, index) => (
-          <PlayerLol
-            key={player}
+      <div className="mt-[3vh] flex flex-col flex-wrap items-center justify-center">
+        {players.map((_, index) => (
+          <PlayerVlrt
+            key={index}
             playerNum={index + 1}
-            playerData={playerData[index]}
-            handlePlayerChange={(field, value, checked) =>
-              handlePlayerChange(index, field, value, checked)
+            playerName={playerData[index].playerName}
+            selectedTier={playerData[index].tier}
+            handlePlayerChange={(field, value) =>
+              handlePlayerChange({ index, field, value })
             }
           />
         ))}
@@ -218,7 +210,7 @@ export default function Lol() {
         </button>
       </div>
 
-      <ResultModalLol
+      <ResultModalVlrt
         isOpen={isModalOpen}
         teams={teams}
         onClose={handleCloseModal}
@@ -231,6 +223,7 @@ export default function Lol() {
           onContinue={handleContinueWithDefaults}
         />
       )}
+      <div ref={bottomRef} className="mb-[10vh]"></div>
     </div>
   );
 }

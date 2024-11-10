@@ -4,7 +4,6 @@ import React, {
   useCallback,
   useRef,
   useLayoutEffect,
-  useMemo,
 } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
 import Spinner from "components/Spinner.jsx";
@@ -31,8 +30,8 @@ export default function Vlrt() {
     SageFire,
     ValorantTeaser,
   ];
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const backgroundImageRef = useRef(
     backgroundImages[Math.floor(Math.random() * backgroundImages.length)],
   );
@@ -42,8 +41,9 @@ export default function Vlrt() {
     img.src = backgroundImageRef.current;
     img.onload = () => setIsImageLoaded(true);
   }, []);
+
   const [playerData, setPlayerData] = useState(
-    players.map((_, index) => ({
+    players.map(() => ({
       playerName: "",
       tier: "",
       pts: 0,
@@ -60,15 +60,15 @@ export default function Vlrt() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
-  const [timerId, setTimerId] = useState(null);
+  const timerIdRef = useRef(null);
 
   useEffect(() => {
     return () => {
-      if (timerId) {
-        clearTimeout(timerId);
+      if (timerIdRef.current) {
+        clearTimeout(timerIdRef.current);
       }
     };
-  }, [timerId]);
+  }, []);
 
   const handlePlayerChange = useCallback(({ index, field, value }) => {
     setPlayerData((prev) => {
@@ -89,20 +89,19 @@ export default function Vlrt() {
     if (isAnyFieldEmpty) {
       setIsWarningModalOpen(true);
     } else {
-      handleGenerateSpinner(playerData);
+      handleGenerateSpinner();
     }
   };
 
-  const handleGenerateSpinner = (players) => {
+  const handleGenerateSpinner = useCallback(() => {
     setShowSpinner(true);
-    const id = setTimeout(() => {
-      const teams = generateVlrtTeams(players);
+    timerIdRef.current = setTimeout(() => {
+      const teams = generateVlrtTeams(playerData);
       setTeams(teams);
       setShowSpinner(false);
       setIsModalOpen(true);
     }, 500);
-    setTimerId(id);
-  };
+  }, [playerData]);
 
   const handleContinueWithDefaults = () => {
     const updatedPlayers = playerData.map((player, index) => ({
@@ -113,7 +112,7 @@ export default function Vlrt() {
 
     setPlayerData(updatedPlayers);
     setIsWarningModalOpen(false);
-    handleGenerateSpinner(updatedPlayers);
+    handleGenerateSpinner();
   };
 
   const handleCloseModal = () => {
@@ -172,7 +171,7 @@ export default function Vlrt() {
   return (
     <>
       <div
-        className={`page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
+        className={`page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
         style={{
           backgroundImage: isImageLoaded
             ? `url(${backgroundImageRef.current})`
@@ -180,9 +179,9 @@ export default function Vlrt() {
         }}
       >
         <div className="mt-[3vh] flex flex-col flex-wrap items-center justify-center">
-          {players.map((player, index) => (
+          {players.map((_, index) => (
             <PlayerVlrt
-              key={player}
+              key={index}
               playerNum={index + 1}
               playerName={playerData[index].playerName}
               selectedTier={playerData[index].tier}
