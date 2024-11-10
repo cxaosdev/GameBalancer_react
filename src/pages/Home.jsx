@@ -1,12 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LeagueLogo from "../assets/logo/LeagueOfLegends.webp";
 import ValorantLogo from "../assets/logo/Valorant.svg";
 import Onboarding from "components/OnBoarding";
 
+// 배경 이미지 파일을 import로 불러옵니다
+import LolBackground from "../assets/league of legends/c-o-war-2020-01.webp";
+import ValorantBackground from "../assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp";
+
 export default function Home({ selectedGame, setSelectedGame, isKorean }) {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const navigate = useNavigate();
   const onboardingRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const img = new Image();
+    img.src =
+      selectedGame === "LeagueOfLegends" ? LolBackground : ValorantBackground;
+    img.onload = () => setIsImageLoaded(true);
+  }, [selectedGame]);
 
   useEffect(() => {
     setSelectedGame(null);
@@ -29,11 +41,12 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
 
   return (
     <div
-      className={`scrollbar-custom page-container vlrt__container relative bg-no-repeat pt-[12vh] ${
-        selectedGame === "LeagueOfLegends"
-          ? "bg-[url('../assets/league%20of%20legends/c-o-war-2020-01.webp')]"
-          : "bg-[url('../assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp')]"
-      }`}
+      className={`page-container vlrt__container relative bg-no-repeat pt-[12vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
+      style={{
+        backgroundImage: isImageLoaded
+          ? `url(${selectedGame === "LeagueOfLegends" ? LolBackground : ValorantBackground})`
+          : "none",
+      }}
     >
       <div className="flex flex-col items-center justify-center">
         <div className="mt-[8vw] text-center">

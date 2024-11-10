@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useLayoutEffect } from "react";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
 import PlayerLol from "components/PlayerLol.jsx";
@@ -19,11 +19,21 @@ const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
 export default function Lol() {
   const backgroundImages = [l1, l2, l3, l4, l5, l6, l7, l8];
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const backgroundImageRef = useRef(
     backgroundImages[Math.floor(Math.random() * backgroundImages.length)],
   );
   const backgroundImage = backgroundImageRef.current;
+
+  useLayoutEffect(() => {
+    const preloadImages = () => {
+      const img = new Image();
+      img.src = backgroundImage;
+      img.onload = () => setIsImageLoaded(true);
+    };
+    preloadImages();
+  }, [backgroundImage]);
 
   const [playerData, setPlayerData] = useState(() =>
     players.map(() => ({
@@ -168,9 +178,9 @@ export default function Lol() {
 
   return (
     <div
-      className="scrollbar-custom page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]"
+      className={`page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
       style={{
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: isImageLoaded ? `url(${backgroundImage})` : "none",
       }}
     >
       <div className="mb-[8vh] mt-[3vh] flex flex-wrap items-center justify-center">
