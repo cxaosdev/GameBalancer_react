@@ -27,8 +27,8 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
     <div
       className={`page-container vlrt__container relative bg-no-repeat pt-[12vh] ${
         selectedGame === "LeagueOfLegends"
-          ? "bg-[url('../assets/lol_background.jpg')]"
-          : "bg-[url('../assets/vlrt_background.jpg')]"
+          ? "bg-[url('../assets/lol_background.webp')]"
+          : "bg-[url('../assets/valorant/vlrt_background.webp')]"
       }`}
     >
       <div className="flex flex-col items-center justify-center">

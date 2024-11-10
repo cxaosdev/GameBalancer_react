@@ -9,6 +9,35 @@ import ResultModalVlrt from "components/ResultModalVlrt.jsx";
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
 export default function Vlrt() {
+  const backgroundImages = [
+    "/assets/valorant/vlrt_background.webp",
+    "/assets/valorant/Valorant2.webp",
+    "/assets/valorant/China_CG_Jett_Jump_Full.webp",
+    "/assets/valorant/China_CG_phxcool_fullres.webp",
+    "/assets/valorant/China_CG_Sagefire_Full.webp",
+    "/assets/valorant/Valorant2.webp",
+    "/assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp",
+  ];
+
+  const backgroundImageRef = useRef(
+    backgroundImages[Math.floor(Math.random() * backgroundImages.length)],
+  ); // 초기 랜덤 배경 이미지 설정, 이후 변경되지 않음
+  const backgroundImage = backgroundImageRef.current;
+
+  console.log(backgroundImage); // 한 번만 설정된 배경 이미지를 출력
+
+  // 이미지 미리 로드
+  useEffect(() => {
+    const selectedImage =
+      backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+    const img = new Image();
+    img.src = selectedImage;
+
+    img.onload = () => {
+      setBackgroundImage(selectedImage);
+    };
+  }, []);
+
   const [playerData, setPlayerData] = useState(
     players.map((_, index) => ({
       playerName: "",
@@ -138,7 +167,12 @@ export default function Vlrt() {
 
   return (
     <>
-      <div className="page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
+      <div
+        className="page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh]"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+        }}
+      >
         <div className="mt-[3vh] flex flex-col flex-wrap items-center justify-center">
           {players.map((player, index) => (
             <PlayerVlrt

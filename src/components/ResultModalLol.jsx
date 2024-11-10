@@ -215,7 +215,8 @@ export default function ResultModalLol({
                 </h2>
                 {teams.largeDifference && (
                   <p className="text-2xl font-semibold text-red-500">
-                    ⚠️ Team balance difference is significant. Try to adjust player positions.
+                    ⚠️ Team balance difference is significant. Try to adjust
+                    player positions.
                   </p>
                 )}
               </div>
