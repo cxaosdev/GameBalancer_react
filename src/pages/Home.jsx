@@ -28,7 +28,7 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
       className={`page-container vlrt__container relative bg-no-repeat pt-[12vh] ${
         selectedGame === "LeagueOfLegends"
           ? "bg-[url('../assets/league%20of%20legends/c-o-war-2020-01.webp')]"
-          : "bg-[url('../assets/valorant/Valorant_EP8_Teaser_Cypher%20Reborn.webp')]"
+          : "bg-[url('../assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp')]"
       }`}
     >
       <div className="flex flex-col items-center justify-center">
@@ -40,12 +40,12 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
               : "Create fair matches for your favorite games!"}
           </p>
         </div>
-        <div className="mt-[4rem] flex gap-[4rem]">
+        <div className="mb-[4rem] mt-[4rem] flex gap-[4rem]">
           <button
             className={`w-[13rem] transform rounded-xl border-4 p-2 transition-transform duration-300 hover:scale-105 active:scale-100 active:duration-75 ${
               selectedGame === "LeagueOfLegends"
-                ? "border-amber-500 bg-amber-500/30"
-                : "border-transparent hover:border-amber-500 hover:bg-amber-900/30"
+                ? "border-amber-600 bg-amber-600/30"
+                : "border-transparent hover:border-amber-600 hover:bg-amber-900/30"
             }`}
             onClick={() => setSelectedGame("LeagueOfLegends")}
           >
@@ -59,8 +59,8 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
           <button
             className={`w-[13rem] transform rounded-xl border-4 p-2 transition-transform duration-300 hover:scale-105 active:scale-100 active:duration-75 ${
               selectedGame === "Valorant"
-                ? "border-red-500 bg-red-900/70"
-                : "border-transparent hover:border-red-500 hover:bg-red-900/20"
+                ? "border-rose-800 bg-rose-800/30"
+                : "border-transparent hover:border-rose-800 hover:bg-rose-800/20"
             }`}
             onClick={() => setSelectedGame("Valorant")}
           >
@@ -72,7 +72,7 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
           </button>
         </div>
         <button
-          className={`mt-8 cursor-pointer rounded-md bg-gradient-to-r from-red-700 to-indigo-800 px-5 py-4 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-red-600 hover:to-indigo-700 focus:ring-2 active:from-red-500 active:to-indigo-500 ${isKorean ? "do-hyeon-regular" : ""}`}
+          className={`cursor-pointer rounded-md bg-gradient-to-bl from-rose-900 to-amber-500 px-4 py-3 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-pink-700 hover:to-amber-400 focus:ring-2 active:from-red-500 active:to-amber-300 ${isKorean ? "do-hyeon-regular" : ""}`}
           onClick={handleGetStarted}
           disabled={!selectedGame}
         >

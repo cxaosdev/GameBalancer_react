@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdLanguage } from "react-icons/md";
-import logo from "../components/logo.jpg";
+import logo from "../components/logo2.jpg";
 
 function Header({ selectedGame, setSelectedGame, isKorean, toggleLanguage }) {
   const navigate = useNavigate();
@@ -29,9 +29,9 @@ function Header({ selectedGame, setSelectedGame, isKorean, toggleLanguage }) {
 
   const selectLanguage = (language) => {
     if ((language === "KR" && !isKorean) || (language === "EN" && isKorean)) {
-      toggleLanguage(); // 언어 전환
+      toggleLanguage();
     }
-    setIsLanguageMenuOpen(false); // 메뉴 닫기
+    setIsLanguageMenuOpen(false);
   };
 
   return (
@@ -64,8 +64,8 @@ function Header({ selectedGame, setSelectedGame, isKorean, toggleLanguage }) {
             onClick={() => handleGame({ target: { value: "LeagueOfLegends" } })}
             className={`font-new-amsterdam text-aliceblue cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
               selectedGame === "LeagueOfLegends"
-                ? "bg-indigo-600 font-bold text-white"
-                : "hover:text-indigo-600"
+                ? "bg-amber-600 font-bold text-white"
+                : "hover:text-amber-500"
             } ${isKorean ? "do-hyeon-regular" : ""}`}
           >
             {isKorean ? "리그 오브 레전드" : "League of Legends"}
@@ -74,8 +74,8 @@ function Header({ selectedGame, setSelectedGame, isKorean, toggleLanguage }) {
             onClick={() => handleGame({ target: { value: "Valorant" } })}
             className={`font-new-amsterdam text-aliceblue cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[27px] transition-colors duration-300 ${
               selectedGame === "Valorant"
-                ? "bg-indigo-600 font-bold text-white"
-                : "hover:text-indigo-600"
+                ? "bg-red-800 font-bold text-white"
+                : "hover:text-red-500"
             } ${isKorean ? "do-hyeon-regular" : ""}`}
           >
             {isKorean ? "발로란트" : "Valorant"}
@@ -96,8 +96,8 @@ function Header({ selectedGame, setSelectedGame, isKorean, toggleLanguage }) {
             htmlFor="toggle-on"
             className={`font-new-amsterdam text-aliceblue mr-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[3vh] transition-colors duration-300 ${
               selectedGame === "LeagueOfLegends"
-                ? "bg-indigo-600 font-bold text-white"
-                : "hover:text-indigo-600"
+                ? "bg-amber-600 font-bold text-white"
+                : "hover:text-amber-500"
             } ${isKorean ? "do-hyeon-regular text-[2.7vh]" : ""}`}
           >
             {isKorean ? "리그 오브 레전드" : "League of Legends"}
@@ -114,8 +114,8 @@ function Header({ selectedGame, setSelectedGame, isKorean, toggleLanguage }) {
             htmlFor="toggle-off"
             className={`font-new-amsterdam text-aliceblue mr-[15px] inline-block cursor-pointer rounded-[25px] px-[15px] py-[5px] text-[3vh] transition-colors duration-300 ${
               selectedGame === "Valorant"
-                ? "bg-indigo-600 font-bold text-white"
-                : "hover:text-indigo-600"
+                ? "bg-red-800 font-bold text-white"
+                : "hover:text-red-500"
             } ${isKorean ? "do-hyeon-regular text-[2.7vh]" : ""}`}
           >
             {isKorean ? "발로란트" : "Valorant"}
@@ -127,7 +127,7 @@ function Header({ selectedGame, setSelectedGame, isKorean, toggleLanguage }) {
             <span
               onClick={() => selectLanguage("KR")}
               className={`${
-                isKorean ? "font-bold text-indigo-600" : "text-white"
+                isKorean ? "font-bold text-amber-600" : "text-white"
               } cursor-pointer no-underline`}
               style={{
                 textDecoration: "none",
@@ -141,7 +141,7 @@ function Header({ selectedGame, setSelectedGame, isKorean, toggleLanguage }) {
             <span
               onClick={() => selectLanguage("EN")}
               className={`${
-                !isKorean ? "font-bold text-indigo-600" : "text-white"
+                !isKorean ? "font-bold text-amber-600" : "text-white"
               } cursor-pointer no-underline`}
               style={{
                 textDecoration: "none",
