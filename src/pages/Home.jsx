@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import LeagueLogo from "../assets/logo/LeagueOfLegends.webp";
 import ValorantLogo from "../assets/logo/Valorant.svg";
@@ -7,6 +7,10 @@ import Onboarding from "components/OnBoarding";
 export default function Home({ selectedGame, setSelectedGame, isKorean }) {
   const navigate = useNavigate();
   const onboardingRef = useRef(null);
+
+  useEffect(() => {
+    setSelectedGame(null);
+  }, [setSelectedGame]);
 
   const handleGetStarted = () => {
     if (selectedGame === "LeagueOfLegends") {
