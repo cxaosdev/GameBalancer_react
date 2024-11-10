@@ -96,10 +96,10 @@ export default function ResultModalLol({
     >
       <div
         ref={modalRef}
-        className="relative w-full max-w-4xl rounded-lg shadow-2xl bg-gradient-to-r from-purple-800 to-indigo-900 p-7"
+        className="relative w-[60em] min-w-[55em] rounded-lg bg-gradient-to-r from-purple-800 to-indigo-900 p-7 shadow-2xl"
       >
         <button
-          className="absolute right-4 top-0 text-[40px] text-white hover:text-yellow-300"
+          className="absolute right-4 top-0 text-[50px] text-white hover:text-yellow-300"
           onClick={onClose}
         >
           &times;
@@ -128,7 +128,7 @@ export default function ResultModalLol({
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 gap-2 bg-transparent sm:grid-cols-2">
+            <div className="grid grid-cols-[auto-fit] gap-2 bg-transparent sm:grid-cols-2">
               {/* Team 1 */}
               <div className="p-3 text-white bg-transparent rounded-lg">
                 <h2 className="text-4xl font-semibold text-center text-yellow-300 bg-transparent">
