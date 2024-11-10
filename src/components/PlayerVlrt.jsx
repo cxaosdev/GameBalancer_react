@@ -52,7 +52,7 @@ const PlayerVlrt = memo(
             {isSmView ? (
               <div className="tier-selection flex h-[100%] flex-col">
                 <div
-                  className="tier-dropdown w-[7em] cursor-pointer rounded-md bg-white text-center text-[1.3em]"
+                  className="tier-dropdown ml-[2vw] flex w-[7em] cursor-pointer items-center justify-center rounded-md bg-white text-center text-[1.3em]"
                   onClick={toggleDropdown}
                 >
                   <span
@@ -63,14 +63,16 @@ const PlayerVlrt = memo(
                         : "gray",
                     }}
                   >
-                    {selectedTier || "Select Tier"}
+                    {selectedTier || (
+                      <span className="text-gray-700">Select Tier &#9660;</span>
+                    )}
                   </span>
                 </div>
                 {isDropdownOpen && (
-                  <div className="absolute flex flex-wrap bg-white rounded-md tier-dropdown-menu">
+                  <div className="scrollbar-custom tier-dropdown-menu absolute z-[100000000] ml-[2vw] mt-2 max-h-[7em] w-[7em] overflow-y-auto rounded-md bg-[#121212] text-[1.3em] shadow-lg">
                     {tiers.map((tier) => (
                       <div
-                        className="tier-option cursor-pointer px-[0.5em] text-center text-[3vh]"
+                        className="tier-option cursor-pointer px-[0.5em] py-[0.4em] text-center"
                         key={tier.id}
                         onClick={() => {
                           handlePlayerChange("tier", tier.id);
