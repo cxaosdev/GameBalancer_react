@@ -23,8 +23,8 @@ import l8 from "../assets/league of legends/war-2020-04.webp";
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
+const backgroundImages = [l1, l2, l3, l4, l5, l6, l7, l8];
 export default function Lol() {
-  const backgroundImages = [l1, l2, l3, l4, l5, l6, l7, l8];
   const backgroundImage = useMemo(() => {
     return backgroundImages[
       Math.floor(Math.random() * backgroundImages.length)

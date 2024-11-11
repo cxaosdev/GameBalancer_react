@@ -22,15 +22,15 @@ import ValorantTeaser from "../assets/valorant/Valorant_EP-8-Teaser_The-arrival.
 
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
+const backgroundImages = [
+  VlrtBackground,
+  Valorant2,
+  JettJump,
+  PhxCool,
+  SageFire,
+  ValorantTeaser,
+];
 export default function Vlrt() {
-  const backgroundImages = [
-    VlrtBackground,
-    Valorant2,
-    JettJump,
-    PhxCool,
-    SageFire,
-    ValorantTeaser,
-  ];
   const backgroundImage = useMemo(() => {
     return backgroundImages[
       Math.floor(Math.random() * backgroundImages.length)
@@ -159,10 +159,14 @@ export default function Vlrt() {
           pts: tierToPoints_vlrt[tier || "Iron"] || 0,
         };
       }
-      return { playerName: `Player ${index + 1}`, tier: "Iron", pts: tierToPoints_vlrt["Iron"] };
+      return {
+        playerName: `Player ${index + 1}`,
+        tier: "Iron",
+        pts: tierToPoints_vlrt["Iron"],
+      };
     });
     setPlayerData(newPlayerData);
-  
+
     // URL 파라미터에 따라 바로 팀을 생성하여 표시
     const isModalOpenParam = params.get("isModalOpen");
     if (isModalOpenParam === "true") {
@@ -174,7 +178,6 @@ export default function Vlrt() {
       setTeams(defaultTeams);
     }
   }, []);
-  
 
   return (
     <>
