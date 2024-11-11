@@ -3,7 +3,6 @@ import React, {
   useEffect,
   useCallback,
   useRef,
-  useLayoutEffect,
   useMemo,
 } from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
@@ -30,6 +29,7 @@ const backgroundImages = [
   SageFire,
   ValorantTeaser,
 ];
+
 export default function Vlrt() {
   const backgroundImage = useMemo(() => {
     return backgroundImages[
@@ -45,7 +45,7 @@ export default function Vlrt() {
     img.onload = () => setIsImageLoaded(true);
   }, [backgroundImage]);
 
-  const [playerData, setPlayerData] = useState(
+  const [playerData, setPlayerData] = useState(() =>
     players.map(() => ({
       playerName: "",
       tier: "",
@@ -92,19 +92,19 @@ export default function Vlrt() {
     if (isAnyFieldEmpty) {
       setIsWarningModalOpen(true);
     } else {
-      handleGenerateSpinner();
+      handleGenerateSpinner(playerData);
     }
   };
 
-  const handleGenerateSpinner = useCallback(() => {
+  const handleGenerateSpinner = useCallback((players) => {
     setShowSpinner(true);
     timerIdRef.current = setTimeout(() => {
-      const teams = generateVlrtTeams(playerData);
+      const teams = generateVlrtTeams(players);
       setTeams(teams);
       setShowSpinner(false);
       setIsModalOpen(true);
     }, 500);
-  }, [playerData]);
+  }, []);
 
   const handleContinueWithDefaults = () => {
     const updatedPlayers = playerData.map((player, index) => ({
@@ -115,7 +115,7 @@ export default function Vlrt() {
 
     setPlayerData(updatedPlayers);
     setIsWarningModalOpen(false);
-    handleGenerateSpinner();
+    handleGenerateSpinner(updatedPlayers);
   };
 
   const handleCloseModal = () => {
@@ -159,23 +159,15 @@ export default function Vlrt() {
           pts: tierToPoints_vlrt[tier || "Iron"] || 0,
         };
       }
-      return {
-        playerName: `Player ${index + 1}`,
-        tier: "Iron",
-        pts: tierToPoints_vlrt["Iron"],
-      };
+      return { playerName: "", tier: "", pts: 0 };
     });
     setPlayerData(newPlayerData);
 
-    // URL 파라미터에 따라 바로 팀을 생성하여 표시
     const isModalOpenParam = params.get("isModalOpen");
     if (isModalOpenParam === "true") {
       const generatedTeams = generateVlrtTeams(newPlayerData);
       setTeams(generatedTeams);
       setIsModalOpen(true);
-    } else {
-      const defaultTeams = generateVlrtTeams(newPlayerData);
-      setTeams(defaultTeams);
     }
   }, []);
 
@@ -219,7 +211,7 @@ export default function Vlrt() {
 
         <div className="fixed right-[20px] top-1/2 mt-6 flex -translate-y-1/2 transform flex-col items-center">
           <button
-            className="flex flex-col items-center cursor-pointer"
+            className="flex cursor-pointer flex-col items-center"
             onClick={scrollToBottom}
           >
             <span
