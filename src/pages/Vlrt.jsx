@@ -159,17 +159,22 @@ export default function Vlrt() {
           pts: tierToPoints_vlrt[tier || "Iron"] || 0,
         };
       }
-      return { playerName: "", tier: "", pts: 0 };
+      return { playerName: `Player ${index + 1}`, tier: "Iron", pts: tierToPoints_vlrt["Iron"] };
     });
     setPlayerData(newPlayerData);
-
+  
+    // URL 파라미터에 따라 바로 팀을 생성하여 표시
     const isModalOpenParam = params.get("isModalOpen");
     if (isModalOpenParam === "true") {
       const generatedTeams = generateVlrtTeams(newPlayerData);
       setTeams(generatedTeams);
       setIsModalOpen(true);
+    } else {
+      const defaultTeams = generateVlrtTeams(newPlayerData);
+      setTeams(defaultTeams);
     }
   }, []);
+  
 
   return (
     <>

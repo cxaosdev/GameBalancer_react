@@ -1,13 +1,13 @@
 export const tierToPoints_vlrt = {
   Iron: 7,
   Bronze: 12,
-  Silver: 15,
-  Gold: 22,
-  Platinum: 28,
-  Diamond: 33,
-  Ascendant: 39,
-  Immortal: 43,
-  Radiant: 50,
+  Silver: 16,
+  Gold: 24,
+  Platinum: 29,
+  Diamond: 36,
+  Ascendant: 41,
+  Immortal: 46,
+  Radiant: 55,
 };
 
 export const tierToPoints_lol = {
