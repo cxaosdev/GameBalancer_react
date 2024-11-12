@@ -182,7 +182,7 @@ export default function Lol() {
 
   return (
     <div
-      className="scrollbar-custom page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]"
+      className="mscrollbar-custo page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
