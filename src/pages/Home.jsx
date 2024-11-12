@@ -52,7 +52,7 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
 
   return (
     <div
-      className={`page-container vlrt__container relative bg-no-repeat pt-[12vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
+      className={`scrollbar-custom page-container vlrt__container relative bg-no-repeat pt-[12vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
       style={{
         backgroundImage: isImageLoaded ? `url(${backgroundImage})` : "none",
       }}
