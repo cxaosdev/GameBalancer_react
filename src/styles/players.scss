@@ -8,11 +8,16 @@
 .page-container {
   flex: 1;
   overflow-y: auto;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-y: auto;
+  padding: 1rem;
 }
 
 .lol__container {
   position: relative;
-  background-image: url("../assets/lol_background.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -27,7 +32,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
 
@@ -38,7 +43,6 @@
 
 .vlrt__container {
   position: relative;
-  background-image: url("../assets/vlrt_background.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -53,7 +57,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
 }
 

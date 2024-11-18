@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useMemo,
+} from "react";
 import PlayerVlrt from "components/PlayerVlrt.jsx";
 import Spinner from "components/Spinner.jsx";
 import WarningModal from "../components/WarningModal.jsx";
@@ -6,11 +12,41 @@ import { generateVlrtTeams } from "../util/teamGenerator.js";
 import { tierToPoints_vlrt } from "../util/tierPoints.js";
 import ResultModalVlrt from "components/ResultModalVlrt.jsx";
 
+import VlrtBackground from "../assets/valorant/vlrt_background.webp";
+import Valorant2 from "../assets/valorant/Valorant2.webp";
+import JettJump from "../assets/valorant/China_CG_Jett_Jump_Full.webp";
+import PhxCool from "../assets/valorant/China_CG_phxcool_fullres.webp";
+import SageFire from "../assets/valorant/China_CG_Sagefire_Full.webp";
+import ValorantTeaser from "../assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp";
+
 const players = Array.from({ length: 10 }, (_, index) => `Player ${index + 1}`);
 
+const backgroundImages = [
+  VlrtBackground,
+  Valorant2,
+  JettJump,
+  PhxCool,
+  SageFire,
+  ValorantTeaser,
+];
+
 export default function Vlrt() {
-  const [playerData, setPlayerData] = useState(
-    players.map((_, index) => ({
+  const backgroundImage = useMemo(() => {
+    return backgroundImages[
+      Math.floor(Math.random() * backgroundImages.length)
+    ];
+  }, [backgroundImages]);
+
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = backgroundImage;
+    img.onload = () => setIsImageLoaded(true);
+  }, [backgroundImage]);
+
+  const [playerData, setPlayerData] = useState(() =>
+    players.map(() => ({
       playerName: "",
       tier: "",
       pts: 0,
@@ -27,15 +63,15 @@ export default function Vlrt() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
-  const [timerId, setTimerId] = useState(null);
+  const timerIdRef = useRef(null);
 
   useEffect(() => {
     return () => {
-      if (timerId) {
-        clearTimeout(timerId);
+      if (timerIdRef.current) {
+        clearTimeout(timerIdRef.current);
       }
     };
-  }, [timerId]);
+  }, []);
 
   const handlePlayerChange = useCallback(({ index, field, value }) => {
     setPlayerData((prev) => {
@@ -60,16 +96,15 @@ export default function Vlrt() {
     }
   };
 
-  const handleGenerateSpinner = (players) => {
+  const handleGenerateSpinner = useCallback((players) => {
     setShowSpinner(true);
-    const id = setTimeout(() => {
+    timerIdRef.current = setTimeout(() => {
       const teams = generateVlrtTeams(players);
       setTeams(teams);
       setShowSpinner(false);
       setIsModalOpen(true);
     }, 500);
-    setTimerId(id);
-  };
+  }, []);
 
   const handleContinueWithDefaults = () => {
     const updatedPlayers = playerData.map((player, index) => ({
@@ -91,19 +126,63 @@ export default function Vlrt() {
     setIsWarningModalOpen(false);
   };
 
-  const bottomRef = useRef(null);
+  const generateShareableLink = () => {
+    const baseUrl = `${window.location.origin}${window.location.pathname}`;
+    const queryParams = playerData
+      .map((player, index) => {
+        const playerName = encodeURIComponent(player.playerName);
+        const tier = encodeURIComponent(player.tier);
+        return `player${index}=name:${playerName},tier:${tier}`;
+      })
+      .join("&");
 
+    const shareableLink = `${baseUrl}?${queryParams}&isModalOpen=true`;
+    navigator.clipboard.writeText(shareableLink);
+
+    return shareableLink;
+  };
+
+  const bottomRef = useRef(null);
   const scrollToBottom = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const newPlayerData = players.map((_, index) => {
+      const param = params.get(`player${index}`);
+      if (param) {
+        const [name, tier] = param.split(",").map((p) => p.split(":")[1]);
+        return {
+          playerName: decodeURIComponent(name || ""),
+          tier: tier || "",
+          pts: tierToPoints_vlrt[tier || "Iron"] || 0,
+        };
+      }
+      return { playerName: "", tier: "", pts: 0 };
+    });
+    setPlayerData(newPlayerData);
+
+    const isModalOpenParam = params.get("isModalOpen");
+    if (isModalOpenParam === "true") {
+      const generatedTeams = generateVlrtTeams(newPlayerData);
+      setTeams(generatedTeams);
+      setIsModalOpen(true);
+    }
+  }, []);
+
   return (
     <>
-      <div className="page-container vlrt__container relative flex flex-col items-center overflow-y-auto pt-[9vh]">
+      <div
+        className="scrollbar-custom page-container lol__container relative flex flex-col items-center overflow-y-auto pt-[9vh]"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+        }}
+      >
         <div className="mt-[3vh] flex flex-col flex-wrap items-center justify-center">
-          {players.map((player, index) => (
+          {players.map((_, index) => (
             <PlayerVlrt
-              key={player}
+              key={index}
               playerNum={index + 1}
               playerName={playerData[index].playerName}
               selectedTier={playerData[index].tier}
@@ -115,12 +194,11 @@ export default function Vlrt() {
         </div>
         <div className="z-[10000] mb-[1.3rem] mt-[0.4rem] flex justify-center bg-transparent">
           <button
-            className="sparkle fixed bottom-[4.5vh] mt-[2vh] flex h-[6vh] items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-[30px] text-white shadow-2xl shadow-indigo-900/50 hover:from-purple-700 hover:to-indigo-700 hover:shadow-indigo-900/70 focus:ring-2 active:from-purple-800 active:to-indigo-800 active:outline-none active:ring-indigo-500 active:ring-offset-2"
+            className="sparkle fixed bottom-[4.5vh] mt-[2vh] flex h-[6vh] items-center justify-center rounded-md bg-gradient-to-r from-rose-800 to-amber-700 px-4 py-2 text-[30px] text-white shadow-rose-900/50 hover:from-rose-700 hover:to-amber-600 hover:shadow-rose-900/70 focus:ring-2 active:from-rose-900 active:to-amber-800 active:outline-none active:ring-rose-700 active:ring-offset-2"
             style={{
               boxShadow:
-                "0px 0px 20px rgba(255, 255, 255, 0.7), 4px 4px 40px rgba(0, 0, 0, 0.2)",
+                "0px 0px 10px rgba(255, 255, 255, 0.4), 4px 4px 40px rgba(0, 0, 0, 0.2)",
             }}
-            type="submit"
             onClick={handleGenerateTeams}
             disabled={showSpinner}
           >
@@ -131,29 +209,9 @@ export default function Vlrt() {
           </button>
         </div>
 
-        <style jsx>{`
-          @keyframes sparkle {
-            0%,
-            100% {
-              box-shadow:
-                0px 0px 10px rgba(255, 255, 255, 0.7),
-                4px 4px 10px rgba(0, 0, 0, 0.2);
-            }
-            50% {
-              box-shadow:
-                0px 0px 20px rgba(255, 255, 255, 1),
-                4px 4px 20px rgba(0, 0, 0, 0.3);
-            }
-          }
-
-          .sparkle {
-            animation: sparkle 1.5s infinite alternate;
-          }
-        `}</style>
-
         <div className="fixed right-[20px] top-1/2 mt-6 flex -translate-y-1/2 transform flex-col items-center">
           <button
-            className="flex flex-col items-center cursor-pointer"
+            className="flex cursor-pointer flex-col items-center"
             onClick={scrollToBottom}
           >
             <span
@@ -169,7 +227,9 @@ export default function Vlrt() {
           isOpen={isModalOpen}
           teams={teams}
           onClose={handleCloseModal}
+          generateShareableLink={generateShareableLink}
         />
+
         {isWarningModalOpen && (
           <WarningModal
             onClose={handleCloseWarningModal}

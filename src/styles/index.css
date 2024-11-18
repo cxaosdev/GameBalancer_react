@@ -1,5 +1,6 @@
 @import "players.scss";
 @import "reset.scss";
+@import "scrollbar.scss";
 
 @tailwind base;
 @tailwind components;

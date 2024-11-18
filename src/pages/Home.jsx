@@ -1,35 +1,61 @@
-import React, { useRef } from "react";
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import LeagueLogo from "../assets/logo/LeagueOfLegends.webp";
 import ValorantLogo from "../assets/logo/Valorant.svg";
 import Onboarding from "components/OnBoarding";
 
+import LolBackground from "../assets/league of legends/c-o-war-2020-01.webp";
+import ValorantBackground from "../assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp";
+
 export default function Home({ selectedGame, setSelectedGame, isKorean }) {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const navigate = useNavigate();
   const onboardingRef = useRef(null);
 
-  const handleGetStarted = () => {
+  const backgroundImage = useMemo(
+    () =>
+      selectedGame === "LeagueOfLegends" ? LolBackground : ValorantBackground,
+    [selectedGame],
+  );
+
+  useLayoutEffect(() => {
+    const img = new Image();
+    img.src = backgroundImage;
+    img.onload = () => setIsImageLoaded(true);
+  }, [backgroundImage]);
+
+  useEffect(() => {
+    setSelectedGame(null);
+  }, [setSelectedGame]);
+
+  const handleGetStarted = useCallback(() => {
     if (selectedGame === "LeagueOfLegends") {
       navigate("/leagueOfLegends");
     } else if (selectedGame === "Valorant") {
       navigate("/valorant");
     }
-  };
+  }, [navigate, selectedGame]);
 
-  const handleScrollToOnboarding = () => {
+  const handleScrollToOnboarding = useCallback(() => {
     onboardingRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
-  };
+  }, []);
 
   return (
     <div
-      className={`page-container vlrt__container relative bg-no-repeat pt-[12vh] ${
-        selectedGame === "LeagueOfLegends"
-          ? "bg-[url('../assets/lol_background.jpg')]"
-          : "bg-[url('../assets/vlrt_background.jpg')]"
-      }`}
+      className={`scrollbar-custom page-container vlrt__container relative bg-no-repeat pt-[12vh] ${isImageLoaded ? "" : "skeleton-bg"}`}
+      style={{
+        backgroundImage: isImageLoaded ? `url(${backgroundImage})` : "none",
+      }}
     >
       <div className="flex flex-col items-center justify-center">
         <div className="mt-[8vw] text-center">
@@ -40,12 +66,12 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
               : "Create fair matches for your favorite games!"}
           </p>
         </div>
-        <div className="mt-[4rem] flex gap-[4rem]">
+        <div className="mb-[4rem] mt-[4rem] flex gap-[4rem]">
           <button
             className={`w-[13rem] transform rounded-xl border-4 p-2 transition-transform duration-300 hover:scale-105 active:scale-100 active:duration-75 ${
               selectedGame === "LeagueOfLegends"
-                ? "border-amber-500 bg-amber-500/30"
-                : "border-transparent hover:border-amber-500 hover:bg-amber-900/30"
+                ? "border-amber-600 bg-amber-600/30"
+                : "border-transparent hover:border-amber-600 hover:bg-amber-900/30"
             }`}
             onClick={() => setSelectedGame("LeagueOfLegends")}
           >
@@ -59,8 +85,8 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
           <button
             className={`w-[13rem] transform rounded-xl border-4 p-2 transition-transform duration-300 hover:scale-105 active:scale-100 active:duration-75 ${
               selectedGame === "Valorant"
-                ? "border-red-500 bg-red-900/70"
-                : "border-transparent hover:border-red-500 hover:bg-red-900/20"
+                ? "border-rose-800 bg-rose-800/30"
+                : "border-transparent hover:border-rose-800 hover:bg-rose-800/20"
             }`}
             onClick={() => setSelectedGame("Valorant")}
           >
@@ -72,7 +98,7 @@ export default function Home({ selectedGame, setSelectedGame, isKorean }) {
           </button>
         </div>
         <button
-          className={`mt-8 cursor-pointer rounded-md bg-gradient-to-r from-red-700 to-indigo-800 px-5 py-4 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-red-600 hover:to-indigo-700 focus:ring-2 active:from-red-500 active:to-indigo-500 ${isKorean ? "do-hyeon-regular" : ""}`}
+          className={`cursor-pointer rounded-md bg-gradient-to-bl from-rose-900 to-amber-500 px-4 py-3 text-2xl text-[30px] font-semibold text-white shadow-sm hover:from-pink-700 hover:to-amber-400 focus:outline-none focus:ring-0 active:from-red-500 active:to-amber-300 ${isKorean ? "do-hyeon-regular" : ""}`}
           onClick={handleGetStarted}
           disabled={!selectedGame}
         >
