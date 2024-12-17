@@ -1,23 +1,34 @@
+import Abyss from "../assets/maps/abyss.webp";
+import Ascent from "../assets/maps/ascent.webp";
+import Bind from "../assets/maps/bind.webp";
+import Breeze from "../assets/maps/breeze.webp";
+import Fracture from "../assets/maps/fracture.webp";
+import Haven from "../assets/maps/haven.webp";
+import Icebox from "../assets/maps/icebox.webp";
 import JettJump from "../assets/valorant/China_CG_Jett_Jump_Full.webp";
+import Lotus from "../assets/maps/lotus.webp";
+import Pearl from "../assets/maps/pearl.webp";
 import PhxCool from "../assets/valorant/China_CG_phxcool_fullres.webp";
 import React, { useEffect, useMemo, useState } from "react";
 import SageFire from "../assets/valorant/China_CG_Sagefire_Full.webp";
+import Split from "../assets/maps/split.webp";
+import Sunset from "../assets/maps/sunset.webp";
 import Valorant2 from "../assets/valorant/Valorant2.webp";
 import ValorantTeaser from "../assets/valorant/Valorant_EP-8-Teaser_The-arrival.webp";
 import VlrtBackground from "../assets/valorant/vlrt_background.webp";
 
 const maps = [
-  { name: "Abyss", src: "/src/assets/maps/abyss.webp" },
-  { name: "Ascent", src: "/src/assets/maps/ascent.webp" },
-  { name: "Bind", src: "/src/assets/maps/bind.webp" },
-  { name: "Breeze", src: "/src/assets/maps/breeze.webp" },
-  { name: "Fracture", src: "/src/assets/maps/fracture.webp" },
-  { name: "Haven", src: "/src/assets/maps/haven.webp" },
-  { name: "Icebox", src: "/src/assets/maps/icebox.webp" },
-  { name: "Lotus", src: "/src/assets/maps/lotus.webp" },
-  { name: "Pearl", src: "/src/assets/maps/pearl.webp" },
-  { name: "Split", src: "/src/assets/maps/split.webp" },
-  { name: "Sunset", src: "/src/assets/maps/sunset.webp" },
+  { name: "Abyss", src: Abyss },
+  { name: "Ascent", src: Ascent },
+  { name: "Bind", src: Bind },
+  { name: "Breeze", src: Breeze },
+  { name: "Fracture", src: Fracture },
+  { name: "Haven", src: Haven },
+  { name: "Icebox", src: Icebox },
+  { name: "Lotus", src: Lotus },
+  { name: "Pearl", src: Pearl },
+  { name: "Split", src: Split },
+  { name: "Sunset", src: Sunset },
 ];
 
 const backgroundImages = [
