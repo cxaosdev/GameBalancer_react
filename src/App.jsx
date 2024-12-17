@@ -1,9 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "components/Footer";
 import Header from "./components/Header";
+import Home from "./pages/Home";
 import Lol from "./pages/Lol";
 import Vlrt from "./pages/Vlrt";
-import Home from "./pages/Home";
-import Footer from "components/Footer";
+import VlrtRandomMap from "./pages/VlrtRandomMap";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/leagueOfLegends" element={<Lol />} />
             <Route path="/valorant" element={<Vlrt />} />
+            <Route path="/map" element={<VlrtRandomMap />} />
           </Routes>
         </div>
         <Footer />
